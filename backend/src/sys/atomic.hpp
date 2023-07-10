@@ -39,8 +39,8 @@ namespace gbe
     INLINE friend T operator+= (AtomicInternal& value, T input) { return atomic_add(&value.data, input) + input; }
     INLINE friend T operator++ (AtomicInternal& value) { return atomic_add(&value.data,  1) + 1; }
     INLINE friend T operator-- (AtomicInternal& value) { return atomic_add(&value.data, -1) - 1; }
-    INLINE friend T operator++ (AtomicInternal& value, int) { return atomic_add(&value.data,  1); }
-    INLINE friend T operator-- (AtomicInternal& value, int) { return atomic_add(&value.data, -1); }
+    INLINE friend const T operator++ (AtomicInternal& value, int) { return atomic_add(&value.data,  1); }
+    INLINE friend const T operator-- (AtomicInternal& value, int) { return atomic_add(&value.data, -1); }
     INLINE friend T cmpxchg    (AtomicInternal& value, const T v, const T c) { return atomic_cmpxchg(&value.data,v,c); }
 
   private:
