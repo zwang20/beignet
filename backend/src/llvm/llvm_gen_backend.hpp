@@ -86,7 +86,7 @@ namespace gbe
         char *realName = abi::__cxa_demangle(symbol.c_str(), NULL, NULL, &status);
         if (realName) {
           std::string realFnName(realName), stripName;
-          stripName = realFnName.substr(0, realFnName.find("("));
+          stripName = realFnName.substr(0, realFnName.find('('));
           it = map.find(stripName);
         }
         free(realName);
