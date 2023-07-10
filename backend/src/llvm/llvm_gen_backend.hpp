@@ -130,10 +130,10 @@ namespace gbe
   llvm::FunctionPass *createGenPass(ir::Unit &unit);
 
   /*! Remove the GEP instructions */
-  llvm::BasicBlockPass *createRemoveGEPPass(const ir::Unit &unit);
+  llvm::FunctionPass *createRemoveGEPPass(const ir::Unit &unit);
 
   /*! Merge load/store if possible */
-  llvm::BasicBlockPass *createLoadStoreOptimizationPass();
+  llvm::FunctionPass *createLoadStoreOptimizationPass();
 
   /*! Scalarize all vector op instructions */
   llvm::FunctionPass* createScalarizePass();
@@ -141,7 +141,7 @@ namespace gbe
   llvm::ModulePass* createBarrierNodupPass(bool);
 
   /*! Convert the Intrinsic call to gen function */
-  llvm::BasicBlockPass *createIntrinsicLoweringPass();
+  llvm::FunctionPass *createIntrinsicLoweringPass();
 
   /*! Passer the printf function call. */
   llvm::FunctionPass* createPrintfParserPass(ir::Unit &unit);

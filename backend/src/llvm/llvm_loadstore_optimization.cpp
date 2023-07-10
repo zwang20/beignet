@@ -26,13 +26,13 @@
 
 using namespace llvm;
 namespace gbe {
-  class GenLoadStoreOptimization : public BasicBlockPass {
+  class GenLoadStoreOptimization : public FunctionPass {
 
   public:
     static char ID;
     ScalarEvolution *SE;
     const DataLayout *TD;
-    GenLoadStoreOptimization() : BasicBlockPass(ID) {}
+    GenLoadStoreOptimization() : FunctionPass(ID) {}
 
     void getAnalysisUsage(AnalysisUsage &AU) const {
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 38
@@ -45,7 +45,9 @@ namespace gbe {
       AU.setPreservesCFG();
     }
 
-    virtual bool runOnBasicBlock(BasicBlock &BB) {
+    virtual bool runOnFunction(Function &F) {
+        bool changedAnyBlock = false;
+        for (BasicBlock &BB : F) {
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 38
       SE = &getAnalysis<ScalarEvolutionWrapperPass>().getSE();
 #else
@@ -59,7 +61,9 @@ namespace gbe {
       #else
         TD = getAnalysisIfAvailable<DataLayout>();
       #endif
-      return optimizeLoadStore(BB);
+           changedAnyBlock = optimizeLoadStore(BB) | changedAnyBlock;
+        }
+        return changedAnyBlock;
     }
     Type *getValueType(Value *insn);
     Value *getPointerOperand(Value *I);
@@ -159,7 +163,11 @@ namespace gbe {
       values.push_back(merged[i]);
     }
     LoadInst *ld = cast<LoadInst>(first);
+#if LLVM_VERSION_MAJOR < 10
     unsigned align = ld->getAlignment();
+#else
+    MaybeAlign align = ld->getAlign();
+#endif
     unsigned addrSpace = ld->getPointerAddressSpace();
     // insert before first load
     Builder.SetInsertPoint(ld);
@@ -352,7 +360,11 @@ namespace gbe {
 
     unsigned addrSpace = st->getPointerAddressSpace();
 
+#if LLVM_VERSION_MAJOR < 10
     unsigned align = st->getAlignment();
+#else
+    MaybeAlign align = st->getAlign();
+#endif
     // insert before the last store
     Builder.SetInsertPoint(last);
 
@@ -466,7 +478,7 @@ namespace gbe {
     return changed;
   }
 
-  BasicBlockPass *createLoadStoreOptimizationPass() {
+  FunctionPass *createLoadStoreOptimizationPass() {
     return new GenLoadStoreOptimization();
   }
 };

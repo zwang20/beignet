@@ -575,10 +575,12 @@ namespace gbe
         has_errors(false),
         legacyMode(true)
     {
+#if LLVM_VERSION_MAJOR < 10
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 37
       initializeLoopInfoWrapperPassPass(*PassRegistry::getPassRegistry());
 #else
       initializeLoopInfoPass(*PassRegistry::getPassRegistry());
+#endif
 #endif
       pass = PASS_EMIT_REGISTERS;
     }

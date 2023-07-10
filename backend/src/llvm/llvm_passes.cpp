@@ -37,7 +37,7 @@
 #include "sys/map.hpp"
 
 using namespace llvm;
-
+template class cfg::Update<BasicBlock *>;
 namespace gbe
 {
   bool isKernelFunction(const llvm::Function &F) {
@@ -219,13 +219,13 @@ namespace gbe
     return offset;
   }
 
-  class GenRemoveGEPPasss : public BasicBlockPass
+  class GenRemoveGEPPasss : public FunctionPass
   {
 
    public:
     static char ID;
     GenRemoveGEPPasss(const ir::Unit &unit) :
-      BasicBlockPass(ID),
+      FunctionPass(ID),
       unit(unit) {}
     const ir::Unit &unit;
     void getAnalysisUsage(AnalysisUsage &AU) const {
@@ -242,16 +242,18 @@ namespace gbe
 
     bool simplifyGEPInstructions(GetElementPtrInst* GEPInst);
 
-    virtual bool runOnBasicBlock(BasicBlock &BB)
+    virtual bool runOnFunction(Function &F)
     {
-      bool changedBlock = false;
+      bool changedAnyBlock = false;
+        for (BasicBlock &BB : F) {
       iplist<Instruction>::iterator I = BB.getInstList().begin();
       for (auto nextI = I, E = --BB.getInstList().end(); I != E; I = nextI) {
         iplist<Instruction>::iterator I = nextI++;
         if(GetElementPtrInst* gep = dyn_cast<GetElementPtrInst>(&*I))
-          changedBlock = (simplifyGEPInstructions(gep) || changedBlock);
+          changedAnyBlock = (simplifyGEPInstructions(gep) | changedAnyBlock);
       }
-      return changedBlock;
+        }
+      return changedAnyBlock;
     }
   };
 
@@ -367,7 +369,7 @@ namespace gbe
     return true;
   }
 
-  BasicBlockPass *createRemoveGEPPass(const ir::Unit &unit) {
+  FunctionPass *createRemoveGEPPass(const ir::Unit &unit) {
     return new GenRemoveGEPPasss(unit);
   }
 } /* namespace gbe */

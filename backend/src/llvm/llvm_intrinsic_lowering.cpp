@@ -29,12 +29,12 @@
 using namespace llvm;
 
 namespace gbe {
-    class InstrinsicLowering : public BasicBlockPass
+    class InstrinsicLowering : public FunctionPass
     {
     public:
       static char ID;
       InstrinsicLowering() :
-        BasicBlockPass(ID) {}
+        FunctionPass(ID) {}
 
       void getAnalysisUsage(AnalysisUsage &AU) const {
 
@@ -93,9 +93,9 @@ namespace gbe {
         CI->eraseFromParent();
         return NewCI;
       }
-      virtual bool runOnBasicBlock(BasicBlock &BB)
+      virtual bool runOnFunction(Function &F)
       {
-        bool changedBlock = false;
+        for (BasicBlock &BB : F) {
         Module *M = BB.getParent()->getParent();
 
         DataLayout TD(M);
@@ -159,13 +159,14 @@ namespace gbe {
             }
           }
         }
-        return changedBlock;
+        }
+        return true;
       }
     };
 
     char InstrinsicLowering::ID = 0;
 
-    BasicBlockPass *createIntrinsicLoweringPass() {
+    FunctionPass *createIntrinsicLoweringPass() {
       return new InstrinsicLowering();
     }
 } // end namespace
