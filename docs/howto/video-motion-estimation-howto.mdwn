@@ -66,6 +66,6 @@ Please go through it for details.
 More references
 ---------------
 
-https://www.khronos.org/registry/cl/extensions/intel/cl_intel_accelerator.txt
-https://www.khronos.org/registry/cl/extensions/intel/cl_intel_motion_estimation.txt
-https://software.intel.com/en-us/articles/intro-to-motion-estimation-extension-for-opencl
+[https://www.khronos.org/registry/cl/extensions/intel/cl_intel_accelerator.txt](https://www.khronos.org/registry/cl/extensions/intel/cl_intel_accelerator.txt)
+[https://www.khronos.org/registry/cl/extensions/intel/cl_intel_motion_estimation.txt](https://www.khronos.org/registry/cl/extensions/intel/cl_intel_motion_estimation.txt)
+[https://software.intel.com/en-us/articles/intro-to-motion-estimation-extension-for-opencl](https://software.intel.com/en-us/articles/intro-to-motion-estimation-extension-for-opencl)
