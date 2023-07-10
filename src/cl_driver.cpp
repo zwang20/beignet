@@ -35,6 +35,6 @@ namespace
   };
 
   /*! Set the call backs at pre-main time */
-  static OCLDriverCallBackInitializer cbInitializer;
+  OCLDriverCallBackInitializer cbInitializer;
 } /* namespace */
 

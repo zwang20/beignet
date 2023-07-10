@@ -21,7 +21,7 @@ float input_data[] = {FLT_MAX, -FLT_MAX, FLT_MIN, -FLT_MIN, 80, -80, 3.14, -3.14
 const int count_input = sizeof(input_data) / sizeof(input_data[0]);
 const int max_function = 5;
 
-static void cpu_compiler_math(float *dst, const float *src)
+void cpu_compiler_math(float *dst, const float *src)
 {
   const float x = *src;
 
@@ -32,7 +32,7 @@ static void cpu_compiler_math(float *dst, const float *src)
   dst[4] = x;
 }
 
-static void builtin_exp(void)
+void builtin_exp(void)
 {
   // Setup kernel and buffers
   int k, i, index_cur;

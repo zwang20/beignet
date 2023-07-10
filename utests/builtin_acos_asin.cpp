@@ -16,7 +16,7 @@ float input_data[] = {-30, -1, -0.92, -0.5, -0.09, 0, 0.09, 0.5, 0.92, 1, 30};
 const int count_input = sizeof(input_data) / sizeof(input_data[0]);
 const int max_function = 5;
 
-static void cpu_compiler_math(float *dst, const float *src)
+void cpu_compiler_math(float *dst, const float *src)
 {
   const float x = *src;
 
@@ -27,7 +27,7 @@ static void cpu_compiler_math(float *dst, const float *src)
   dst[4] = x;
 }
 
-static void builtin_acos_asin(void)
+void builtin_acos_asin(void)
 {
   // Setup kernel and buffers
   int k, i, index_cur;

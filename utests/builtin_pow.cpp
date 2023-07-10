@@ -21,13 +21,13 @@ float input_data1[count_input];
 float input_data2[count_input];
 const int max_function = 2; // builtin_pow.cl has 2 outputs: pow(src1,src2) and src1
 
-static void cpu_compiler_math(const float *src1, const float *src2, float *dst)
+void cpu_compiler_math(const float *src1, const float *src2, float *dst)
 {
   dst[0] = powf(src1[0], src2[0]);
   dst[1] = src1[0];
 }
 
-static void builtin_pow(void)
+void builtin_pow(void)
 {
   // Setup kernel and buffers
   int k, i, index_cur;
