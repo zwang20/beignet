@@ -51,7 +51,7 @@ namespace gbe {
       Type *boolTy = IntegerType::get(I->getContext(), 1);
       Type *i32Ty = IntegerType::get(I->getContext(), 32);
 
-      if (fnName.compare("__gen_ocl_sampler_need_fix") == 0) {
+      if (fnName == "__gen_ocl_sampler_need_fix") {
 
         //  return (((sampler & __CLK_ADDRESS_MASK) == CLK_ADDRESS_CLAMP) &&
         //          ((sampler & __CLK_FILTER_MASK) == CLK_FILTER_NEAREST));
@@ -106,7 +106,7 @@ namespace gbe {
 
         I->replaceAllUsesWith(needFixVal);
         changed = true;
-      } else if (fnName.compare("__gen_ocl_sampler_need_rounding_fix") == 0) {
+      } else if (fnName == "__gen_ocl_sampler_need_rounding_fix") {
 
         //  return ((sampler & CLK_NORMALIZED_COORDS_TRUE) == 0);
         bool needFix = true;
