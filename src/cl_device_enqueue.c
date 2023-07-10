@@ -55,7 +55,7 @@ cl_device_enqueue_fix_offset(cl_kernel ker) {
 }
 
 LOCAL cl_int
-cl_device_enqueue_bind_buffer(cl_gpgpu gpgpu, cl_kernel ker, uint32_t *max_bti, cl_gpgpu_kernel *kernel)
+cl_device_enqueue_bind_buffer(cl_gpgpu gpgpu, cl_kernel ker, const uint32_t *max_bti, cl_gpgpu_kernel *kernel)
 {
   int32_t value = GBE_CURBE_ENQUEUE_BUF_POINTER;
   int32_t offset = interp_kernel_get_curbe_offset(ker->opaque, value, 0);

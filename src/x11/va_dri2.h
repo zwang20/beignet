@@ -18,7 +18,7 @@
  */
 
 /*
- * Copyright © 2007,2008 Red Hat, Inc.
+ * Copyright ï¿½ 2007,2008 Red Hat, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Soft-
@@ -46,7 +46,7 @@
  * the copyright holder.
  *
  * Authors:
- *   Kristian Høgsberg (krh@redhat.com)
+ *   Kristian Hï¿½gsberg (krh@redhat.com)
  */
 #ifndef _VA_DRI2_H_
 #define _VA_DRI2_H_
@@ -79,7 +79,7 @@ VA_DRI2DestroyDrawable(Display *display, XID handle);
 extern VA_DRI2Buffer *
 VA_DRI2GetBuffers(Display *dpy, XID drawable,
 	       int *width, int *height,
-	       unsigned int *attachments, int count,
+	       const unsigned int *attachments, int count,
 	       int *outcount);
 #if 1
 extern void

@@ -2,7 +2,7 @@
 
 typedef unsigned int uint;
 
-static void cpu(int global_id, uint *src, int *dst) {
+static void cpu(int global_id, const uint *src, int *dst) {
   dst[global_id] = src[global_id] >> 24;
 }
 

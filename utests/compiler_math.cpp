@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 
-static void cpu_compiler_math(float *dst, float *src, int i)
+static void cpu_compiler_math(float *dst, const float *src, int i)
 {
   const float x = src[i];
   const float PI = 3.141592653589793f;

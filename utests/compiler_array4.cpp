@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-static void cpu(int global_id, int *src, int *dst) {
+static void cpu(int global_id, const int *src, int *dst) {
   dst[global_id * 4] = src[global_id * 4];
 }
 

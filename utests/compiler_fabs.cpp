@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-static void cpu(int global_id, float *src, float *dst) {
+static void cpu(int global_id, const float *src, float *dst) {
   float f = src[global_id];
   f = f < 0 ? -f : f;
   dst[global_id] = f;

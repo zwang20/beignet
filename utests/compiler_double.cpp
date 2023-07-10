@@ -1,7 +1,7 @@
 #include <cmath>
 #include "utest_helper.hpp"
 
-static void cpu(int global_id, double *src, double *dst) {
+static void cpu(int global_id, const double *src, double *dst) {
   double f = src[global_id];
   double d = 1.234567890123456789;
   dst[global_id] = global_id < 14 ? (d * (f + d)) : 14;

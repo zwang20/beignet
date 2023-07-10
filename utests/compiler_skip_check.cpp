@@ -6,7 +6,7 @@ const size_t h = 48;
 const size_t mv_w = (w + 15) / 16;
 const size_t mv_h = (h + 15) / 16;
 
-void cpu_result(uint8_t *srcImg, uint8_t *refImg, int16_t *mv, uint16_t *residual)
+void cpu_result(const uint8_t *srcImg, const uint8_t *refImg, const int16_t *mv, uint16_t *residual)
 {
   for (uint32_t j = 0; j <= mv_h - 1; ++j) {
     for (uint32_t i = 0; i <= mv_w - 1; ++i) {

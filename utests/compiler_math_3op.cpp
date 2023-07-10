@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 
-static void cpu_compiler_math(float *dst, float *src1, float *src2, float *src3, int i)
+static void cpu_compiler_math(float *dst, const float *src1, const float *src2, const float *src3, int i)
 {
   const float x = src1[i], y = src2[i], z = src3[i];
   switch (i%2) {

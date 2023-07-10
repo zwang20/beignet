@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-static void cpu_compiler_switch(int *dst, int *src, int get_global_id0)
+static void cpu_compiler_switch(int *dst, const int *src, int get_global_id0)
 {
   switch (get_global_id0) {
     case 0: dst[get_global_id0] = src[get_global_id0 + 4]; break;

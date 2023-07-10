@@ -5,7 +5,7 @@
 
 #define GROUP_NUM 16
 #define LOCAL_SIZE 256
-static void cpu_compiler_atomic(int *dst, int *src)
+static void cpu_compiler_atomic(int *dst, const int *src)
 {
   dst[4] = 0xffffffff;
   int tmp[16] = { 0 };

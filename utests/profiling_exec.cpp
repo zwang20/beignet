@@ -1,7 +1,7 @@
 #include "utest_helper.hpp"
 #include <cstring>
 
-static void cpu_exec (int n, float* src, float* dst)
+static void cpu_exec (int n, const float* src, float* dst)
 {
     int i = 0;
     for (; i < n; i++) {

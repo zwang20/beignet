@@ -26,6 +26,6 @@
 #include <stdint.h>
 
 extern cl_int cl_device_enqueue_bind_buffer(cl_gpgpu gpgpu, cl_kernel ker,
-                                                     uint32_t *max_bti, cl_gpgpu_kernel *kernel);
+                                                     const uint32_t *max_bti, cl_gpgpu_kernel *kernel);
 extern cl_int cl_device_enqueue_parse_result(cl_command_queue queue, cl_gpgpu gpgpu);
 #endif /* __CL_DEVICE_ENQUEUE_H__ */

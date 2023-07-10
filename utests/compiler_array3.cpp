@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-static void cpu(int global_id, int *src, int *dst) {
+static void cpu(int global_id, const int *src, int *dst) {
   int tmp[32];
   for (int i = 0; i < 16; ++i) {
     for (int j = 0; j < 16; ++j)

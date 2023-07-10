@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-static void cpu(int global_id, int *src, int *dst, int scale) {
+static void cpu(int global_id, const int *src, int *dst, int scale) {
   bool isRedRow = false;
   bool isRed;
   int val = src[global_id];
