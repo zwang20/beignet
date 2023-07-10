@@ -37,7 +37,6 @@ namespace gbe
             : Gen8Context(unit, name, deviceID, relaxMath) {
     };
     virtual void emitBarrierInstruction(const SelectionInstruction &insn);
-    virtual void emitImeInstruction(const SelectionInstruction &insn);
 
   protected:
     virtual GenEncoder* generateEncoder(void) {
