@@ -50,9 +50,9 @@ namespace gbe
     /*! Build a CVar from a string environment variable */
     explicit CVarInit(const char *name, std::string *str, const std::string &v);
     int varType;      //!< STRING, INTEGER or FLOAT
-    std::string *str; //!< string variable
+    std::string *str{}; //!< string variable
     union {
-      struct { int32_t min, *curr, max; } i; //!< integer variables with bounds
+      struct { int32_t min, *curr, max; } i{}; //!< integer variables with bounds
       struct { float   min, *curr, max; } f; //!< float variables with bounds
     };
   };

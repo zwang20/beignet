@@ -506,7 +506,7 @@ namespace ir {
         auto *insn = const_cast<Instruction*>(addUse->getInstruction());
 
         // We finally find something like load dst arg+imm
-        LoadAddImm loadAddImm;
+        LoadAddImm loadAddImm{};
         if (matchLoad(insn, add, loadImm, offset, argID, loadAddImm)) {
           tmpSeq.push_back(loadAddImm);
           continue;

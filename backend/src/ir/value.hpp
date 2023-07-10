@@ -121,7 +121,7 @@ namespace ir {
       const FunctionArgument *arg;
       /*! ... special register */
       uint32_t regID;
-    } data;
+    } data{};
     /*!< Function argument or instruction dst? */
     Type type;
     GBE_CLASS(ValueDef); // Use gbe allocators
@@ -259,7 +259,7 @@ namespace ir {
     DUGraph duGraph;                   //!< All the DU chains
     DefSet *udEmpty;                   //!< Void use set
     UseSet *duEmpty;                   //!< Void def set
-    ValueDef *undefined;               //!< Undefined value
+    ValueDef *undefined{};               //!< Undefined value
     map<ValueUse, ValueUse*> useName;  //!< Get the ValueUse pointer from the value
     map<ValueDef, ValueDef*> defName;  //!< Get the ValueDef pointer from the value
     map<Register, UseSet*> regUse;     //!< All uses of registers

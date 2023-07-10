@@ -328,8 +328,8 @@ namespace ir {
 
   private:
     ImmType type;  //!< Type of the value
-    uint32_t elemNum; //!< vector imm data type
-    uint64_t defaultData;
+    uint32_t elemNum{}; //!< vector imm data type
+    uint64_t defaultData{};
     union {
       bool *b;
       int8_t *s8;
@@ -345,7 +345,7 @@ namespace ir {
       half *f16;
       const Immediate **immVec;
       void *p;
-    } data;     //!< Value to store
+    } data{};     //!< Value to store
     Immediate operator+ (const Immediate &) const;
     Immediate operator- (const Immediate &) const;
     Immediate operator* (const Immediate &) const;

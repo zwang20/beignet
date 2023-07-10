@@ -221,7 +221,7 @@ namespace ir {
       vector<uint8_t> *usedLabels; //!< Store all labels that are defined
     };
     vector<StackElem> fnStack;     //!< Stack of functions still to finish
-    DebugInfo DBGInfo;
+    DebugInfo DBGInfo{};
     GBE_CLASS(Context);
   };
 

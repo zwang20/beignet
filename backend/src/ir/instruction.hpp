@@ -39,7 +39,7 @@ namespace ir {
     uint8_t isConst; // whether fixed bti
     union {
       Register reg;  // mixed reg
-      unsigned short imm;  // fixed bti
+      unsigned short imm{};  // fixed bti
     };
 
     BTI() : isConst(0) {

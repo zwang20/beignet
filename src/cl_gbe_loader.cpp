@@ -357,9 +357,9 @@ struct GbeLoaderInitializer
     interp_program_delete = NULL;
   }
 
-  bool compilerLoaded;
-  void *dlhCompiler;
-  void *dlhInterp;
+  bool compilerLoaded{};
+  void *dlhCompiler{};
+  void *dlhInterp{};
 };
 
 static struct GbeLoaderInitializer gbeLoader;

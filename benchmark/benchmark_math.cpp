@@ -11,7 +11,7 @@ double benchmark_generic_math(const char* str_filename,
                               const char* str_kernel)
 {
   double elapsed = 0;
-  struct timeval start,stop;
+  struct timeval start{},stop{};
   const size_t global_size = 1024 * 1024;
   const size_t local_size = 64;
 

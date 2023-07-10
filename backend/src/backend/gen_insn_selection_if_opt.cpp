@@ -23,7 +23,7 @@ namespace gbe
   protected:
     const GenContext &ctx;      //in case that we need it
     SelectionBlock &selBlock;
-    bool optimized;
+    bool optimized{};
   };
 
   bool IfOptimizer::isSimpleBlock() {

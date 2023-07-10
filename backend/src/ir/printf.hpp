@@ -248,7 +248,7 @@ namespace gbe
     private:
       std::map<uint32_t, PrintfFmt> fmts;
       friend struct LockOutput;
-      uint8_t btiBuf;
+      uint8_t btiBuf{};
       static pthread_mutex_t lock;
       GBE_CLASS(PrintfSet);
     };

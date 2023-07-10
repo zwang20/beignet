@@ -585,7 +585,7 @@ namespace ir {
     SamplerSet *samplerSet;         //!< samplers used in this function.
     ImageSet* imageSet;             //!< Image set in this function's arguments..
     PrintfSet *printfSet;           //!< printfSet store the printf info.
-    size_t compileWgSize[3];        //!< required work group size specified by
+    size_t compileWgSize[3]{};        //!< required work group size specified by
                                     //   __attribute__((reqd_work_group_size(X, Y, Z))).
     std::string functionAttributes; //!< function attribute qualifiers combined.
     int32_t wgBroadcastSLM;         //!< Used for broadcast the workgroup value.

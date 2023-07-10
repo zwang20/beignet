@@ -82,7 +82,7 @@ namespace ir {
 
   public:
     BlockType btype;
-    Block* fall_through;
+    Block* fall_through{};
     BlockSets predecessor;
     BlockSets successor;
     BlockList children;
@@ -90,7 +90,7 @@ namespace ir {
     bool mark;
     bool canBeHandled;
     //label is for debug
-    int label;
+    int label{};
     /* inversePredicate should be false under two circumstance,
      * fallthrough is the same with succs:
      * (1) n->succs == m && block->fallthrough == m
@@ -238,7 +238,7 @@ namespace ir {
       std::map<BasicBlock *, Block *> bbmap;
       std::map<Block *, BasicBlock *> bTobbmap;
       BlockVector blocks;
-      Block* blocks_entry;
+      Block* blocks_entry{};
       gbe::vector<Loop *> loops;
       BlockList orderedBlks;
       BlockList::iterator orderIter;

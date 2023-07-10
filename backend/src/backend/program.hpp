@@ -46,9 +46,9 @@ namespace gbe {
   /*! Info for the kernel argument */
   struct KernelArgument {
     gbe_arg_type type; //!< Pointer, structure, image, regular value?
-    uint32_t size;     //!< Size of the argument
-    uint32_t align;    //!< addr alignment of the argument
-    uint8_t bti;      //!< binding table index for __global buffer
+    uint32_t size{};     //!< Size of the argument
+    uint32_t align{};    //!< addr alignment of the argument
+    uint8_t bti{};      //!< binding table index for __global buffer
 
     // Strings for arg info.
     struct ArgInfo {

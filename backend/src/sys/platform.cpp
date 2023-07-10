@@ -64,7 +64,7 @@ namespace gbe
 namespace gbe
 {
   double getSeconds() {
-    struct timeval tp; gettimeofday(&tp,NULL);
+    struct timeval tp{}; gettimeofday(&tp,NULL);
     return double(tp.tv_sec) + double(tp.tv_usec)/1E6;
   }
 

@@ -345,7 +345,7 @@ namespace gbe {
       assert(insn_version == 8);
       auto *pOut = (union Gen8NativeInstruction *) insn;
       memset(pOut, 0, sizeof(Gen8NativeInstruction));
-      union Src3ControlBits control_bits;
+      union Src3ControlBits control_bits{};
       control_bits.data = src3_control_table[(uint32_t)p->src3Insn.bits1.control_index].bit_pattern;
       pOut->header.opcode = p->bits1.opcode;
 
@@ -392,7 +392,7 @@ namespace gbe {
     } else {
       if (insn_version == 7) {
         memset(pOut, 0, sizeof(Gen7NativeInstruction));
-        union ControlBits control_bits;
+        union ControlBits control_bits{};
         control_bits.data = control_table[(uint32_t)p->bits1.control_index].bit_pattern;
         pNative->low.low = (uint32_t)p->bits1.opcode | ((control_bits.data & 0xffff) << 8);
         pOut->header.destreg_or_condmod = p->bits1.destreg_or_condmod;
@@ -401,9 +401,9 @@ namespace gbe {
         pOut->header.cmpt_control = p->bits1.cmpt_control;
         pOut->header.debug_control = p->bits1.debug_control;
 
-        union DataTypeBits data_type_bits;
-        union SubRegBits subreg_bits;
-        union SrcRegBits src0_bits;
+        union DataTypeBits data_type_bits{};
+        union SubRegBits subreg_bits{};
+        union SrcRegBits src0_bits{};
         data_type_bits.data = data_type_decompact[(uint32_t)p->bits1.data_type_index].bit_pattern;
         subreg_bits.data = subreg_table[(uint32_t)p->bits1.sub_reg_index].bit_pattern;
         src0_bits.data = srcreg_table[p->bits1.src0_index_lo | p->bits2.src0_index_hi << 2].bit_pattern;
@@ -424,7 +424,7 @@ namespace gbe {
           uint32_t imm = (uint32_t)p->bits2.src1_reg_nr | (p->bits2.src1_index<<8);
           pOut->bits3.ud = imm & 0x1000 ? (imm | 0xfffff000) : imm;
         } else {
-          union SrcRegBits src1_bits;
+          union SrcRegBits src1_bits{};
           src1_bits.data = srcreg_table[p->bits2.src1_index].bit_pattern;
           pOut->bits3.da1.src1_subreg_nr = subreg_bits.src1_subreg_nr;
           pOut->bits3.da1.src1_reg_nr = p->bits2.src1_reg_nr;
@@ -433,7 +433,7 @@ namespace gbe {
       } else if (insn_version == 8) {
         auto *pOut = (union Gen8NativeInstruction *) insn;
         memset(pOut, 0, sizeof(Gen8NativeInstruction));
-        union ControlBits control_bits;
+        union ControlBits control_bits{};
         control_bits.data = control_table[(uint32_t)p->bits1.control_index].bit_pattern;
         pOut->header.opcode = p->bits1.opcode;
 
@@ -454,9 +454,9 @@ namespace gbe {
         pOut->header.cmpt_control = p->bits1.cmpt_control;
         pOut->header.debug_control = p->bits1.debug_control;
 
-        union Gen8DataTypeBits data_type_bits;
-        union SubRegBits subreg_bits;
-        union SrcRegBits src0_bits;
+        union Gen8DataTypeBits data_type_bits{};
+        union SubRegBits subreg_bits{};
+        union SrcRegBits src0_bits{};
         data_type_bits.data = gen8_data_type_table[(uint32_t)p->bits1.data_type_index].bit_pattern;
         subreg_bits.data = subreg_table[(uint32_t)p->bits1.sub_reg_index].bit_pattern;
         src0_bits.data = srcreg_table[p->bits1.src0_index_lo | p->bits2.src0_index_hi << 2].bit_pattern;
@@ -480,7 +480,7 @@ namespace gbe {
           uint32_t imm = (uint32_t)p->bits2.src1_reg_nr | (p->bits2.src1_index<<8);
           pOut->bits3.ud = imm & 0x1000 ? (imm | 0xfffff000) : imm;
         } else {
-          union SrcRegBits src1_bits;
+          union SrcRegBits src1_bits{};
           src1_bits.data = srcreg_table[p->bits2.src1_index].bit_pattern;
           pOut->bits3.da1.src1_subreg_nr = subreg_bits.src1_subreg_nr;
           pOut->bits3.da1.src1_reg_nr = p->bits2.src1_reg_nr;
@@ -501,7 +501,7 @@ namespace gbe {
     if(s->flag == 1)
       return -1;
 
-    ControlBits b;
+    ControlBits b{};
     b.data = 0;
 
     if (execWidth == 8)
@@ -524,7 +524,7 @@ namespace gbe {
     b.flag_sub_reg_nr = s->subFlag;
     b.flag_reg_nr = s->flag;
 
-    compact_table_entry key;
+    compact_table_entry key{};
     key.bit_pattern = b.data;
 
     auto *r = (compact_table_entry *)bsearch(&key, control_table,

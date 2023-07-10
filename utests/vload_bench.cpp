@@ -8,7 +8,7 @@ template <typename T>
 static double vload_bench(const char *kernelFunc, uint32_t N, uint32_t offset, bool benchMode)
 {
   const size_t n = benchMode ? (512 * 1024) : (8 * 1024);
-  struct timeval start, end;
+  struct timeval start{}, end{};
 
   // Setup kernel and buffers
   std::string kernelName = kernelFunc + std::to_string((long long unsigned int)N);

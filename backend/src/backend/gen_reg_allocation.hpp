@@ -41,9 +41,9 @@ namespace gbe
   } SpillRegTag;
 
   typedef struct HoleRegTag {
-    uint32_t startID;
-    uint32_t endID;
-    uint32_t regSize;
+    uint32_t startID{};
+    uint32_t endID{};
+    uint32_t regSize{};
     ir::Register reg;
   }HoleRegTag;
 

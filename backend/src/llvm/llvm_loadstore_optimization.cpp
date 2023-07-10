@@ -30,8 +30,8 @@ namespace gbe {
 
   public:
     static char ID;
-    ScalarEvolution *SE;
-    const DataLayout *TD;
+    ScalarEvolution *SE{};
+    const DataLayout *TD{};
     GenLoadStoreOptimization() : FunctionPass(ID) {}
 
     void getAnalysisUsage(AnalysisUsage &AU) const override {
