@@ -33,14 +33,14 @@
 class Exception : public std::exception
 {
 public:
-  Exception(std::string msg) throw() : msg(std::move(msg)) {}
-  Exception(const Exception &other) throw() : msg(other.msg) {}
+  Exception(std::string msg) noexcept : msg(std::move(msg)) {}
+  Exception(const Exception &other) noexcept : msg(other.msg) {}
   ~Exception(void) throw() {}
   Exception &operator= (const Exception &other) throw() {
     this->msg = other.msg;
     return *this;
   }
-  const char *what(void) const throw() { return msg.c_str(); }
+  const char *what(void) const noexcept { return msg.c_str(); }
 private:
   std::string msg; //!< String message
 };
