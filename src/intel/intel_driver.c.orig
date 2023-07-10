@@ -261,6 +261,7 @@ if(!intel_driver_is_active(intel)) {
 }
 
 if(!intel_driver_is_active(intel)) {
+  fprintf(stderr, "Device open failed, aborting...\n");
   return CL_DEVICE_NOT_FOUND;
 }
 
@@ -341,6 +342,7 @@ drm_client_t client;
 // usually dev_name = "/dev/dri/card%d"
 dev_fd = open(dev_name, O_RDWR);
 if (dev_fd == -1) {
+  fprintf(stderr, "open(\"%s\", O_RDWR) failed: %s\n", dev_name, strerror(errno));
   return 0;
 }
 

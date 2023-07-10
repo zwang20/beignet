@@ -974,10 +974,10 @@ aml_gt2_break:
     case PCI_CHIP_SANDYBRIDGE_BRIDGE_S:
     case PCI_CHIP_SANDYBRIDGE_S_GT:
       // Intel(R) HD Graphics SandyBridge not supported yet
+    default:
+      fprintf(stderr, "beignet-opencl-icd: no supported GPU found, this is probably the wrong opencl-icd package for this hardware\n(If you have multiple ICDs installed and OpenCL works, you can ignore this message)\n");
       ret = NULL;
       break;
-    default:
-      printf("cl_get_gt_device(): error, unknown device: %x\n", device_id);
   }
 
   if (ret == NULL)
