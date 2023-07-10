@@ -163,10 +163,18 @@ namespace gbe
       // __gen_ocl_store_timestamp(int nth, int type);
       Value *Args[2] = {ConstantInt::get(intTy, pointNum++), ConstantInt::get(intTy, profilingType)};
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 50
+#if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 90
+      builder->CreateCall(module->getOrInsertFunction(
+#else
       builder->CreateCall(cast<llvm::Function>(module->getOrInsertFunction(
+#endif
               "__gen_ocl_calc_timestamp", Type::getVoidTy(module->getContext()),
               IntegerType::getInt32Ty(module->getContext()),
+#if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 90
+              IntegerType::getInt32Ty(module->getContext())),
+#else
               IntegerType::getInt32Ty(module->getContext()))),
+#endif
               ArrayRef<Value*>(Args));
 #else
       builder->CreateCall(cast<llvm::Function>(module->getOrInsertFunction(
@@ -185,10 +193,18 @@ namespace gbe
     Value *Args2[2] = {profilingBuf, ConstantInt::get(intTy, profilingType)};
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 50
+#if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 90
+    builder->CreateCall(module->getOrInsertFunction(
+#else
     builder->CreateCall(cast<llvm::Function>(module->getOrInsertFunction(
+#endif
             "__gen_ocl_store_profiling", Type::getVoidTy(module->getContext()),
             ptrTy,
+#if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 90
+            IntegerType::getInt32Ty(module->getContext())),
+#else
             IntegerType::getInt32Ty(module->getContext()))),
+#endif
             ArrayRef<Value*>(Args2));
 #else
     builder->CreateCall(cast<llvm::Function>(module->getOrInsertFunction(
