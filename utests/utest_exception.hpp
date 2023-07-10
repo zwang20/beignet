@@ -27,12 +27,13 @@
 
 #include <string>
 #include <exception>
+#include <utility>
 
 /*! Exception are only used while using unit tests */
 class Exception : public std::exception
 {
 public:
-  Exception(const std::string &msg) throw() : msg(msg) {}
+  Exception(std::string msg) throw() : msg(std::move(msg)) {}
   Exception(const Exception &other) throw() : msg(other.msg) {}
   ~Exception(void) throw() {}
   Exception &operator= (const Exception &other) throw() {

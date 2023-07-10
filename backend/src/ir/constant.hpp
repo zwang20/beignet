@@ -25,6 +25,8 @@
 #ifndef __GBE_IR_CONSTANT_HPP__
 #define __GBE_IR_CONSTANT_HPP__
 
+#include <utility>
+
 #include "sys/vector.hpp"
 
 namespace gbe {
@@ -35,8 +37,8 @@ namespace ir {
   {
   public:
     /*! Build a constant description */
-    INLINE Constant(const std::string &name, uint32_t size, uint32_t alignment, uint32_t offset) :
-      name(name), size(size), alignment(alignment), offset(offset) {}
+    INLINE Constant(std::string name, uint32_t size, uint32_t alignment, uint32_t offset) :
+      name(std::move(name)), size(size), alignment(alignment), offset(offset) {}
     /*! Copy constructor */
     INLINE Constant(const Constant &other) :
       name(other.name), size(other.size), alignment(other.alignment), offset(other.offset) {}
