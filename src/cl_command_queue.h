@@ -70,7 +70,7 @@ extern void cl_command_queue_add_ref(cl_command_queue);
 extern cl_int cl_command_queue_ND_range(cl_command_queue queue,
                                         cl_kernel ker,
                                         cl_event event,
-                                        const uint32_t work_dim,
+                                        uint32_t work_dim,
                                         const size_t *global_wk_off,
                                         const size_t *global_dim_off,
                                         const size_t *global_wk_sz,

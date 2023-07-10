@@ -290,11 +290,11 @@ extern cl_int cl_mem_kernel_copy_image(cl_command_queue, cl_event event, struct 
 
 /* api clEnqueueCopyImageToBuffer help function */
 extern cl_int cl_mem_copy_image_to_buffer(cl_command_queue, cl_event, struct _cl_mem_image*, cl_mem,
-                                          const size_t *, const size_t, const size_t *);
+                                          const size_t *, size_t, const size_t *);
 
 /* api clEnqueueCopyBufferToImage help function */
 extern cl_int cl_mem_copy_buffer_to_image(cl_command_queue, cl_event, cl_mem, struct _cl_mem_image*,
-                                          const size_t, const size_t *, const size_t *);
+                                          size_t, const size_t *, const size_t *);
 
 /* Directly map a memory object */
 extern void *cl_mem_map(cl_mem, int);

@@ -52,7 +52,7 @@ namespace ir {
     /*! clear image info. */
     void clearInfo();
     /*! Get the image's index(actual location). */
-    uint32_t getIdx(const Register imageReg) const;
+    uint32_t getIdx(Register imageReg) const;
     size_t getDataSize(void) { return regMap.size(); }
     size_t getDataSize(void) const { return regMap.size(); }
 
