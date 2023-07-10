@@ -31,48 +31,48 @@ namespace gbe
   class Gen8Encoder : public GenEncoder
   {
   public:
-    virtual ~Gen8Encoder(void) { }
+    ~Gen8Encoder(void) override { }
 
     Gen8Encoder(uint32_t simdWidth, uint32_t gen, uint32_t deviceID)
          : GenEncoder(simdWidth, gen, deviceID) { }
 
     /*! Jump indexed instruction */
-    virtual void JMPI(GenRegister src, bool longjmp = false);
-    virtual void FENCE(GenRegister dst, bool flushRWCache);
+    void JMPI(GenRegister src, bool longjmp = false) override;
+    void FENCE(GenRegister dst, bool flushRWCache) override;
     /*! Patch JMPI/BRC/BRD (located at index insnID) with the given jump distance */
-    virtual void patchJMPI(uint32_t insnID, int32_t jip, int32_t uip);
-    virtual void F16TO32(GenRegister dest, GenRegister src0);
-    virtual void F32TO16(GenRegister dest, GenRegister src0);
-    virtual void LOAD_INT64_IMM(GenRegister dest, GenRegister value);
-    virtual bool needToSplitCmpBySrcType(GenEncoder *p, GenRegister src0, GenRegister src1);
-    virtual void ATOMIC(GenRegister dst, uint32_t function, GenRegister addr, GenRegister data, GenRegister bti, uint32_t srcNum, bool useSends);
-    virtual void ATOMICA64(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum);
-    virtual void UNTYPED_READ(GenRegister dst, GenRegister src, GenRegister bti, uint32_t elemNum);
-    virtual void UNTYPED_WRITE(GenRegister src, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends);
-    virtual void UNTYPED_READA64(GenRegister dst, GenRegister src, uint32_t elemNum);
-    virtual void UNTYPED_WRITEA64(GenRegister src, uint32_t elemNum);
-    virtual void BYTE_GATHERA64(GenRegister dst, GenRegister src, uint32_t elemSize);
-    virtual void BYTE_SCATTERA64(GenRegister src, uint32_t elemSize);
-    virtual void setHeader(GenNativeInstruction *insn);
-    virtual void setDPUntypedRW(GenNativeInstruction *insn, uint32_t bti, uint32_t rgba,
-                   uint32_t msg_type, uint32_t msg_length, uint32_t response_length);
-    virtual void setTypedWriteMessage(GenNativeInstruction *insn, unsigned char bti,
+    void patchJMPI(uint32_t insnID, int32_t jip, int32_t uip) override;
+    void F16TO32(GenRegister dest, GenRegister src0) override;
+    void F32TO16(GenRegister dest, GenRegister src0) override;
+    void LOAD_INT64_IMM(GenRegister dest, GenRegister value) override;
+    bool needToSplitCmpBySrcType(GenEncoder *p, GenRegister src0, GenRegister src1) override;
+    void ATOMIC(GenRegister dst, uint32_t function, GenRegister addr, GenRegister data, GenRegister bti, uint32_t srcNum, bool useSends) override;
+    void ATOMICA64(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum) override;
+    void UNTYPED_READ(GenRegister dst, GenRegister src, GenRegister bti, uint32_t elemNum) override;
+    void UNTYPED_WRITE(GenRegister src, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends) override;
+    void UNTYPED_READA64(GenRegister dst, GenRegister src, uint32_t elemNum) override;
+    void UNTYPED_WRITEA64(GenRegister src, uint32_t elemNum) override;
+    void BYTE_GATHERA64(GenRegister dst, GenRegister src, uint32_t elemSize) override;
+    void BYTE_SCATTERA64(GenRegister src, uint32_t elemSize) override;
+    void setHeader(GenNativeInstruction *insn) override;
+    void setDPUntypedRW(GenNativeInstruction *insn, uint32_t bti, uint32_t rgba,
+                   uint32_t msg_type, uint32_t msg_length, uint32_t response_length) override;
+    void setTypedWriteMessage(GenNativeInstruction *insn, unsigned char bti,
                                       unsigned char msg_type, uint32_t msg_length,
-                                      bool header_present);
-    virtual void FLUSH_SAMPLERCACHE(GenRegister dst);
-    virtual void setDst(GenNativeInstruction *insn, GenRegister dest);
-    virtual void setSrc0(GenNativeInstruction *insn, GenRegister reg);
-    virtual void setSrc1(GenNativeInstruction *insn, GenRegister reg);
-    virtual uint32_t getCompactVersion() { return 8; }
-    virtual void alu3(uint32_t opcode, GenRegister dst,
-                       GenRegister src0, GenRegister src1, GenRegister src2);
-    virtual bool canHandleLong(uint32_t opcode, GenRegister dst, GenRegister src0,
-                            GenRegister src1 = GenRegister::null());
-    virtual void handleDouble(GenEncoder *p, uint32_t opcode, GenRegister dst, GenRegister src0, GenRegister src1 = GenRegister::null());
-    virtual unsigned setAtomicMessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum);
-    virtual unsigned setAtomicA64MessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum, int type_long);
-    virtual unsigned setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum);
-    virtual unsigned setUntypedWriteMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum);
+                                      bool header_present) override;
+    void FLUSH_SAMPLERCACHE(GenRegister dst) override;
+    void setDst(GenNativeInstruction *insn, GenRegister dest) override;
+    void setSrc0(GenNativeInstruction *insn, GenRegister reg) override;
+    void setSrc1(GenNativeInstruction *insn, GenRegister reg) override;
+    uint32_t getCompactVersion() override { return 8; }
+    void alu3(uint32_t opcode, GenRegister dst,
+                       GenRegister src0, GenRegister src1, GenRegister src2) override;
+    bool canHandleLong(uint32_t opcode, GenRegister dst, GenRegister src0,
+                            GenRegister src1 = GenRegister::null()) override;
+    void handleDouble(GenEncoder *p, uint32_t opcode, GenRegister dst, GenRegister src0, GenRegister src1 = GenRegister::null()) override;
+    unsigned setAtomicMessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum) override;
+    unsigned setAtomicA64MessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum, int type_long) override;
+    unsigned setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
+    unsigned setUntypedWriteMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
     void setSrc0WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
     void setSrc1WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
 
@@ -81,9 +81,9 @@ namespace gbe
     void MADM(GenRegister dst, GenRegister src0, GenRegister src1, GenRegister src2,
               uint32_t dstAcc, uint32_t src0Acc, uint32_t src1Acc, uint32_t src2Acc);
     /*! A64 OBlock read */
-    virtual void OBREADA64(GenRegister dst, GenRegister header, uint32_t bti, uint32_t elemSize);
+    void OBREADA64(GenRegister dst, GenRegister header, uint32_t bti, uint32_t elemSize) override;
     /*! A64 OBlock write */
-    virtual void OBWRITEA64(GenRegister header, uint32_t bti, uint32_t elemSize);
+    void OBWRITEA64(GenRegister header, uint32_t bti, uint32_t elemSize) override;
   };
 }
 #endif /* __GBE_GEN8_ENCODER_HPP__ */

@@ -83,7 +83,7 @@ namespace {
                                      lastTime(lastTime) {
     }
 
-    virtual bool runOnFunction(Function &Func);
+    bool runOnFunction(Function &Func) override;
   private:
     bool lastTime; //last time all StripAttributes
   };

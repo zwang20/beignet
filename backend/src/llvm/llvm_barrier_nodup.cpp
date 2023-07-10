@@ -44,20 +44,20 @@ namespace gbe {
       BarrierNodup(bool nodup) :
         ModulePass(ID), nodup(nodup) {}
 
-      void getAnalysisUsage(AnalysisUsage &AU) const {
+      void getAnalysisUsage(AnalysisUsage &AU) const override {
 
       }
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-      virtual StringRef getPassName() const
+      StringRef getPassName() const
 #else
       virtual const char *getPassName() const
-#endif
+#endif override
       {
         return "SPIR backend: set barrier no duplicate attr";
       }
 
-      virtual bool runOnModule(Module &M)
+      bool runOnModule(Module &M) override
       {
         using namespace llvm;
         bool changed = false;

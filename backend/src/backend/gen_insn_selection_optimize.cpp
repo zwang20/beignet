@@ -89,8 +89,8 @@ namespace gbe
         SelOptimizer(ctx, features), bb(bb), liveout(liveout), optimized(false)
     {
     }
-    ~SelBasicBlockOptimizer() {}
-    virtual void run();
+    ~SelBasicBlockOptimizer() override {}
+    void run() override;
 
   private:
     // local copy propagation
@@ -331,8 +331,8 @@ namespace gbe
   {
   public:
     SelGlobalOptimizer(const GenContext& ctx, uint32_t features) : SelOptimizer(ctx, features) {}
-    ~SelGlobalOptimizer() {}
-    virtual void run();
+    ~SelGlobalOptimizer() override {}
+    void run() override;
   };
 
   class SelGlobalImmMovOpt : public SelGlobalOptimizer
@@ -344,7 +344,7 @@ namespace gbe
         mblockList = blockList;
       }
 
-    virtual void run();
+    void run() override;
 
     void addToReplaceInfoMap(SelectionInstruction& insn);
     void doGlobalCopyPropagation();

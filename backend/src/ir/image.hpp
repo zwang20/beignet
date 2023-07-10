@@ -66,7 +66,7 @@ namespace ir {
 
     ImageSet(const ImageSet& other) : regMap(other.regMap.begin(), other.regMap.end()) { }
     ImageSet() {}
-    ~ImageSet();
+    ~ImageSet() override;
 
     static const uint32_t magic_begin = TO_MAGIC('I', 'M', 'A', 'G');
     static const uint32_t magic_end = TO_MAGIC('G', 'A', 'M', 'I');
@@ -86,9 +86,9 @@ namespace ir {
     */
 
     /*! Implements the serialization. */
-    virtual uint32_t serializeToBin(std::ostream& outs);
-    virtual uint32_t deserializeFromBin(std::istream& ins);
-    virtual void printStatus(int indent, std::ostream& outs);
+    uint32_t serializeToBin(std::ostream& outs) override;
+    uint32_t deserializeFromBin(std::istream& ins) override;
+    void printStatus(int indent, std::ostream& outs) override;
 
   private:
     map<Register, struct ImageInfo *> regMap;

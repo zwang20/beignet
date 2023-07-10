@@ -332,9 +332,9 @@ namespace gbe {
     */
 
     /*! Implements the serialization. */
-    virtual uint32_t serializeToBin(std::ostream& outs);
-    virtual uint32_t deserializeFromBin(std::istream& ins);
-    virtual void printStatus(int indent, std::ostream& outs);
+    uint32_t serializeToBin(std::ostream& outs) override;
+    uint32_t deserializeFromBin(std::istream& ins) override;
+    void printStatus(int indent, std::ostream& outs) override;
     uint32_t fast_relaxed_math : 1;
 
   protected:

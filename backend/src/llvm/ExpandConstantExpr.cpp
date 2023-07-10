@@ -92,7 +92,7 @@ namespace {
     ExpandConstantExpr() : FunctionPass(ID) {
     }
 
-    virtual bool runOnFunction(Function &Func);
+    bool runOnFunction(Function &Func) override;
   };
 }
 

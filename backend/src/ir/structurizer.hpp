@@ -113,10 +113,10 @@ namespace ir {
   {
   public:
     SimpleBlock(BasicBlock *p_bb) : Block(SingleBlockType, BlockList()) { this->p_bb = p_bb; }
-    virtual ~SimpleBlock() {}
+    ~SimpleBlock() override {}
     BasicBlock* getBasicBlock() { return p_bb; }
-    virtual BasicBlock* getEntry() { return p_bb; }
-    virtual BasicBlock* getExit() { return p_bb; }
+    BasicBlock* getEntry() override { return p_bb; }
+    BasicBlock* getExit() override { return p_bb; }
     virtual BasicBlock* getFirstBB() { return p_bb; }
   private:
     BasicBlock *p_bb;
@@ -127,7 +127,7 @@ namespace ir {
   {
   public:
     SerialBlock(BlockList& children) : Block(SerialBlockType, children) {}
-    virtual ~SerialBlock(){}
+    ~SerialBlock() override{}
   };
 
   /* If-Then Block*/
@@ -135,7 +135,7 @@ namespace ir {
   {
   public:
     IfThenBlock(Block* pred, Block* trueBlock) : Block(IfThenType, InitChildren(pred, trueBlock)) {}
-    virtual ~IfThenBlock() {}
+    ~IfThenBlock() override {}
 
   private:
     const BlockList InitChildren(Block* pred, Block* trueBlock)
@@ -152,7 +152,7 @@ namespace ir {
   {
   public:
     IfElseBlock(Block* pred, Block* trueBlock, Block* falseBlock) : Block(IfElseType, InitChildren(pred, trueBlock, falseBlock)) {}
-    virtual ~IfElseBlock() {}
+    ~IfElseBlock() override {}
 
   private:
     const BlockList InitChildren(Block* pred, Block* trueBlock, Block* falseBlock)
@@ -170,12 +170,12 @@ namespace ir {
   {
   public:
     SelfLoopBlock(Block* block) : Block(SelfLoopType, InitChildren(block)) {}
-    virtual ~SelfLoopBlock() {}
-    virtual BasicBlock* getEntry()
+    ~SelfLoopBlock() override {}
+    BasicBlock* getEntry() override
     {
       return (*(children.begin()))->getEntry();
     }
-    virtual BasicBlock* getExit()
+    BasicBlock* getExit() override
     {
       return (*(children.begin()))->getExit();
     }

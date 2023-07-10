@@ -69,9 +69,9 @@ namespace gbe
     /*! Clean LLVM resource */
     virtual void CleanLlvmResource(void);
     /*! Implements base class */
-    virtual Kernel *compileKernel(const ir::Unit &unit, const std::string &name, bool relaxMath, int profiling);
+    Kernel *compileKernel(const ir::Unit &unit, const std::string &name, bool relaxMath, int profiling) override;
     /*! Allocate an empty kernel. */
-    virtual Kernel *allocateKernel(const std::string &name) {
+    Kernel *allocateKernel(const std::string &name) override {
       return GBE_NEW(GenKernel, name, deviceID);
     }
     void* module;

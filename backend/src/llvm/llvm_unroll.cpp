@@ -35,7 +35,7 @@ namespace gbe {
       CustomLoopUnroll() :
        LoopPass(ID) {}
 
-      void getAnalysisUsage(AnalysisUsage &AU) const {
+      void getAnalysisUsage(AnalysisUsage &AU) const override {
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 37
         AU.addRequired<LoopInfoWrapperPass>();
         AU.addPreserved<LoopInfoWrapperPass>();
@@ -224,7 +224,7 @@ namespace gbe {
       // Analyze the outermost BBs of this loop, if there are
       // some private load or store, we change it's loop meta data
       // to indicate more aggresive unrolling on it.
-      virtual bool runOnLoop(Loop *L, LPPassManager &LPM) {
+      bool runOnLoop(Loop *L, LPPassManager &LPM) override {
         const MDNode *Enable = GetUnrollMetadataValue(L, "llvm.loop.unroll.enable");
         if (Enable)
           return false;
@@ -242,10 +242,10 @@ namespace gbe {
       }
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-      virtual StringRef getPassName() const
+      StringRef getPassName() const
 #else
       virtual const char *getPassName() const
-#endif
+#endif override
       {
         return "SPIR backend: custom loop unrolling pass";
       }

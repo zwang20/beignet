@@ -31,21 +31,21 @@ namespace gbe
   class Gen7Encoder : public GenEncoder
   {
   public:
-    virtual ~Gen7Encoder(void) { }
+    ~Gen7Encoder(void) override { }
 
     Gen7Encoder(uint32_t simdWidth, uint32_t gen, uint32_t deviceID)
          : GenEncoder(simdWidth, gen, deviceID) { }
 
-    virtual void setHeader(GenNativeInstruction *insn);
-    virtual void setDst(GenNativeInstruction *insn, GenRegister dest);
-    virtual void setSrc0(GenNativeInstruction *insn, GenRegister reg);
-    virtual void setSrc1(GenNativeInstruction *insn, GenRegister reg);
-    virtual void alu3(uint32_t opcode, GenRegister dst,
-                       GenRegister src0, GenRegister src1, GenRegister src2);
+    void setHeader(GenNativeInstruction *insn) override;
+    void setDst(GenNativeInstruction *insn, GenRegister dest) override;
+    void setSrc0(GenNativeInstruction *insn, GenRegister reg) override;
+    void setSrc1(GenNativeInstruction *insn, GenRegister reg) override;
+    void alu3(uint32_t opcode, GenRegister dst,
+                       GenRegister src0, GenRegister src1, GenRegister src2) override;
     /*! MBlock read */
-    virtual void MBREAD(GenRegister dst, GenRegister header, uint32_t bti, uint32_t elemSize);
+    void MBREAD(GenRegister dst, GenRegister header, uint32_t bti, uint32_t elemSize) override;
     /*! MBlock write */
-    virtual void MBWRITE(GenRegister header, GenRegister data, uint32_t bti, uint32_t elemSize, bool useSends);
+    void MBWRITE(GenRegister header, GenRegister data, uint32_t bti, uint32_t elemSize, bool useSends) override;
   };
 }
 #endif /* __GBE_GEN7_ENCODER_HPP__ */

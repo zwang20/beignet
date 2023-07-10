@@ -35,7 +35,7 @@ namespace ir {
       loadImms.clear();
     }
     /*! Free everything we needed */
-    virtual ~FunctionStructArgConstOffsetFolder() {
+    ~FunctionStructArgConstOffsetFolder() override {
       for (size_t i = 0; i < records.size(); ++i) {
         delete records[i];
       }

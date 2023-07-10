@@ -96,7 +96,7 @@ class PromoteIntegers : public FunctionPass {
   static char ID;
   PromoteIntegers() : FunctionPass(ID) {
   }
-  virtual bool runOnFunction(Function &F);
+  bool runOnFunction(Function &F) override;
 };
 }
 

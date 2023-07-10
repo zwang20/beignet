@@ -79,9 +79,9 @@ namespace ir {
     */
 
     /*! Implements the serialization. */
-    virtual uint32_t serializeToBin(std::ostream& outs);
-    virtual uint32_t deserializeFromBin(std::istream& ins);
-    virtual void printStatus(int indent, std::ostream& outs);
+    uint32_t serializeToBin(std::ostream& outs) override;
+    uint32_t deserializeFromBin(std::istream& ins) override;
+    void printStatus(int indent, std::ostream& outs) override;
 
   private:
     uint8_t appendReg(uint32_t key, Context *ctx);

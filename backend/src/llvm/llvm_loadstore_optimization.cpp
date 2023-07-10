@@ -34,7 +34,7 @@ namespace gbe {
     const DataLayout *TD;
     GenLoadStoreOptimization() : FunctionPass(ID) {}
 
-    void getAnalysisUsage(AnalysisUsage &AU) const {
+    void getAnalysisUsage(AnalysisUsage &AU) const override {
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 38
       AU.addRequired<ScalarEvolutionWrapperPass>();
       AU.addPreserved<ScalarEvolutionWrapperPass>();
@@ -45,7 +45,7 @@ namespace gbe {
       AU.setPreservesCFG();
     }
 
-    virtual bool runOnFunction(Function &F) {
+    bool runOnFunction(Function &F) override {
         bool changedAnyBlock = false;
         for (BasicBlock &BB : F) {
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 38
@@ -84,10 +84,10 @@ namespace gbe {
                                int *addrOffset, Instruction *&first,
                                Instruction *&last);
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-    virtual StringRef getPassName() const
+    StringRef getPassName() const
 #else
     virtual const char *getPassName() const
-#endif
+#endif override
     {
       return "Merge compatible Load/stores for Gen";
     }

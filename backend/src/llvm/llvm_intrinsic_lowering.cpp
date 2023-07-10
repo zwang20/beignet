@@ -36,15 +36,15 @@ namespace gbe {
       InstrinsicLowering() :
         FunctionPass(ID) {}
 
-      void getAnalysisUsage(AnalysisUsage &AU) const {
+      void getAnalysisUsage(AnalysisUsage &AU) const override {
 
       }
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-      virtual StringRef getPassName() const
+      StringRef getPassName() const
 #else
       virtual const char *getPassName() const
-#endif
+#endif override
       {
         return "SPIR backend: lowering instrinsics";
       }
@@ -93,7 +93,7 @@ namespace gbe {
         CI->eraseFromParent();
         return NewCI;
       }
-      virtual bool runOnFunction(Function &F)
+      bool runOnFunction(Function &F) override
       {
         for (BasicBlock &BB : F) {
         Module *M = BB.getParent()->getParent();

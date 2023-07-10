@@ -105,7 +105,7 @@ namespace gbe {
 #endif
     }
 
-    virtual bool runOnFunction(Function&);
+    bool runOnFunction(Function&) override;
     void print(raw_ostream&, const Module* = 0) const;
     virtual void getAnalysisUsage(AnalysisUsage&) const;
 

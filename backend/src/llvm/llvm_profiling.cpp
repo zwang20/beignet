@@ -84,15 +84,15 @@ namespace gbe
     }
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-    virtual StringRef getPassName() const
+    StringRef getPassName() const
 #else
     virtual const char *getPassName() const
-#endif
+#endif override
     {
       return "Timestamp Parser";
     }
 
-    virtual bool runOnFunction(llvm::Function &F);
+    bool runOnFunction(llvm::Function &F) override;
   };
 
   bool ProfilingInserter::runOnFunction(llvm::Function &F)

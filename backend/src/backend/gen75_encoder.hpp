@@ -33,27 +33,27 @@ namespace gbe
   class Gen75Encoder : public Gen7Encoder
   {
   public:
-    virtual ~Gen75Encoder(void) { }
+    ~Gen75Encoder(void) override { }
 
     Gen75Encoder(uint32_t simdWidth, uint32_t gen, uint32_t deviceID)
          : Gen7Encoder(simdWidth, gen, deviceID) { }
 
     /*! Jump indexed instruction */
-    virtual void JMPI(GenRegister src, bool longjmp = false);
+    void JMPI(GenRegister src, bool longjmp = false) override;
     /*! Patch JMPI/BRC/BRD (located at index insnID) with the given jump distance */
-    virtual void patchJMPI(uint32_t insnID, int32_t jip, int32_t uip);
+    void patchJMPI(uint32_t insnID, int32_t jip, int32_t uip) override;
     virtual void ATOMIC(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum, bool useSends);
-    virtual void UNTYPED_READ(GenRegister dst, GenRegister src, GenRegister bti, uint32_t elemNum);
-    virtual void UNTYPED_WRITE(GenRegister src, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends);
-    virtual void setHeader(GenNativeInstruction *insn);
-    virtual void setDPUntypedRW(GenNativeInstruction *insn, uint32_t bti, uint32_t rgba,
-                   uint32_t msg_type, uint32_t msg_length, uint32_t response_length);
-    virtual void setTypedWriteMessage(GenNativeInstruction *insn, unsigned char bti,
+    void UNTYPED_READ(GenRegister dst, GenRegister src, GenRegister bti, uint32_t elemNum) override;
+    void UNTYPED_WRITE(GenRegister src, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends) override;
+    void setHeader(GenNativeInstruction *insn) override;
+    void setDPUntypedRW(GenNativeInstruction *insn, uint32_t bti, uint32_t rgba,
+                   uint32_t msg_type, uint32_t msg_length, uint32_t response_length) override;
+    void setTypedWriteMessage(GenNativeInstruction *insn, unsigned char bti,
                                       unsigned char msg_type, uint32_t msg_length,
-                                      bool header_present);
-    virtual unsigned setAtomicMessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum);
-    virtual unsigned setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum);
-    virtual unsigned setUntypedWriteMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum);
+                                      bool header_present) override;
+    unsigned setAtomicMessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum) override;
+    unsigned setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
+    unsigned setUntypedWriteMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
   };
 }
 #endif /* __GBE_GEN75_ENCODER_HPP__ */

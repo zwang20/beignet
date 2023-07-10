@@ -76,8 +76,8 @@ namespace ir {
     */
 
     /*! Implements the serialization. */
-    virtual uint32_t serializeToBin(std::ostream& outs);
-    virtual uint32_t deserializeFromBin(std::istream& ins);
+    uint32_t serializeToBin(std::ostream& outs) override;
+    uint32_t deserializeFromBin(std::istream& ins) override;
     private:
       vector<RelocEntry> entries;
       GBE_CLASS(RelocTable);

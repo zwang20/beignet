@@ -152,7 +152,7 @@ namespace gbe {
       return changed;
     }
 
-    bool runOnFunction(Function& F) {
+    bool runOnFunction(Function& F) override {
       bool changed = false;
       std::set<Instruction*> deadInsnSet;
       for (inst_iterator I = inst_begin(&F), E = inst_end(&F); I != E; ++I) {
