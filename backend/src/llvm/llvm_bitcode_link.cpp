@@ -363,7 +363,7 @@ namespace gbe
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 39
     auto PreserveKernel = [=](const GlobalValue &GV) {
       for(auto kernel : kernels)
-        if(strcmp(GV.getName().data(), kernel))
+        if(strcmp(GV.getName().data(), kernel) != 0)
           return true;
       return false;
     };

@@ -114,7 +114,7 @@ static kernel_storage_node * find_kernel(context_storage_node *p_context, const 
   kernel_storage_node *pre = p_context->kernels_storage;
   kernel_storage_node *cur = p_context->kernels_storage;
   while(NULL != cur &&
-        (strncmp(cur->kernel_name, kernel_name, MAX_KERNEL_NAME_LENGTH) ||
+        (strncmp(cur->kernel_name, kernel_name, MAX_KERNEL_NAME_LENGTH) != 0 ||
          strncmp(cur->build_option, build_opt, MAX_KERNEL_BUILD_OPT)))
   {
     pre = cur;
