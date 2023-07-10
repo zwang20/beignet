@@ -116,7 +116,7 @@ namespace gbe
       uint32_t getDeviceID() const {
         return deviceID;
       }
-      void outputProfilingInfo(void* logBuf);
+      void outputProfilingInfo(void* logBuf) const;
 
     private:
       uint32_t bti;

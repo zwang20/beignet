@@ -74,9 +74,9 @@ namespace gbe {
     bool isLoadStoreCompatible(Value *A, Value *B, int *dist, int *elementSize,
                                int maxVecSize);
     void mergeLoad(BasicBlock &BB, SmallVector<Instruction *, 16> &merged,
-                   Instruction *first, int offset);
+                   Instruction *first, int offset) const;
     void mergeStore(BasicBlock &BB, SmallVector<Instruction *, 16> &merged,
-                    Instruction *first, Instruction *last, int offset);
+                    Instruction *first, Instruction *last, int offset) const;
     bool findConsecutiveAccess(BasicBlock &BB,
                                SmallVector<Instruction *, 16> &merged,
                                const BasicBlock::iterator &start,
@@ -154,7 +154,7 @@ namespace gbe {
   void GenLoadStoreOptimization::mergeLoad(BasicBlock &BB,
                                             SmallVector<Instruction*, 16> &merged,
                                             Instruction *first,
-                                            int offset) {
+                                            int offset) const {
     IRBuilder<> Builder(&BB);
 
     unsigned size = merged.size();
@@ -346,7 +346,7 @@ namespace gbe {
                                             SmallVector<Instruction*, 16> &merged,
                                             Instruction *first,
                                             Instruction *last,
-                                            int offset) {
+                                            int offset) const {
     IRBuilder<> Builder(&BB);
 
     unsigned size = merged.size();

@@ -326,7 +326,7 @@ namespace gbe
     void if_opt(void);
 
     /* Add insn ID for sel IR */
-    void addID(void);
+    void addID(void) const;
     const GenContext &getCtx();
 
     /*! Use custom allocators */

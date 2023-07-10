@@ -266,7 +266,7 @@ namespace gbe
       }
     }
     std::string str(){return messages.str();}
-    bool has_errors(){return _has_errors;}
+    bool has_errors() const{return _has_errors;}
   private:
     std::string _str;
     llvm::raw_string_ostream messages;

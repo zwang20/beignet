@@ -32,7 +32,7 @@ namespace ir
 {
   pthread_mutex_t ProfilingInfo::lock = PTHREAD_MUTEX_INITIALIZER;
 
-  void ProfilingInfo::outputProfilingInfo(void * logBuf)
+  void ProfilingInfo::outputProfilingInfo(void * logBuf) const
   {
     LockOutput lock;
     uint32_t logNum = *reinterpret_cast<uint32_t*>(logBuf);

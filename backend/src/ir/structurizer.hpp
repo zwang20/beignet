@@ -61,16 +61,16 @@ namespace ir {
     virtual ~Block() {}
     Block*& fallthrough() { return fall_through; }
     BlockSets& successors() { return successor; }
-    size_t succ_size() { return successor.size(); }
-    sIterator succ_begin() { return successor.begin(); }
-    sIterator succ_end() { return successor.end(); }
-    bool succ_empty() { return successor.empty(); }
+    size_t succ_size() const { return successor.size(); }
+    sIterator succ_begin() const { return successor.begin(); }
+    sIterator succ_end() const { return successor.end(); }
+    bool succ_empty() const { return successor.empty(); }
     BlockSets& predecessors() { return predecessor; }
-    size_t pred_size() { return predecessor.size(); }
-    sIterator pred_begin() { return predecessor.begin(); }
-    sIterator pred_end() { return predecessor.end(); }
+    size_t pred_size() const { return predecessor.size(); }
+    sIterator pred_begin() const { return predecessor.begin(); }
+    sIterator pred_end() const { return predecessor.end(); }
     bool& hasBarrier() { return has_barrier; }
-    BlockType type() { return btype; }
+    BlockType type() const { return btype; }
     virtual BasicBlock* getEntry()
     {
       return (*(children.begin()))->getEntry();

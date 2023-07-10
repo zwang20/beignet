@@ -663,7 +663,7 @@ namespace gbe
 
   }
 
-  void Selection::addID()
+  void Selection::addID() const
   {
     uint32_t insnID = 0;
     for (auto &block : *blockList)
