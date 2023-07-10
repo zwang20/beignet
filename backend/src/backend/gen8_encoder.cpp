@@ -437,7 +437,7 @@ namespace gbe
     this->setHeader(insn);
     this->setDst(insn, dst);
     this->setSrc0(insn, dst);
-    setMessageDescriptor(insn, GEN_SFID_DATAPORT_DATA, 1, 1, 1);
+    setMessageDescriptor(insn, GEN_SFID_DATAPORT_DATA, 1, 1, true);
     gen8_insn->bits3.gen7_memory_fence.msg_type = GEN_MEM_FENCE;
     gen8_insn->bits3.gen7_memory_fence.commit_enable = 0x1;
     gen8_insn->bits3.gen7_memory_fence.flush_rw = flushRWCache ? 1 : 0;

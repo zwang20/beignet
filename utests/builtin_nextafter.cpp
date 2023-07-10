@@ -45,7 +45,7 @@ void builtin_nextafter(void)
 
   OCL_MAP_BUFFER(2);
   auto *dest = (float *)buf_data[2];
-  if (0)
+  if (false)
     for (int i = 0; i < n; ++i)
       printf("%d %x %x %x %x\n", i, as_int(src1[i]), as_int(src2[i]),
              as_int(dest[i]), as_int(nextafterf(src1[i], src2[i])));

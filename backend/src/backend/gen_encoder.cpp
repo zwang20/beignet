@@ -960,7 +960,7 @@ namespace gbe
     this->setDst(insn, dst);
     this->setSrc0(insn, dst);
     this->setSrc1(insn, GenRegister::immud(0));
-    setMessageDescriptor(insn, GEN_SFID_DATAPORT_DATA, 1, 1, 1);
+    setMessageDescriptor(insn, GEN_SFID_DATAPORT_DATA, 1, 1, true);
     insn->bits3.gen7_memory_fence.msg_type = GEN_MEM_FENCE;
     insn->bits3.gen7_memory_fence.commit_enable = 0x1;
   }
