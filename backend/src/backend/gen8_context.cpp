@@ -1853,9 +1853,9 @@ namespace gbe
     if(dst.type == GEN_TYPE_UL || dst.type == GEN_TYPE_L)
     {
       GenRegister threadDataL = GenRegister::retype(threadData, GEN_TYPE_D);
-      GenRegister threadDataH = threadDataL.offset(threadDataL, 0, 4);
+      GenRegister threadDataH = gbe::GenRegister::offset(threadDataL, 0, 4);
       GenRegister msgDataL = GenRegister::retype(msgData, GEN_TYPE_D);
-      GenRegister msgDataH = msgDataL.offset(msgDataL, 1);
+      GenRegister msgDataH = gbe::GenRegister::offset(msgDataL, 1);
       p->curr.execWidth = 8;
       p->MOV(msgDataL, threadDataL);
       p->MOV(msgDataH, threadDataH);
@@ -1901,14 +1901,14 @@ namespace gbe
         p->ADD(msgAddr, msgAddr, msgSlmOff);
         p->UNTYPED_READ(msgData, msgAddr, GenRegister::immw(0xFE), 2);
 
-        GenRegister msgDataL = msgData.retype(msgData.offset(msgData, 0, 4), GEN_TYPE_D);
-        GenRegister msgDataH = msgData.retype(msgData.offset(msgData, 1, 4), GEN_TYPE_D);
+        GenRegister msgDataL = gbe::GenRegister::retype(gbe::GenRegister::offset(msgData, 0, 4), GEN_TYPE_D);
+        GenRegister msgDataH = gbe::GenRegister::retype(gbe::GenRegister::offset(msgData, 1, 4), GEN_TYPE_D);
         msgDataL.hstride = 2;
         msgDataH.hstride = 2;
         p->MOV(msgDataL, msgDataH);
 
         /* perform operation, partialData will hold result */
-        wgOpPerform(partialData, partialData, msgData.offset(msgData, 0), wg_op, p);
+        wgOpPerform(partialData, partialData, gbe::GenRegister::offset(msgData, 0), wg_op, p);
       }
       else
       {
@@ -1920,7 +1920,7 @@ namespace gbe
         p->UNTYPED_READ(msgData, msgAddr, GenRegister::immw(0xFE), 1);
 
         /* perform operation, partialData will hold result */
-        wgOpPerform(partialData, partialData, msgData.offset(msgData, 0), wg_op, p);
+        wgOpPerform(partialData, partialData, gbe::GenRegister::offset(msgData, 0), wg_op, p);
       }
 
       /* while threadN is not 0, cycle read SLM / update value */
