@@ -9,7 +9,7 @@ void compiler_function_argument1(void)
 
   // Setup kernel and buffers
   OCL_CREATE_KERNEL("compiler_function_argument1");
-  OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(uint32_t), NULL);
+  OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(uint32_t), nullptr);
   OCL_SET_ARG(0, sizeof(cl_mem), &buf[0]);
   OCL_SET_ARG(1, sizeof(char), &value);
   OCL_SET_ARG(2, sizeof(short), &value0);

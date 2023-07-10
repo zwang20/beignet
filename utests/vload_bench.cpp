@@ -12,14 +12,14 @@ static double vload_bench(const char *kernelFunc, uint32_t N, uint32_t offset, b
 
   // Setup kernel and buffers
   std::string kernelName = kernelFunc + std::to_string((long long unsigned int)N);
-  OCL_CALL (cl_kernel_init, "vload_bench.cl", kernelName.c_str(), SOURCE, NULL);
+  OCL_CALL (cl_kernel_init, "vload_bench.cl", kernelName.c_str(), SOURCE, nullptr);
   //OCL_CREATE_KERNEL("compiler_array");
   buf_data[0] = (T*) malloc(sizeof(T) * n);
   for (uint32_t i = 0; i < n; ++i) ((T*)buf_data[0])[i] = i; //rand() & ((1LL << N) - 1);
   OCL_CREATE_BUFFER(buf[0], CL_MEM_COPY_HOST_PTR, n * sizeof(T), buf_data[0]);
-  OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(uint32_t), NULL);
+  OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(uint32_t), nullptr);
   free(buf_data[0]);
-  buf_data[0] = NULL;
+  buf_data[0] = nullptr;
 
   // Run the kernel
   OCL_SET_ARG(0, sizeof(cl_mem), &buf[0]);
@@ -28,11 +28,11 @@ static double vload_bench(const char *kernelFunc, uint32_t N, uint32_t offset, b
   globals[0] = n / ((N + 1) & ~0x1);
   locals[0] = 256;
   if (benchMode)
-    gettimeofday(&start, NULL);
+    gettimeofday(&start, nullptr);
   OCL_NDRANGE(1);
   if (benchMode) {
     OCL_FINISH();
-    gettimeofday(&end, NULL);
+    gettimeofday(&end, nullptr);
     double elapsed = (end.tv_sec - start.tv_sec) * 1e6 + (end.tv_usec - start.tv_usec);
     double bandwidth = (globals[0] * (N_ITERATIONS) * sizeof(T) * N) / (elapsed * 1000.);
     printf("\t%2.1fGB/S\n", bandwidth);

@@ -12,8 +12,8 @@ void test(const char *kernel_name)
 
   // Setup kernel and buffers
   OCL_CREATE_KERNEL_FROM_FILE("compiler_ctz", kernel_name);
-  OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(U), NULL);
-  OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(U), NULL);
+  OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(U), nullptr);
+  OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(U), nullptr);
   OCL_SET_ARG(0, sizeof(cl_mem), &buf[0]);
   OCL_SET_ARG(1, sizeof(cl_mem), &buf[1]);
 

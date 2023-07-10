@@ -7,9 +7,9 @@ void builtin_atan2(void) {
 
 	// Setup kernel and buffers
 	OCL_CREATE_KERNEL("builtin_atan2");
-	OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(float), NULL);
-	OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(float), NULL);
-	OCL_CREATE_BUFFER(buf[2], 0, n * sizeof(float), NULL);
+	OCL_CREATE_BUFFER(buf[0], 0, n * sizeof(float), nullptr);
+	OCL_CREATE_BUFFER(buf[1], 0, n * sizeof(float), nullptr);
+	OCL_CREATE_BUFFER(buf[2], 0, n * sizeof(float), nullptr);
 	OCL_SET_ARG(0, sizeof(cl_mem), &buf[0]);
 	OCL_SET_ARG(1, sizeof(cl_mem), &buf[1]);
 	OCL_SET_ARG(2, sizeof(cl_mem), &buf[2]);
