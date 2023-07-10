@@ -41,7 +41,7 @@ namespace gbe
   {
     std::string bitCodeFiles = oclVersion >= 200 ?
                                OCL_BITCODE_LIB_20_PATH : OCL_BITCODE_LIB_PATH;
-    if(bitCodeFiles == "")
+    if(bitCodeFiles.empty())
       bitCodeFiles = oclVersion >= 200 ? OCL_BITCODE_BIN_20 : OCL_BITCODE_BIN;
     std::istringstream bitCodeFilePath(bitCodeFiles);
     std::string FilePath;

@@ -49,7 +49,7 @@ namespace ir {
     /* output the const data. */
     uint32_t sz = data.size()*sizeof(char);
     OUT_UPDATE_SZ(sz);
-    if(data.size() > 0) {
+    if(!data.empty()) {
       outs.write(data.data(), sz);
       ret_size += sz;
     }

@@ -403,7 +403,7 @@ int main (int argc, const char **argv)
 
     for (i=1; i < argc; i++) {
         //cout << argv_saved[i] << endl;
-        if (argv_saved[i].size() && argv_saved[i][0] != '-') {
+        if (!argv_saved[i].empty() && argv_saved[i][0] != '-') {
             if (used_index[i])
                 continue;
 

@@ -745,7 +745,7 @@ namespace gbe
             } else
               ++it;
           }
-          if (children.size() == 0) {
+          if (children.empty()) {
             toRetireIt = this->active.erase(toRetireIt);
             continue;
           }

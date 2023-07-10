@@ -41,8 +41,8 @@ namespace ir {
       }
     });
     // Now with iterative analysis, we compute liveout and livein sets
-    while (unvisitBlocks.size()) {
-      if (workSet.size() == 0)
+    while (!unvisitBlocks.empty()) {
+      if (workSet.empty())
         workSet.insert(--unvisitBlocks.end(), unvisitBlocks.end());
       this->computeLiveInOut();
     }
@@ -220,7 +220,7 @@ namespace ir {
   void Liveness::computeExtraLiveInOut(set<Register> &extentRegs) {
     const vector<Loop *> &loops = fn.getLoops();
     extentRegs.clear();
-    if(loops.size() == 0) return;
+    if(loops.empty()) return;
 
     for (auto l : loops) {
       const BasicBlock &preheader = fn.getBlock(l->preheader);
@@ -255,7 +255,7 @@ namespace ir {
                             preheaderInfo->liveOut.end(),
                             std::back_inserter(toExtend));
 
-        if (toExtend.size() == 0) continue;
+        if (toExtend.empty()) continue;
         for(auto r : toExtend)
           extentRegs.insert(r);
         for (auto bb : l->bbs) {

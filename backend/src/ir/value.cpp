@@ -618,7 +618,7 @@ namespace ir {
     auto defSet1 = getRegDef(r1);
     getBlockDefInsns(bb, defSet0, r0, defInsns0);
     getBlockDefInsns(bb, defSet1, r1, defInsns1);
-    if (defInsns0.size() == 0 && defInsns1.size() == 0)
+    if (defInsns0.empty() && defInsns1.empty())
       return false;
 
     for (auto insn : defInsns0) {
@@ -642,7 +642,7 @@ namespace ir {
     auto defSet1 = getRegDef(r1);
     getBlockDefInsns(bb, defSet0, r0, defInsns0);
     getBlockDefInsns(bb, defSet1, r1, defInsns1);
-    if (defInsns0.size() == 0 && defInsns1.size() == 0)
+    if (defInsns0.empty() && defInsns1.empty())
       return false;
 
     BasicBlock::const_iterator iter = --bb->end();
