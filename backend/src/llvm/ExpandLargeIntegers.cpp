@@ -781,10 +781,7 @@ bool ExpandLargeIntegers::runOnFunction(Function &F) {
   DataLayout DL(F.getParent());
   bool Modified = false;
   ReversePostOrderTraversal<Function *> RPOT(&F);
-  for (ReversePostOrderTraversal<Function *>::rpo_iterator FI = RPOT.begin(),
-                                                           FE = RPOT.end();
-       FI != FE; ++FI) {
-    BasicBlock *BB = *FI;
+  for (auto BB : RPOT) {
     for (Instruction &I : *BB) {
       // Only attempt to convert an instruction if its result or any of its
       // operands are illegal.

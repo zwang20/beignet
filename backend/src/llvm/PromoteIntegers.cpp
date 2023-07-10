@@ -633,8 +633,8 @@ bool PromoteIntegers::runOnFunction(Function &F) {
 
   ConversionState State;
   bool Modified = false;
-  for (Function::iterator FI = F.begin(), FE = F.end(); FI != FE; ++FI) {
-    for (BasicBlock::iterator BBI = FI->begin(), BBE = FI->end(); BBI != BBE;) {
+  for (auto & FI : F) {
+    for (BasicBlock::iterator BBI = FI.begin(), BBE = FI.end(); BBI != BBE;) {
       Instruction *Inst = &*BBI++;
       // Only attempt to convert an instruction if its result or any of its
       // operands are illegal.

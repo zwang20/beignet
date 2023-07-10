@@ -51,8 +51,8 @@ void runtime_event(void)
     OCL_ASSERT(((int*)buf_data[0])[i] == (int)value + 0x3);
   }
 
-  for (cl_uint i = 0; i != sizeof(ev) / sizeof(cl_event); ++i) {
-    clReleaseEvent(ev[i]);
+  for (auto & i : ev) {
+    clReleaseEvent(i);
   }
 }
 

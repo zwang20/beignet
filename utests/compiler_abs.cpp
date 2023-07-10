@@ -154,8 +154,8 @@ template <typename T, typename U> static void compiler_abs_with_type(void)
         memset(buf_data[1], 0, sizeof(U) * n);
         OCL_UNMAP_BUFFER(1);
 
-        for (int32_t i = 0; i < (int32_t) n; ++i) {
-            gen_rand_val(cpu_src[i]);
+        for (auto & i : cpu_src) {
+            gen_rand_val(i);
         }
 
         memcpy(buf_data[0], cpu_src, sizeof(T) * n);

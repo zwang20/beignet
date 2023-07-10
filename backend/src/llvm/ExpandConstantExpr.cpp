@@ -171,10 +171,8 @@ static bool expandInstruction(Instruction *Inst) {
 
 bool ExpandConstantExpr::runOnFunction(Function &Func) {
   bool Modified = false;
-  for (llvm::Function::iterator BB = Func.begin(), E = Func.end();
-       BB != E;
-       ++BB) {
-    for (BasicBlock::InstListType::iterator Inst = BB->begin(), E = BB->end();
+  for (auto & BB : Func) {
+    for (BasicBlock::InstListType::iterator Inst = BB.begin(), E = BB.end();
          Inst != E;
          ++Inst) {
       Modified |= expandInstruction(&*Inst);

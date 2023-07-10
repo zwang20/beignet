@@ -92,10 +92,9 @@ namespace gbe
     FPM.add(createLowerExpectIntrinsicPass());
 
     FPM.doInitialization();
-    for (Module::iterator I = mod.begin(),
-           E = mod.end(); I != E; ++I)
-      if (!I->isDeclaration())
-        FPM.run(*I);
+    for (auto & I : mod)
+      if (!I.isDeclaration())
+        FPM.run(I);
     FPM.doFinalization();
   }
 

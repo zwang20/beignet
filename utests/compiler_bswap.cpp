@@ -136,8 +136,8 @@ void compiler_bswap(void)
   OCL_SET_ARG(11, sizeof(cl_mem), &buf[8]);
 
   OCL_MAP_BUFFER(0);
-  for (int32_t i = 0; i < (int32_t) n; ++i) {
-    gen_rand_val(src0[i]);
+  for (unsigned int & i : src0) {
+    gen_rand_val(i);
   }
   memcpy(buf_data[0], src0, sizeof(src0));
   OCL_UNMAP_BUFFER(0);
@@ -148,8 +148,8 @@ void compiler_bswap(void)
   OCL_UNMAP_BUFFER(1);
 
   OCL_MAP_BUFFER(2);
-  for (int32_t i = 0; i < (int32_t) n; ++i) {
-    gen_rand_val(src1[i]);
+  for (unsigned short & i : src1) {
+    gen_rand_val(i);
   }
   memcpy(buf_data[2], src1, sizeof(src1));
   OCL_UNMAP_BUFFER(2);
@@ -170,11 +170,11 @@ void compiler_bswap(void)
   OCL_UNMAP_BUFFER(5);
 
   OCL_MAP_BUFFER(6);
-  for (int32_t i = 0; i < (int32_t) n; ++i) {
+  for (unsigned long & i : src4) {
     uint64_t x, y;
     gen_rand_val(x);
     gen_rand_val(y);
-    src4[i] = (x << 32)| y;
+    i = (x << 32)| y;
   }
   memcpy(buf_data[6], src4, sizeof(src4));
   OCL_UNMAP_BUFFER(6);

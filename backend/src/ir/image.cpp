@@ -67,8 +67,8 @@ namespace ir {
   void ImageSet::clearInfo()
   {
     struct ImageInfo *imageInfo;
-    for (map<uint32_t, struct ImageInfo *>::iterator it = indexMap.begin(); it != indexMap.end(); ++it) {
-      imageInfo = it->second;
+    for (auto & it : indexMap) {
+      imageInfo = it.second;
       imageInfo->wSlot = -1;
       imageInfo->hSlot = -1;
       imageInfo->depthSlot = -1;
@@ -94,8 +94,8 @@ namespace ir {
 
   void ImageSet::getData(struct ImageInfo *imageInfos) const {
       int id = 0;
-      for (map<Register, struct ImageInfo *>::const_iterator it = regMap.begin(); it != regMap.end(); ++it)
-        imageInfos[id++] = *(it->second);
+      for (auto it : regMap)
+        imageInfos[id++] = *(it.second);
   }
 
   ImageSet::~ImageSet() {
@@ -229,16 +229,16 @@ namespace ir {
    outs << spaces_nl << "  ImageSet Map: [index, arg_idx, idx, wSlot, hSlot, depthSlot, "
            "dataTypeSlot, channelOrderSlot, dimOrderSlot]\n";
    outs << spaces_nl << "     regMap size: " << indexMap.size() << "\n";
-   for (map<uint32_t, struct ImageInfo *>::iterator it = indexMap.begin(); it != indexMap.end(); ++it) {
-     outs << spaces_nl << "         [" << it->first << ", "
-          << it->second->arg_idx << ", "
-          << it->second->idx << ", "
-          << it->second->wSlot << ", "
-          << it->second->hSlot << ", "
-          << it->second->depthSlot << ", "
-          << it->second->dataTypeSlot << ", "
-          << it->second->channelOrderSlot << ", "
-          << it->second->dimOrderSlot << ", " << "\n";
+   for (auto & it : indexMap) {
+     outs << spaces_nl << "         [" << it.first << ", "
+          << it.second->arg_idx << ", "
+          << it.second->idx << ", "
+          << it.second->wSlot << ", "
+          << it.second->hSlot << ", "
+          << it.second->depthSlot << ", "
+          << it.second->dataTypeSlot << ", "
+          << it.second->channelOrderSlot << ", "
+          << it.second->dimOrderSlot << ", " << "\n";
    }
 
    outs << spaces << "------------- End ImageSet -------------" << "\n";

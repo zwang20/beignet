@@ -301,12 +301,12 @@ namespace ir {
         getStructureSequence(*rit, struSeq);
 
         int firstindex = *(ns.begin());
-        for(size_t i = 0; i < unstruSeqHead.size(); ++i)
-          bbs[firstindex++] = unstruSeqHead[i];
-        for(size_t i = 0; i < struSeq.size(); ++i)
-          bbs[firstindex++] = struSeq[i];
-        for(size_t i = 0; i < unstruSeqTail.size(); ++i)
-          bbs[firstindex++] = unstruSeqTail[i];
+        for(auto & i : unstruSeqHead)
+          bbs[firstindex++] = i;
+        for(auto & i : struSeq)
+          bbs[firstindex++] = i;
+        for(auto & i : unstruSeqTail)
+          bbs[firstindex++] = i;
       }
       rit++;
     }

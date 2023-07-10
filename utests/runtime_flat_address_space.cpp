@@ -64,7 +64,7 @@ main(int argc, char *argv[])
     clEnqueueUnmapMemObject(queue, dst[j], dst_buffer, 0, NULL, NULL);
   }
 
-  for (uint32_t j = 0; j < 24; ++j) OCL_CALL (clReleaseMemObject, dst[j]);
+  for (auto & j : dst) OCL_CALL (clReleaseMemObject, j);
   cl_test_destroy();
 
 error:

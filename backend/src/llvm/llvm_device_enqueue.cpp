@@ -396,8 +396,8 @@ namespace gbe {
               args.push_back(AI);
 
               std::vector<Type *> ParamTys;
-              for (Value** iter = args.begin(); iter != args.end(); ++iter)
-                ParamTys.push_back((*iter)->getType());
+              for (auto & arg : args)
+                ParamTys.push_back(arg->getType());
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 90
               CallInst* newCI = builder.CreateCall(mod->getOrInsertFunction(
                               "__gen_enqueue_kernel_slm", FunctionType::get(intTy, ParamTys, false)), args);

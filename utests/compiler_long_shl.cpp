@@ -18,8 +18,8 @@ void compiler_long_shl(void)
   locals[0] = 16;
 
   // Run random tests
-  for (int32_t i = 0; i < (int32_t) n; ++i)
-    src[i] = 1;
+  for (long & i : src)
+    i = 1;
   OCL_MAP_BUFFER(0);
   memcpy(buf_data[0], src, sizeof(src));
   OCL_UNMAP_BUFFER(0);

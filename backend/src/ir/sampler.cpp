@@ -125,9 +125,9 @@ namespace ir {
     outs << spaces_nl << "  SamplerSet Map: [index, sampler_reg, sampler_slot]\n";
     outs << spaces_nl << "     samplerMap size: " << samplerMap.size() << "\n";
 
-    for (map<uint32_t, uint32_t>::iterator it = samplerMap.begin(); it != samplerMap.end(); ++it) {
-      outs << spaces_nl <<  "     [" << it->first << ", "
-           << it->second << "]\n";
+    for (auto & it : samplerMap) {
+      outs << spaces_nl <<  "     [" << it.first << ", "
+           << it.second << "]\n";
     }
 
     outs << spaces << "------------- End SamplerSet -------------" << "\n";

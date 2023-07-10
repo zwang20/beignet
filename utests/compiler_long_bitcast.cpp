@@ -199,8 +199,8 @@ void compiler_bitcast_long_to_short4(void)
   globals[0] = n;
   locals[0] = 16;
 
-  for (int32_t i = 0; i < (int32_t) n; ++i) {
-    src[i] = ((int64_t)rand() << 32) + rand();
+  for (unsigned long & i : src) {
+    i = ((int64_t)rand() << 32) + rand();
   }
 
   OCL_MAP_BUFFER(0);

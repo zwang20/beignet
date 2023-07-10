@@ -56,8 +56,7 @@ namespace ir {
 
     sz = constants.size();
     OUT_UPDATE_SZ(sz);
-    for (uint32_t i = 0; i < constants.size(); ++i) {
-      Constant& cnst = constants[i];
+    for (auto & cnst : constants) {
       sz = cnst.getName().size()*sizeof(char);
       uint32_t bytes = sizeof(sz)        //name length self
                        + sz              //name

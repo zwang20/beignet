@@ -138,14 +138,14 @@ namespace gbe {
           if (subBlocks.find(bb) == subBlocks.end())
             blocks.insert(bb);
         for(auto bb : blocks) {
-          for (BasicBlock::iterator inst = bb->begin(), instE = bb->end(); inst != instE; ++inst) {
+          for (auto & inst : *bb) {
             unsigned addrSpace = -1;
-            if (isa<LoadInst>(*inst)) {
-              auto *ld = cast<LoadInst>(&*inst);
+            if (isa<LoadInst>(inst)) {
+              auto *ld = cast<LoadInst>(&inst);
               addrSpace = ld->getPointerAddressSpace();
             }
-            else if (isa<StoreInst>(*inst)) {
-              auto *st = cast<StoreInst>(&*inst);
+            else if (isa<StoreInst>(inst)) {
+              auto *st = cast<StoreInst>(&inst);
               addrSpace = st->getPointerAddressSpace();
             }
             if (addrSpace == 0)

@@ -460,8 +460,8 @@ namespace gbe {
           else
             mergeStore(BB, mergedVec, first, last, addrOffset);
           // remove merged insn
-          for(uint32_t i = 0; i < mergedVec.size(); i++)
-            mergedVec[i]->eraseFromParent();
+          for(auto & i : mergedVec)
+            i->eraseFromParent();
           changed = true;
           pos += vecSize;
           size -= vecSize;

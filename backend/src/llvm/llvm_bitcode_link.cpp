@@ -362,8 +362,8 @@ namespace gbe
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 39
     auto PreserveKernel = [=](const GlobalValue &GV) {
-      for(size_t i = 0;i < kernels.size(); ++i)
-        if(strcmp(GV.getName().data(), kernels[i]))
+      for(auto kernel : kernels)
+        if(strcmp(GV.getName().data(), kernel))
           return true;
       return false;
     };
@@ -376,8 +376,8 @@ namespace gbe
 
     passes.run(*clonedLib);
 
-    for(size_t i = 0;i < kerneltmp.size(); i++)
-      delete[] kerneltmp[i];
+    for(auto & i : kerneltmp)
+      delete[] i;
 
     return clonedLib;
   }
