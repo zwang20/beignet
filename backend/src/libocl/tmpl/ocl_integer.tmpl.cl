@@ -216,13 +216,14 @@ OVERLOADABLE ulong mad_sat(ulong a, ulong b, ulong c) {
   return __gen_ocl_mad_sat(a, b, c);
 }
 
-OVERLOADABLE uchar __rotate_left(uchar x, uchar y) { return (x << y) | (x >> (8 - y)); }
+// the 'volatile' is to make the LLVM optimizer leave these alone, as it would convert them to intrinsics (fshl/fshr) that we don't implement
+OVERLOADABLE uchar __rotate_left(uchar x, uchar y) { volatile uchar z; z = (x << y); return z | (x >> (8 - y)); }
 OVERLOADABLE char __rotate_left(char x, char y) { return __rotate_left((uchar)x, (uchar)y); }
-OVERLOADABLE ushort __rotate_left(ushort x, ushort y) { return (x << y) | (x >> (16 - y)); }
+OVERLOADABLE ushort __rotate_left(ushort x, ushort y) { volatile ushort z; z = (x << y); return z | (x >> (16 - y)); }
 OVERLOADABLE short __rotate_left(short x, short y) { return __rotate_left((ushort)x, (ushort)y); }
-OVERLOADABLE uint __rotate_left(uint x, uint y) { return (x << y) | (x >> (32 - y)); }
+OVERLOADABLE uint __rotate_left(uint x, uint y) { volatile uint z; z = (x << y); return z | (x >> (32 - y)); }
 OVERLOADABLE int __rotate_left(int x, int y) { return __rotate_left((uint)x, (uint)y); }
-OVERLOADABLE ulong __rotate_left(ulong x, ulong y) { return (x << y) | (x >> (64 - y)); }
+OVERLOADABLE ulong __rotate_left(ulong x, ulong y) { volatile ulong z; z = (x << y); return z | (x >> (64 - y)); }
 OVERLOADABLE long __rotate_left(long x, long y) { return __rotate_left((ulong)x, (ulong)y); }
 #define DEF(type, m) OVERLOADABLE type rotate(type x, type y) { return __rotate_left(x, (type)(y & m)); }
 DEF(char, 7)

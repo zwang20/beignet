@@ -225,6 +225,7 @@ namespace gbe
                        uint32_t width,
                        uint32_t hstride)
     {
+      this->value.reg = 0;//avoid subgroup crash
       this->type = type;
       this->file = file;
       this->nr = nr;
