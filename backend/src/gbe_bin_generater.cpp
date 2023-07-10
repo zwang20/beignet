@@ -332,7 +332,7 @@ int main (int argc, const char **argv)
 
     /* because getopt will re-sort the argv, so we save here. */
     for (i=0; i< argc; i++) {
-        argv_saved.push_back(string(argv[i]));
+        argv_saved.emplace_back(argv[i]);
     }
 
     while ( (oc = getopt(argc, (char * const *)argv, "t:o:p:s")) != -1 ) {
@@ -357,7 +357,7 @@ int main (int argc, const char **argv)
             file_path = argv[opt_index - 1];
             build_opt = optarg;
 
-            prog_insts.push_back(program_build_instance(file_path, build_opt));
+            prog_insts.emplace_back(file_path, build_opt);
             break;
         }
 
@@ -418,7 +418,7 @@ int main (int argc, const char **argv)
             });
 
             if (result == prog_insts.end()) {
-                prog_insts.push_back(program_build_instance(file_name.c_str(), ""));
+                prog_insts.emplace_back(file_name.c_str(), "");
             }
         }
     }
