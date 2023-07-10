@@ -360,7 +360,7 @@ namespace gbe
 
   };
 
-  extern void outputSelectionInst(SelectionInstruction &insn);
+
 
   void SelGlobalImmMovOpt::cleanReplaceInfoMap()
   {
