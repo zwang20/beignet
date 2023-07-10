@@ -35,7 +35,7 @@ void builtin_tgamma(void)
     OCL_MAP_BUFFER(1);
     float *dst = (float*)buf_data[1];
     for (int i = 0; i < n; ++i) {
-      float cpu = tgamma(src[i]);
+      float cpu = std::tgamma(src[i]);
       if (!denormals_supported && std::fpclassify(cpu)==FP_SUBNORMAL && dst[i]==0) {
         cpu = 0;
       }

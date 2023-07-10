@@ -26,28 +26,28 @@ void compiler_sqrt_div(void) {
     OCL_MAP_BUFFER(1);
     float *dst = (float *)buf_data[1];
     for (int i = 0; i < n; ++i) {
-      float cpu = 1.0f / sqrt(src[i]);
+      float cpu = 1.0f / std::sqrt(src[i]);
       float gpu = dst[4 * i];
       if (fabsf(cpu - gpu) >= 1e-3) {
         printf("%f %f %f", src[i], cpu, gpu);
         OCL_ASSERT(0);
       }
 
-      cpu = i / sqrt(src[i]);
+      cpu = i / std::sqrt(src[i]);
       gpu = dst[4 * i + 1];
       if (fabsf(cpu - gpu) >= 1e-3) {
         printf("%f %f %f", src[i], cpu, gpu);
         OCL_ASSERT(0);
       }
 
-      cpu = 2.0f / sqrt(src[i]);
+      cpu = 2.0f / std::sqrt(src[i]);
       gpu = dst[4 * i + 2];
       if (fabsf(cpu - gpu) >= 1e-3) {
         printf("%f %f %f", src[i], cpu, gpu);
         OCL_ASSERT(0);
       }
 
-      cpu = 1.0f / sqrt(src[i]) + sqrt(src[i]);
+      cpu = 1.0f / std::sqrt(src[i]) + std::sqrt(src[i]);
       gpu = dst[4 * i + 3];
       if (fabsf(cpu - gpu) >= 1e-3) {
         printf("%f %f %f", src[i], cpu, gpu);

@@ -25,10 +25,10 @@ static void cpu_compiler_math(float *dst, const float *src)
 {
   const float x = *src;
 
-  dst[0] = exp(x);
-  dst[1] = exp2(x);
+  dst[0] = std::exp(x);
+  dst[1] = std::exp2(x);
   dst[2] = exp10(x);
-  dst[3] = expm1(x);
+  dst[3] = std::expm1(x);
   dst[4] = x;
 }
 
@@ -68,7 +68,7 @@ static void builtin_exp(void)
     for (i = 0; i < max_function; i++)
     {
       index_cur = k * max_function + i;
-      diff = fabs(gpu_data[index_cur]-cpu_data[index_cur]);
+      diff = std::fabs(gpu_data[index_cur]-cpu_data[index_cur]);
       sprintf(log, "%d/%d: %f -> gpu:%f  cpu:%f diff:%f expect:%f\n", \
          k, i, input_data[k], gpu_data[index_cur], cpu_data[index_cur], \
          diff/gpu_data[index_cur], 3 * FLT_ULP);
@@ -94,9 +94,9 @@ static void builtin_exp(void)
       else if (std::isnan(cpu_data[index_cur]))
         OCL_ASSERTM(std::isnan(gpu_data[index_cur]), log);
       else if ( gpu_data[index_cur] > FLT_ULP || cpu_data[index_cur] > FLT_ULP)
-        OCL_ASSERTM(fabs( diff / cpu_data[index_cur]) < 3 * FLT_ULP, log);
+        OCL_ASSERTM(std::fabs( diff / cpu_data[index_cur]) < 3 * FLT_ULP, log);
       else
-        OCL_ASSERTM(fabs(diff) < 3 * FLT_ULP, log);
+        OCL_ASSERTM(std::fabs(diff) < 3 * FLT_ULP, log);
 #endif
     }
   }

@@ -77,7 +77,7 @@ static void compiler_math(void)
       else if (std::isnan(cpu))
         OCL_ASSERT(std::isnan(gpu));
       else
-        OCL_ASSERT(fabs(gpu-cpu) < 1e-3f);
+        OCL_ASSERT(std::fabs(gpu-cpu) < 1e-3f);
     }
     OCL_UNMAP_BUFFER(0);
     OCL_UNMAP_BUFFER(1);

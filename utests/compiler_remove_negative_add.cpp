@@ -26,7 +26,7 @@ void compiler_remove_negative_add(void) {
     OCL_MAP_BUFFER(1);
     float *dst = (float *)buf_data[1];
     for (int i = 0; i < n; ++i) {
-      float cpu = exp2(-src[i]);
+      float cpu = std::exp2(-src[i]);
       float gpu = dst[i];
       if (fabsf(cpu - gpu) >= 1e-3) {
         printf("%f %f %f", src[i], cpu, gpu);

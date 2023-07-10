@@ -95,7 +95,7 @@ static void builtin_pow(void)
        OCL_ASSERT(std::isnan(gpu_data[index_cur]));
      else
      {
-       OCL_ASSERT((fabs(gpu_data[index_cur] - cpu_data[index_cur]) < cl_FLT_ULP(cpu_data[index_cur]) * ULPSIZE_FACTOR) ||
+       OCL_ASSERT((std::fabs(gpu_data[index_cur] - cpu_data[index_cur]) < cl_FLT_ULP(cpu_data[index_cur]) * ULPSIZE_FACTOR) ||
        (!denormals_supported && gpu_data[index_cur]==0 && std::fpclassify(cpu_data[index_cur])==FP_SUBNORMAL) );
      }
 #endif

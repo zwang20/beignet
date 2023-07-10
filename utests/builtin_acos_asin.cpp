@@ -21,9 +21,9 @@ static void cpu_compiler_math(float *dst, const float *src)
   const float x = *src;
 
   dst[0] = acos(x);
-  dst[1] = acosh(x);
-  dst[2] = asin(x);
-  dst[3] = asinh(x);
+  dst[1] = std::acosh(x);
+  dst[2] = std::asin(x);
+  dst[3] = std::asinh(x);
   dst[4] = x;
 }
 
@@ -80,7 +80,7 @@ static void builtin_acos_asin(void)
        OCL_ASSERT(std::isnan(gpu_data[index_cur]));
      else
      {
-       OCL_ASSERT(fabs(gpu_data[index_cur] - cpu_data[index_cur]) < 1e-3f);
+       OCL_ASSERT(std::fabs(gpu_data[index_cur] - cpu_data[index_cur]) < 1e-3f);
      }
 #endif
     }

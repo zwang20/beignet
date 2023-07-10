@@ -108,7 +108,7 @@ static void compiler_math_3op_half(void)
       bool isInf, infSign;
       const float gpu = as_float(__half_to_float(((uint16_t*)buf_data[0])[i], &isInf, &infSign));
       //printf("cpu:(%f*%f+%f) = %f, gpu:%f\n", cpu_src1[i], cpu_src2[i], cpu_src3[i],cpu,gpu);
-      OCL_ASSERT(((fabs(cpu) < 6e-8f) && (gpu < 6e-8f)) || (fabs(cpu - gpu) <= 0.3 * fabs(cpu)) ||
+      OCL_ASSERT(((std::fabs(cpu) < 6e-8f) && (gpu < 6e-8f)) || (std::fabs(cpu - gpu) <= 0.3 * std::fabs(cpu)) ||
                  (isInf && ((infSign && cpu > 65504.0f) || (!infSign && cpu < -65504.0f))) ||
                  (std::isnan(gpu) && std::isnan(cpu)));
     }
