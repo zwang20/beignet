@@ -1,6 +1,6 @@
 #include <cstring>
 #include "utest_helper.hpp"
-static void runtime_pipe_query(void) {
+static void runtime_pipe_query() {
   if(!cl_check_ocl20(false))
     return;
   const size_t w = 16;

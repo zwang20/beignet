@@ -69,34 +69,34 @@ namespace ir {
       this->data.regID = uint32_t(reg);
     }
     /*! Get the type of the value */
-    INLINE Type getType(void) const { return type; }
+    INLINE Type getType() const { return type; }
     /*! Get the instruction (only if this is a instruction value) */
-    INLINE const Instruction *getInstruction(void) const {
+    INLINE const Instruction *getInstruction() const {
       GBE_ASSERT(type == DEF_INSN_DST);
       return data.insn;
     }
     /*! Get the destination ID (only if this is a instruction value) */
-    INLINE uint32_t getDstID(void) const {
+    INLINE uint32_t getDstID() const {
       GBE_ASSERT(type == DEF_INSN_DST);
       return data.dstID;
     }
     /*! Get the function input (only if this is a function argument) */
-    INLINE const FunctionArgument *getFunctionArgument(void) const {
+    INLINE const FunctionArgument *getFunctionArgument() const {
       GBE_ASSERT(type == DEF_FN_ARG);
       return data.arg;
     }
     /*! Get the pushed location */
-    INLINE const PushLocation *getPushLocation(void) const {
+    INLINE const PushLocation *getPushLocation() const {
       GBE_ASSERT(type == DEF_FN_PUSHED);
       return data.pushed;
     }
     /*! Get the special register */
-    INLINE Register getSpecialReg(void) const {
+    INLINE Register getSpecialReg() const {
       GBE_ASSERT(type == DEF_SPECIAL_REG);
       return Register(data.regID);
     }
     /*! Retrieve the register associated to the definition */
-    INLINE Register getRegister(void) const {
+    INLINE Register getRegister() const {
       if (type == DEF_SPECIAL_REG)
         return Register(data.regID);
       else if (type == DEF_FN_ARG)
@@ -164,11 +164,11 @@ namespace ir {
     explicit ValueUse(const Instruction *insn, uint32_t srcID = 0u) :
       insn(insn), srcID(srcID) {}
     /*! Get the instruction of the use */
-    const Instruction *getInstruction(void) const { return insn; }
+    const Instruction *getInstruction() const { return insn; }
     /*! Get the source index for this use */
-    uint32_t getSrcID(void) const { return srcID; }
+    uint32_t getSrcID() const { return srcID; }
     /*! Get the register for this use */
-    Register getRegister(void) const { return insn->getSrc(srcID); }
+    Register getRegister() const { return insn->getSrc(srcID); }
   private:
     const Instruction *insn; //!< Instruction where the value is used
     uint32_t srcID;          //!< Index of the source in the instruction
@@ -201,7 +201,7 @@ namespace ir {
     /*! Build the complete DU/UD graphs for the program included in liveness */
     FunctionDAG(Liveness &liveness);
     /*! Free all the resources */
-    ~FunctionDAG(void);
+    ~FunctionDAG();
     /*! Get the du-chain for the definition */
     const UseSet &getUse(const ValueDef &def) const;
     /*! Get the du-chain for the given instruction and destination */
@@ -233,7 +233,7 @@ namespace ir {
     /*! Get the set of all definitions for the register */
     const DefSet *getRegDef(const Register &reg) const;
     /*! Get the function we have the graph for */
-    INLINE const Function &getFunction(void) const { return fn; }
+    INLINE const Function &getFunction() const { return fn; }
     /*! The DefSet for each definition use */
     typedef map<ValueUse, DefSet*> UDGraph;
     /*! The UseSet for each definition */

@@ -1,7 +1,7 @@
 #include <cmath>
 #include "utest_helper.hpp"
 
-void builtin_atan2(void) {
+void builtin_atan2() {
 	const int n = 1024;
 	float y[n], x[n];
 

@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
 
-void compiler_function_argument1(void)
+void compiler_function_argument1()
 {
   const size_t n = 2048;
   const char value = 34;
