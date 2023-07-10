@@ -4,6 +4,7 @@
 #include "cl_base_object.h"
 #include "CL/cl.h"
 #include "CL/cl_ext.h"
+#include "CL/cl_intel.h"
 #include <stdint.h>
 
 struct _cl_accelerator_intel {
