@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <math.h>
+#include <cmath>
 
 static void double_precision_check(void)
 {

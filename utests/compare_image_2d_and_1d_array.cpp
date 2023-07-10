@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 
 static void compare_image_2d_and_1d_array(void)

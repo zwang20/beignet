@@ -2,7 +2,7 @@
 #include "backend/gen_insn_selection_output.hpp"
 #include "sys/cvar.hpp"
 #include "sys/intrusive_list.hpp"
-#include <string.h>
+#include <cstring>
 #include <iostream>
 #include <iomanip>
 using namespace std;

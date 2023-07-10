@@ -1,6 +1,6 @@
 #include "utest_helper.hpp"
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 template<typename T>
 static void compiler_vector_load_store(int elemNum, const char *kernelName)
 {

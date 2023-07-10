@@ -25,9 +25,9 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <assert.h>
-#include <string.h>
-#include <stdio.h>
+#include <cassert>
+#include <cstring>
+#include <cstdio>
 
 int
 cl_file_map_init(cl_file_map_t *fm)

@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include "string.h"
+#include <cstring>
 
 #define cpu_htons(A)     ((((uint16_t)(A) & 0xff00) >> 8) | \
     (((uint16_t)(A) & 0x00ff) << 8))

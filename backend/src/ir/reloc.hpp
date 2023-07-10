@@ -26,7 +26,7 @@
 #define __GBE_IR_RELOC_HPP__
 
 #include "sys/vector.hpp"
-#include <string.h>
+#include <cstring>
 
 namespace gbe {
 namespace ir {

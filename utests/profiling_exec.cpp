@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include "string.h"
+#include <cstring>
 
 static void cpu_exec (int n, float* src, float* dst)
 {

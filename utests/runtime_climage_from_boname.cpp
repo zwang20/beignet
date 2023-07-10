@@ -4,7 +4,7 @@
 #include "utest_helper.hpp"
 #include "utest_file_map.hpp"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <fcntl.h>
 #include <unistd.h>
 

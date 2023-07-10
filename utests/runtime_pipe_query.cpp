@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 static void runtime_pipe_query(void) {
   if(!cl_check_ocl20(false))

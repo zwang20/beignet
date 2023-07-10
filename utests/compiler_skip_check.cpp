@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 const size_t w = 80;
 const size_t h = 48;

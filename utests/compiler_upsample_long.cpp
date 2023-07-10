@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include <cstdint>
 #include "utest_helper.hpp"
 
 void compiler_upsample_long(void)

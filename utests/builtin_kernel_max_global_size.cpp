@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 void builtin_kernel_max_global_size(void)
 {

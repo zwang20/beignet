@@ -1,5 +1,5 @@
 #include <cmath>
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 
 void compiler_double_convert_int(void)

@@ -23,8 +23,8 @@
  *******************************************************************************/
 #include <fcntl.h>
 #include <sys/mman.h>
-#include <string.h>
-#include <assert.h>
+#include <cstring>
+#include <cassert>
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
@@ -33,8 +33,8 @@
 #include <deque>
 #include <vector>
 #include <algorithm>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 #include "backend/program.h"
 #include "backend/program.hpp"

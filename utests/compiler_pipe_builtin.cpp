@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 typedef struct{
   int a;

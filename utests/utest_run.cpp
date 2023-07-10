@@ -26,7 +26,7 @@
 #include "utest_helper.hpp"
 #include "utest_exception.hpp"
 #include <iostream>
-#include <string.h>
+#include <cstring>
 #include <getopt.h>
 
 static const char *shortopts = "c:j:l::anh";

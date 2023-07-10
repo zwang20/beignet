@@ -27,8 +27,8 @@
 #ifndef __GBE_GEN_PROGRAM_H__
 #define __GBE_GEN_PROGRAM_H__
 
-#include <stdint.h>
-#include <stdlib.h>
+#include <cstdint>
+#include <cstdlib>
 #include <semaphore.h>
 
 /*! This will make the compiler output Gen ISA code */

@@ -30,7 +30,7 @@
 #include "ir/printf.hpp"
 #include "ir/reloc.hpp"
 #include "sys/map.hpp"
-#include <string.h>
+#include <cstring>
 
 namespace gbe {
 namespace ir {

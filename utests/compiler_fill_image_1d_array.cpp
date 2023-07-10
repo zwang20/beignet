@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 
 static void compiler_fill_image_1d_array(void)

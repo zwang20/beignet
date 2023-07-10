@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utest_helper.hpp"
 
 void image_1D_buffer(void)

@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include "string.h"
+#include <cstring>
 
 static void compiler_copy_image_3d(void)
 {

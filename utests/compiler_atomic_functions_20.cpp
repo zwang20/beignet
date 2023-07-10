@@ -1,7 +1,7 @@
 #include "utest_helper.hpp"
 #include <cmath>
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #define GROUP_NUM 16
 #define LOCAL_SIZE 256

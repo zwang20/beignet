@@ -30,8 +30,8 @@
  * content in GPU's printf buffer here, and use the system's C standard printf to
  * print the content after kernel executed.
  */
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "llvm_includes.hpp"
 

@@ -21,7 +21,7 @@
  *
  */
 
-#include <stdarg.h>
+#include <cstdarg>
 #include "printf.hpp"
 #include "ir/unit.hpp"
 

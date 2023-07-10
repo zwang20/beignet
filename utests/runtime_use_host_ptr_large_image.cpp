@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 static void runtime_use_host_ptr_large_image(void)
 {

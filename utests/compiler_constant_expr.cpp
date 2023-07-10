@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <math.h>
+#include <cmath>
 
 static void compiler_constant_expr(void)
 {

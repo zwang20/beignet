@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <stdint.h>
+#include <cstdint>
 
 typedef unsigned char uchar;
 typedef unsigned short ushort;

@@ -17,7 +17,7 @@
  * Author: Guo Yejun <yejun.guo@intel.com>
  */
 
-#include <assert.h>
+#include <cassert>
 #include "ir/context.hpp"
 #include "ir/value.hpp"
 #include "ir/constopt.hpp"

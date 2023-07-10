@@ -1,7 +1,7 @@
 #include "utest_helper.hpp"
 #include <cmath>
 #include <algorithm>
-#include <string.h>
+#include <cstring>
 
 #define udebug 0
 #define printf_c(...) \

@@ -1,6 +1,6 @@
 #include <cmath>
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 void builtin_tgamma(void)
 {

@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include "string.h"
+#include <cstring>
 
 template <typename T, int N>
 struct cl_vec {

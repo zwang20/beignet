@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 void compiler_block_motion_estimate_intel(void)
 {

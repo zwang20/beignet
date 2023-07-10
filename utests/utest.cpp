@@ -29,7 +29,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <cstring>
-#include <stdlib.h>
+#include <cstdlib>
 #include <csignal>
 #include <algorithm>
 #include <random>

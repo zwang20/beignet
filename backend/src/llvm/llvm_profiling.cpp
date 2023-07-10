@@ -22,8 +22,8 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "llvm/Config/llvm-config.h"
 #include "llvm/IR/Function.h"

@@ -20,11 +20,11 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include "ir/profiling.hpp"
 #include "src/cl_device_data.h"
-#include <inttypes.h>
+#include <cinttypes>
 
 namespace gbe
 {

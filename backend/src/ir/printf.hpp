@@ -23,7 +23,7 @@
 #ifndef __GBE_IR_PRINTF_HPP__
 #define __GBE_IR_PRINTF_HPP__
 
-#include <string.h>
+#include <cstring>
 #include "sys/map.hpp"
 #include "sys/vector.hpp"
 

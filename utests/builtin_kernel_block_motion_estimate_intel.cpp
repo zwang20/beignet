@@ -1,5 +1,5 @@
 #include "utest_helper.hpp"
-#include <string.h>
+#include <cstring>
 
 typedef cl_accelerator_intel (OCLCREATEACCELERATORINTEL)(cl_context, cl_accelerator_type_intel accel_type, size_t desc_sz, const void* desc, cl_int* errcode_ret);
 OCLCREATEACCELERATORINTEL * oclCreateAcceleratorIntel = NULL;

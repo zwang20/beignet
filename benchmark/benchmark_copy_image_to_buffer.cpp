@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "utests/utest_helper.hpp"
 #include <sys/time.h>
 

@@ -22,7 +22,7 @@
 #ifndef __GBE_IR_PROFILING_HPP__
 #define __GBE_IR_PROFILING_HPP__
 
-#include <string.h>
+#include <cstring>
 #include "sys/map.hpp"
 #include "sys/vector.hpp"
 #include "unit.hpp"

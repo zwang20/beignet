@@ -1,6 +1,6 @@
 #include "utests/utest_helper.hpp"
 #include <sys/time.h>
-#include <string.h>
+#include <cstring>
 
 double benchmark_use_host_ptr_large_image(void)
 {

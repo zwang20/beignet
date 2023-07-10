@@ -25,7 +25,7 @@
 #ifndef __GBE_IR_IMMEDIATE_HPP__
 #define __GBE_IR_IMMEDIATE_HPP__
 
-#include <string.h>
+#include <cstring>
 #include "ir/type.hpp"
 #include "ir/half.hpp"
 #include "sys/platform.hpp"
