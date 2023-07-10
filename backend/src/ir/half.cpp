@@ -90,7 +90,7 @@ namespace ir {
     auto u64 = static_cast<uint64_t>(u16);
     llvm::APInt apInt(16, u64, false);
     res.convertFromAPInt(apInt, false, llvm::APFloat::rmNearestTiesToEven);
-    return half(convAPFloatToU16(res));
+    return {convAPFloatToU16(res)};
   }
 
   half half::convToHalf(int16_t v16) {
@@ -102,7 +102,7 @@ namespace ir {
     auto u64 = static_cast<uint64_t>(v16);
     llvm::APInt apInt(16, u64, true);
     res.convertFromAPInt(apInt, true, llvm::APFloat::rmNearestTiesToEven);
-    return half(convAPFloatToU16(res));
+    return {convAPFloatToU16(res)};
   }
 
   half half::operator +(const half& other) const
@@ -111,7 +111,7 @@ namespace ir {
     llvm::APFloat apf_other = convU16ToAPFloat(other.val);
     apf_self.add(apf_other, llvm::APFloat::rmNearestTiesToEven);
     uint16_t ret = convAPFloatToU16(apf_self);
-    return half(ret);
+    return {ret};
   }
 
   half half::operator -(const half& other) const
@@ -120,7 +120,7 @@ namespace ir {
     llvm::APFloat apf_other = convU16ToAPFloat(other.val);
     apf_self.subtract(apf_other, llvm::APFloat::rmNearestTiesToEven);
     uint16_t ret = convAPFloatToU16(apf_self);
-    return half(ret);
+    return {ret};
   }
 
   half half::operator *(const half& other) const
@@ -129,7 +129,7 @@ namespace ir {
     llvm::APFloat apf_other = convU16ToAPFloat(other.val);
     apf_self.multiply(apf_other, llvm::APFloat::rmNearestTiesToEven);
     uint16_t ret = convAPFloatToU16(apf_self);
-    return half(ret);
+    return {ret};
   }
 
   half half::operator /(const half& other) const
@@ -138,7 +138,7 @@ namespace ir {
     llvm::APFloat apf_other = convU16ToAPFloat(other.val);
     apf_self.divide(apf_other, llvm::APFloat::rmNearestTiesToEven);
     uint16_t ret = convAPFloatToU16(apf_self);
-    return half(ret);
+    return {ret};
   }
 
   half half::operator %(const half& other) const
@@ -147,7 +147,7 @@ namespace ir {
     llvm::APFloat apf_other = convU16ToAPFloat(other.val);
     apf_self.remainder(apf_other);
     uint16_t ret = convAPFloatToU16(apf_self);
-    return half(ret);
+    return {ret};
   }
 
   bool half::operator ==(const half& other) const

@@ -838,43 +838,43 @@ namespace gbe
     }
 
     static INLINE GenRegister ip(void) {
-      return GenRegister(GEN_ARCHITECTURE_REGISTER_FILE,
+      return {GEN_ARCHITECTURE_REGISTER_FILE,
                          GEN_ARF_IP,
                          0,
                          GEN_TYPE_D,
                          GEN_VERTICAL_STRIDE_4,
                          GEN_WIDTH_1,
-                         GEN_HORIZONTAL_STRIDE_0);
+                         GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE GenRegister sr(uint32_t nr, uint32_t subnr = 0) {
-      return GenRegister(GEN_ARCHITECTURE_REGISTER_FILE,
+      return {GEN_ARCHITECTURE_REGISTER_FILE,
                          GEN_ARF_STATE | nr,
                          subnr,
                          GEN_TYPE_UD,
                          GEN_VERTICAL_STRIDE_8,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_1);
+                         GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister notification0(uint32_t subnr) {
-      return GenRegister(GEN_ARCHITECTURE_REGISTER_FILE,
+      return {GEN_ARCHITECTURE_REGISTER_FILE,
                          GEN_ARF_NOTIFICATION_COUNT,
                          subnr,
                          GEN_TYPE_UD,
                          GEN_VERTICAL_STRIDE_0,
                          GEN_WIDTH_1,
-                         GEN_HORIZONTAL_STRIDE_0);
+                         GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE GenRegister flag(uint32_t nr, uint32_t subnr) {
-      return GenRegister(GEN_ARCHITECTURE_REGISTER_FILE,
+      return {GEN_ARCHITECTURE_REGISTER_FILE,
                          GEN_ARF_FLAG | nr,
                          subnr,
                          GEN_TYPE_UW,
                          GEN_VERTICAL_STRIDE_0,
                          GEN_WIDTH_1,
-                         GEN_HORIZONTAL_STRIDE_0);
+                         GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE GenRegister next(GenRegister reg) {
@@ -926,53 +926,53 @@ namespace gbe
     }
 
     static INLINE GenRegister vec16(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_F,
                          GEN_VERTICAL_STRIDE_8,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_1);
+                         GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister vec8(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_F,
                          GEN_VERTICAL_STRIDE_8,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_1);
+                         GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister vec4(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_F,
                          GEN_VERTICAL_STRIDE_4,
                          GEN_WIDTH_4,
-                         GEN_HORIZONTAL_STRIDE_1);
+                         GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister vec2(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                     nr,
                     subnr,
                     GEN_TYPE_F,
                     GEN_VERTICAL_STRIDE_2,
                     GEN_WIDTH_2,
-                    GEN_HORIZONTAL_STRIDE_1);
+                    GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister vec1(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                     nr,
                     subnr,
                     GEN_TYPE_F,
                     GEN_VERTICAL_STRIDE_0,
                     GEN_WIDTH_1,
-                    GEN_HORIZONTAL_STRIDE_0);
+                    GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE uint32_t hstrideFromSize(int size) {
@@ -1089,43 +1089,43 @@ namespace gbe
     }
 
     static INLINE GenRegister uw1(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_UW,
                          GEN_VERTICAL_STRIDE_0,
                          GEN_WIDTH_1,
-                         GEN_HORIZONTAL_STRIDE_0);
+                         GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE GenRegister ub16(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_UB,
                          GEN_VERTICAL_STRIDE_16,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_2);
+                         GEN_HORIZONTAL_STRIDE_2};
     }
 
     static INLINE GenRegister ub8(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_UB,
                          GEN_VERTICAL_STRIDE_16,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_2);
+                         GEN_HORIZONTAL_STRIDE_2};
     }
 
     static INLINE GenRegister ub1(uint32_t file, uint32_t nr, uint32_t subnr) {
-      return GenRegister(file,
+      return {file,
                          nr,
                          subnr,
                          GEN_TYPE_UB,
                          GEN_VERTICAL_STRIDE_0,
                          GEN_WIDTH_1,
-                         GEN_HORIZONTAL_STRIDE_0);
+                         GEN_HORIZONTAL_STRIDE_0};
     }
 
     static INLINE GenRegister f1grf(uint32_t nr, uint32_t subnr) {
@@ -1213,13 +1213,13 @@ namespace gbe
     }
 
     static INLINE GenRegister unpacked_uw(uint32_t nr, uint32_t subnr) {
-      return GenRegister(GEN_GENERAL_REGISTER_FILE,
+      return {GEN_GENERAL_REGISTER_FILE,
                          nr,
                          subnr,
                          GEN_TYPE_UW,
                          GEN_VERTICAL_STRIDE_16,
                          GEN_WIDTH_8,
-                         GEN_HORIZONTAL_STRIDE_2);
+                         GEN_HORIZONTAL_STRIDE_2};
     }
 
     static INLINE GenRegister unpacked_uw(const GenRegister& reg) {
@@ -1229,33 +1229,33 @@ namespace gbe
       int hstrideSize = GenRegister::hstride_size(reg) * typeSize(reg.type) / typeSize(GEN_TYPE_UW);
       uint32_t hstride = GenRegister::hstrideFromSize(hstrideSize);
 
-      return GenRegister(GEN_GENERAL_REGISTER_FILE,
+      return {GEN_GENERAL_REGISTER_FILE,
                          nr,
                          subnr,
                          GEN_TYPE_UW,
                          GEN_VERTICAL_STRIDE_16,
                          width,
-                         hstride);
+                         hstride};
     }
 
     static INLINE GenRegister packed_ud(uint32_t nr, uint32_t subnr) {
-      return GenRegister(GEN_GENERAL_REGISTER_FILE,
+      return {GEN_GENERAL_REGISTER_FILE,
                          nr,
                          subnr,
                          GEN_TYPE_UD,
                          GEN_VERTICAL_STRIDE_8,
                          GEN_WIDTH_4,
-                         GEN_HORIZONTAL_STRIDE_1);
+                         GEN_HORIZONTAL_STRIDE_1};
     }
 
     static INLINE GenRegister unpacked_ud(uint32_t nr, uint32_t subnr) {
-      return GenRegister(GEN_GENERAL_REGISTER_FILE,
+      return {GEN_GENERAL_REGISTER_FILE,
                          nr,
                          subnr,
                          GEN_TYPE_UD,
                          GEN_VERTICAL_STRIDE_8,
                          GEN_WIDTH_4,
-                         GEN_HORIZONTAL_STRIDE_2);
+                         GEN_HORIZONTAL_STRIDE_2};
     }
 
     static INLINE GenRegister mask(uint32_t subnr) {

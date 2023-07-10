@@ -122,13 +122,13 @@ using namespace ir;
           default:
             GBE_ASSERT(0);
           case TYPE_S8:  
-          case TYPE_U8:  return Immediate((*left.data.u8 >> shift));
+          case TYPE_U8:  return {(*left.data.u8 >> shift)};
           case TYPE_S16: 
-          case TYPE_U16: return Immediate((*left.data.u16 >> shift));
+          case TYPE_U16: return {(*left.data.u16 >> shift)};
           case TYPE_S32: 
-          case TYPE_U32: return Immediate((*left.data.u32 >> shift));
+          case TYPE_U32: return {(*left.data.u32 >> shift)};
           case TYPE_S64: 
-          case TYPE_U64: return Immediate((*left.data.u64 >> shift));
+          case TYPE_U64: return {(*left.data.u64 >> shift)};
         }
     }
 
@@ -137,17 +137,17 @@ using namespace ir;
       switch (left.getType()) {
         default:
           GBE_ASSERT(0);
-        case TYPE_S8:     return Immediate(*left.data.s8 < *right.data.s8);
-        case TYPE_U8:     return Immediate(*left.data.u8 < *right.data.u8);
-        case TYPE_S16:    return Immediate(*left.data.s16 < *right.data.s16);
-        case TYPE_U16:    return Immediate(*left.data.u16 < *right.data.u16);
-        case TYPE_S32:    return Immediate(*left.data.s32 < *right.data.s32);
-        case TYPE_U32:    return Immediate(*left.data.u32 < *right.data.u32);
-        case TYPE_S64:    return Immediate(*left.data.s64 < *right.data.s64);
-        case TYPE_U64:    return Immediate(*left.data.u64 < *right.data.u64);
-        case TYPE_FLOAT:  return Immediate(*left.data.f32 < *right.data.f32);
-        case TYPE_HALF:   return Immediate(*left.data.f16 < *right.data.f16);
-        case TYPE_DOUBLE: return Immediate(*left.data.f64 < *right.data.f64);
+        case TYPE_S8:     return {*left.data.s8 < *right.data.s8};
+        case TYPE_U8:     return {*left.data.u8 < *right.data.u8};
+        case TYPE_S16:    return {*left.data.s16 < *right.data.s16};
+        case TYPE_U16:    return {*left.data.u16 < *right.data.u16};
+        case TYPE_S32:    return {*left.data.s32 < *right.data.s32};
+        case TYPE_U32:    return {*left.data.u32 < *right.data.u32};
+        case TYPE_S64:    return {*left.data.s64 < *right.data.s64};
+        case TYPE_U64:    return {*left.data.u64 < *right.data.u64};
+        case TYPE_FLOAT:  return {*left.data.f32 < *right.data.f32};
+        case TYPE_HALF:   return {*left.data.f16 < *right.data.f16};
+        case TYPE_DOUBLE: return {*left.data.f64 < *right.data.f64};
       }
     }
 
@@ -160,18 +160,18 @@ using namespace ir;
         switch (left.getType()) {
           default:
             GBE_ASSERT(0);
-          case TYPE_BOOL:   return Immediate(left.data.b[index]);
-          case TYPE_S8:     return Immediate(left.data.s8[index]);
-          case TYPE_U8:     return Immediate(left.data.u8[index]);
-          case TYPE_S16:    return Immediate(left.data.s16[index]);
-          case TYPE_U16:    return Immediate(left.data.u16[index]);
-          case TYPE_S32:    return Immediate(left.data.s32[index]);
-          case TYPE_U32:    return Immediate(left.data.u32[index]);
-          case TYPE_S64:    return Immediate(left.data.s64[index]);
-          case TYPE_U64:    return Immediate(left.data.u64[index]);
-          case TYPE_FLOAT:  return Immediate(left.data.f32[index]);
-          case TYPE_HALF:   return Immediate(left.data.f16[index]);
-          case TYPE_DOUBLE: return Immediate(left.data.f64[index]);
+          case TYPE_BOOL:   return {left.data.b[index]};
+          case TYPE_S8:     return {left.data.s8[index]};
+          case TYPE_U8:     return {left.data.u8[index]};
+          case TYPE_S16:    return {left.data.s16[index]};
+          case TYPE_U16:    return {left.data.u16[index]};
+          case TYPE_S32:    return {left.data.s32[index]};
+          case TYPE_U32:    return {left.data.u32[index]};
+          case TYPE_S64:    return {left.data.s64[index]};
+          case TYPE_U64:    return {left.data.u64[index]};
+          case TYPE_FLOAT:  return {left.data.f32[index]};
+          case TYPE_HALF:   return {left.data.f16[index]};
+          case TYPE_DOUBLE: return {left.data.f64[index]};
         }
       } else
         return *left.data.immVec[index];
