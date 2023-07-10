@@ -972,8 +972,7 @@ namespace gbe {
 
   void Scalarize::print(raw_ostream&, const Module*) const
   {
-      return;
-  }
+       }
   FunctionPass* createScalarizePass()
   {
     return new Scalarize();

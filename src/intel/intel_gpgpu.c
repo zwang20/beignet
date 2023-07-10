@@ -2356,7 +2356,6 @@ intel_gpgpu_event_get_gpu_cur_timestamp(intel_driver_t* gen_driver, uint64_t* re
   result *= 80;
 
   *ret_ts = result;
-  return;
 }
 
 /* Get the GPU execute time. */

@@ -172,5 +172,4 @@ cl_intel_platform_extension_init(cl_platform_id intel_platform)
   intel_platform->internal_extensions = &intel_platform_extensions;
   intel_platform->extensions = intel_platform_extensions.ext_str;
   intel_platform->extensions_sz = strlen(intel_platform->extensions) + 1;
-  return;
 }
