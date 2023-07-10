@@ -291,7 +291,7 @@ namespace gbe
     virtual void handleDouble(GenEncoder *p, uint32_t opcode, GenRegister dst, GenRegister src0, GenRegister src1 = GenRegister::null());
 
     /*! OBlock helper function */
-    uint32_t getOBlockSize(uint32_t oword_size, bool low_half = true);
+    static uint32_t getOBlockSize(uint32_t oword_size, bool low_half = true);
     void setMBlockRW(GenNativeInstruction *insn, uint32_t bti, uint32_t msg_type, uint32_t msg_length, uint32_t response_length);
     void setOBlockRW(GenNativeInstruction *insn, uint32_t bti, uint32_t block_size, uint32_t msg_type, uint32_t msg_length, uint32_t response_lengtha);
 

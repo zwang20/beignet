@@ -47,7 +47,7 @@ namespace gbe
                 uint32_t return_format,
                 bool isLD,
                 bool isUniform) override;
-    void setSendsOperands(Gen9NativeInstruction *gen9_insn, GenRegister dst, GenRegister src0, GenRegister src1);
+    static void setSendsOperands(Gen9NativeInstruction *gen9_insn, GenRegister dst, GenRegister src0, GenRegister src1);
     void UNTYPED_WRITE(GenRegister addr, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends) override;
     void TYPED_WRITE(GenRegister header, GenRegister data, bool header_present, unsigned char bti, bool useSends) override;
     unsigned setUntypedWriteSendsMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;

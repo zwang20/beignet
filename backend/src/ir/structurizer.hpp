@@ -138,7 +138,7 @@ namespace ir {
     ~IfThenBlock() override {}
 
   private:
-    const BlockList InitChildren(Block* pred, Block* trueBlock)
+    static const BlockList InitChildren(Block* pred, Block* trueBlock)
     {
       BlockList children;
       children.push_back(pred);
@@ -155,7 +155,7 @@ namespace ir {
     ~IfElseBlock() override {}
 
   private:
-    const BlockList InitChildren(Block* pred, Block* trueBlock, Block* falseBlock)
+    static const BlockList InitChildren(Block* pred, Block* trueBlock, Block* falseBlock)
     {
       BlockList children;
       children.push_back(pred);
@@ -181,7 +181,7 @@ namespace ir {
     }
 
   private:
-    const BlockList InitChildren(Block * block)
+    static const BlockList InitChildren(Block * block)
     {
       BlockList children;
       children.push_back(block);
@@ -201,35 +201,35 @@ namespace ir {
       int  numLoopPatternMatch;
       int  numIfPatternMatch;
 
-      void outBlockTypes(BlockType type);
+      static void outBlockTypes(BlockType type);
       void printOrderedBlocks();
       void blockPatternMatch();
       int  serialPatternMatch(Block *block);
       Block* mergeSerialBlock(BlockList& serialBB);
-      void cfgUpdate(Block* mergedBB,  const BlockSets& blockBBs);
+      static void cfgUpdate(Block* mergedBB,  const BlockSets& blockBBs);
       void replace(Block* mergedBB,  BlockSets serialSets);
       int  loopPatternMatch(Block *block);
       Block* mergeLoopBlock(BlockList& loopSets);
       int  ifPatternMatch(Block *block);
       int  patternMatch(Block *block);
-      void collectInsnNum(Block* block, const BasicBlock* bb);
+      static void collectInsnNum(Block* block, const BasicBlock* bb);
 
     private:
-      void handleSelfLoopBlock(Block *loopblock, LabelIndex& whileLabel);
+      static void handleSelfLoopBlock(Block *loopblock, LabelIndex& whileLabel);
       void markNeedIf(Block *block, bool status);
       void markNeedEndif(Block *block, bool status);
       void markStructuredBlocks(Block *block, bool status);
-      void handleIfBlock(Block *block, LabelIndex& matchingEndifLabel, LabelIndex& matchingElseLabel);
+      static void handleIfBlock(Block *block, LabelIndex& matchingEndifLabel, LabelIndex& matchingElseLabel);
       void handleThenBlock(Block * block, LabelIndex& endiflabel);
-      void handleThenBlock2(Block *block, Block *elseblock, LabelIndex elseBBLabel);
+      static void handleThenBlock2(Block *block, Block *elseblock, LabelIndex elseBBLabel);
       void handleElseBlock(Block * block, LabelIndex& elselabel, LabelIndex& endiflabel);
       void handleStructuredBlocks();
       void getStructureSequence(Block *block, std::vector<BasicBlock*> &seq);
       std::set<int> getStructureBasicBlocksIndex(Block* block, std::vector<BasicBlock *> &bbs);
       std::set<BasicBlock *> getStructureBasicBlocks(Block *block);
       Block* insertBlock(Block *p_block);
-      bool checkForBarrier(const BasicBlock* bb);
-      void getLiveIn(BasicBlock& bb, std::set<Register>& livein);
+      static bool checkForBarrier(const BasicBlock* bb);
+      static void getLiveIn(BasicBlock& bb, std::set<Register>& livein);
       void initializeBlocks();
       void calculateNecessaryLiveout();
 

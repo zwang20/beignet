@@ -42,7 +42,7 @@ namespace gbe {
 #endif
     }
 
-    bool visitCallInst(CallInst *I) {
+    static bool visitCallInst(CallInst *I) {
       if(!I)
         return false;
       Value *Callee = I->getCalledValue();

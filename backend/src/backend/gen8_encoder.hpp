@@ -73,8 +73,8 @@ namespace gbe
     unsigned setAtomicA64MessageDesc(GenNativeInstruction *insn, unsigned function, unsigned bti, unsigned srcNum, int type_long) override;
     unsigned setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
     unsigned setUntypedWriteMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) override;
-    void setSrc0WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
-    void setSrc1WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
+    static void setSrc0WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
+    static void setSrc1WithAcc(GenNativeInstruction *insn, GenRegister reg, uint32_t accN);
 
     void MATH_WITH_ACC(GenRegister dst, uint32_t function, GenRegister src0, GenRegister src1,
                        uint32_t dstAcc, uint32_t src0Acc, uint32_t src1Acc);

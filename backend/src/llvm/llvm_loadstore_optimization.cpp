@@ -65,10 +65,10 @@ namespace gbe {
         }
         return changedAnyBlock;
     }
-    Type *getValueType(Value *insn);
-    Value *getPointerOperand(Value *I);
-    unsigned getAddressSpace(Value *I);
-    bool isSimpleLoadStore(Value *I);
+    static Type *getValueType(Value *insn);
+    static Value *getPointerOperand(Value *I);
+    static unsigned getAddressSpace(Value *I);
+    static bool isSimpleLoadStore(Value *I);
     bool optimizeLoadStore(BasicBlock &BB);
 
     bool isLoadStoreCompatible(Value *A, Value *B, int *dist, int *elementSize,

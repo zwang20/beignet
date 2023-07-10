@@ -102,7 +102,7 @@ namespace gbe {
         return 0;
       }
 
-      void setUnrollID(Loop *L, bool enable) {
+      static void setUnrollID(Loop *L, bool enable) {
         assert(enable);
         LLVMContext &Context = L->getHeader()->getContext();
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 36

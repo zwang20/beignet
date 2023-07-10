@@ -348,9 +348,9 @@ namespace gbe
 
     void addToReplaceInfoMap(SelectionInstruction& insn);
     void doGlobalCopyPropagation();
-    bool CanBeReplaced(const ReplaceInfo* info, SelectionInstruction& insn, const GenRegister& var);
+    static bool CanBeReplaced(const ReplaceInfo* info, SelectionInstruction& insn, const GenRegister& var);
     void cleanReplaceInfoMap();
-    void doReplacement(ReplaceInfo* info);
+    static void doReplacement(ReplaceInfo* info);
 
   private:
     intrusive_list<SelectionBlock> *mblockList;

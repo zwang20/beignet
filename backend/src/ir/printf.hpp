@@ -205,7 +205,7 @@ namespace gbe
       void setBufBTI(uint8_t b)      { btiBuf = b; }
       uint8_t getBufBTI() const      { return btiBuf; }
 
-      uint32_t getPrintfBufferElementSize(uint32_t i) {
+      static uint32_t getPrintfBufferElementSize(uint32_t i) {
         PrintfSlot slot;
         int vec_num = 1;
         if (slot.state.vector_n > 0) {
