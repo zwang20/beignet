@@ -25,8 +25,8 @@ static void compiler_insn_selection_min(void)
   // Check result
   OCL_MAP_BUFFER(0);
   OCL_MAP_BUFFER(1);
-  float *dst = (float*)buf_data[1];
-  float *src = (float*)buf_data[0];
+  auto *dst = (float*)buf_data[1];
+  auto *src = (float*)buf_data[0];
   for (uint32_t i = 0; i < n; ++i) {
     OCL_ASSERT(dst[i] == std::min(src[i], src[0]));
   }

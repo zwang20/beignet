@@ -212,7 +212,7 @@ namespace gbe
     char ret_char;
     char* rend;
     PrintfState state;
-    PrintfSet::PrintfFmt* printf_fmt = new PrintfSet::PrintfFmt();
+    auto* printf_fmt = new PrintfSet::PrintfFmt();
 
     p = format;
     begin = format;

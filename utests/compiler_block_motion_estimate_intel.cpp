@@ -81,7 +81,7 @@ void compiler_block_motion_estimate_intel(void)
   OCL_MAP_BUFFER(6);
   OCL_MAP_BUFFER(7);
   OCL_MAP_BUFFER(8);
-  int16_t *mv = (int16_t *)buf_data[2];
+  auto *mv = (int16_t *)buf_data[2];
 #define VME_DEBUG 0
 #if VME_DEBUG
   uint16_t *residual = (uint16_t *)buf_data[3];

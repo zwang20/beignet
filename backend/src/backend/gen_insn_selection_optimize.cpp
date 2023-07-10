@@ -133,7 +133,7 @@ namespace gbe
 
   void SelBasicBlockOptimizer::removeFromReplaceInfoMap(const SelectionInstruction& insn, const GenRegister& var)
   {
-    for (ReplaceInfoMap::iterator pos = replaceInfoMap.begin(); pos != replaceInfoMap.end(); ++pos) {
+    for (auto pos = replaceInfoMap.begin(); pos != replaceInfoMap.end(); ++pos) {
       ReplaceInfo* info = pos->second;
       if (info->intermedia.reg() == var.reg()) {   //intermedia is overwritten
         if (info->intermedia.quarter == var.quarter && info->intermedia.subnr == var.subnr && info->intermedia.nr == var.nr) {
@@ -179,7 +179,7 @@ namespace gbe
     if (liveout.find(dst.reg()) != liveout.end())
       return;
 
-    ReplaceInfo* info = new ReplaceInfo(insn, dst, src);
+    auto* info = new ReplaceInfo(insn, dst, src);
     replaceInfoMap[dst.reg()] = info;
   }
 
@@ -265,7 +265,7 @@ namespace gbe
 
   void SelBasicBlockOptimizer::changeInsideReplaceInfoMap(const SelectionInstruction& insn, GenRegister& var)
   {
-    ReplaceInfoMap::iterator it = replaceInfoMap.find(var.reg());
+    auto it = replaceInfoMap.find(var.reg());
     if (it != replaceInfoMap.end()) {    //same ir register
       ReplaceInfo* info = it->second;
       if (CanBeReplaced(info, insn, var)) {
@@ -500,7 +500,7 @@ namespace gbe
     if (src.type != dst.type)
       return;
 
-    ReplaceInfo* info = new ReplaceInfo(insn, dst, src);
+    auto* info = new ReplaceInfo(insn, dst, src);
     replaceInfoMap[dst.reg()] = info;
   }
 
@@ -557,7 +557,7 @@ namespace gbe
       {
         for (uint8_t i = 0; i < insn.srcNum; ++i)
         {
-            ReplaceInfoMap::iterator it = replaceInfoMap.find(insn.src(i).reg());
+            auto it = replaceInfoMap.find(insn.src(i).reg());
             if (it != replaceInfoMap.end())
             {
               ReplaceInfo *info = it->second;
@@ -576,7 +576,7 @@ namespace gbe
 
         for (uint8_t i = 0; i < insn.dstNum; ++i)
         {
-          ReplaceInfoMap::iterator it = replaceInfoMap.find(insn.dst(i).reg());
+          auto it = replaceInfoMap.find(insn.dst(i).reg());
           if (it != replaceInfoMap.end())
           {
             ReplaceInfo *info = it->second;

@@ -259,7 +259,7 @@ using namespace ir;
           this->data.p = &this->defaultData;
         else
           this->data.p = malloc(immVec[0]->getTypeSize() * immVec.size());
-        uint8_t *p = (uint8_t*)this->data.p;
+        auto *p = (uint8_t*)this->data.p;
         for(uint32_t i = 0; i < immVec.size(); i++) {
           GBE_ASSERT(immVec[i]->type == immVec[0]->type && immVec[i]->elemNum == 1);
           memcpy(p, immVec[i]->data.p, immVec[i]->getTypeSize());
@@ -312,7 +312,7 @@ using namespace ir;
           data.p = &defaultData;
         else
           data.p = malloc(num * other.getTypeSize());
-        uint8_t* datap = (uint8_t*)data.p;
+        auto* datap = (uint8_t*)data.p;
         memset(datap, 0, num * other.getTypeSize());
         if (offset < 0) {
           datap += (-offset) * other.getTypeSize();

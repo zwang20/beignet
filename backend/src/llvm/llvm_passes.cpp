@@ -358,7 +358,7 @@ namespace gbe
     }
 
     //convert offset to ptr type (nop)
-    IntToPtrInst* intToPtrInst = 
+    auto* intToPtrInst =
       new IntToPtrInst(currentAddrInst,GEPInst->getType(),"", GEPInst);
 
     //replace uses of the GEP instruction with the newly calculated pointer

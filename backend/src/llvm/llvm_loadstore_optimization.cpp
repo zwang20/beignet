@@ -96,8 +96,8 @@ namespace gbe {
   char GenLoadStoreOptimization::ID = 0;
 
   Value *GenLoadStoreOptimization::getPointerOperand(Value *I) {
-    if (LoadInst *LI = dyn_cast<LoadInst>(I)) return LI->getPointerOperand();
-    if (StoreInst *SI = dyn_cast<StoreInst>(I)) return SI->getPointerOperand();
+    if (auto *LI = dyn_cast<LoadInst>(I)) return LI->getPointerOperand();
+    if (auto *SI = dyn_cast<StoreInst>(I)) return SI->getPointerOperand();
     return NULL;
   }
   unsigned GenLoadStoreOptimization::getAddressSpace(Value *I) {
@@ -134,7 +134,7 @@ namespace gbe {
     const SCEV *ptrSCEVA = SE->getSCEV(ptrA);
     const SCEV *ptrSCEVB = SE->getSCEV(ptrB);
     const SCEV *offsetSCEV = SE->getMinusSCEV(ptrSCEVA, ptrSCEVB);
-    const SCEVConstant *constOffSCEV = dyn_cast<SCEVConstant>(offsetSCEV);
+    const auto *constOffSCEV = dyn_cast<SCEVConstant>(offsetSCEV);
 
     // Non constant distance.
     if (!constOffSCEV) return false;
@@ -162,7 +162,7 @@ namespace gbe {
     for(unsigned i = 0; i < size; i++) {
       values.push_back(merged[i]);
     }
-    LoadInst *ld = cast<LoadInst>(first);
+    auto *ld = cast<LoadInst>(first);
 #if LLVM_VERSION_MAJOR < 10
     unsigned align = ld->getAlignment();
 #else
@@ -268,7 +268,7 @@ namespace gbe {
           }
       } else if((isLoad && isa<StoreInst>(*J))) {
         // simple stop to keep read/write order
-        StoreInst *st = cast<StoreInst>(&*J);
+        auto *st = cast<StoreInst>(&*J);
         unsigned addrSpace = st->getPointerAddressSpace();
         if (addrSpace != targetAddrSpace) {
           crossAddressSpace = true;
@@ -276,7 +276,7 @@ namespace gbe {
           break;
         }
       } else if ((!isLoad && isa<LoadInst>(*J))) {
-        LoadInst *ld = cast<LoadInst>(&*J);
+        auto *ld = cast<LoadInst>(&*J);
         unsigned addrSpace = ld->getPointerAddressSpace();
         if (addrSpace != targetAddrSpace) {
           crossAddressSpace = true;
@@ -354,7 +354,7 @@ namespace gbe {
     for(unsigned i = 0; i < size; i++) {
       values.push_back(cast<StoreInst>(merged[i])->getValueOperand());
     }
-    StoreInst *st = cast<StoreInst>(first);
+    auto *st = cast<StoreInst>(first);
     if(!st)
       return;
 

@@ -21,7 +21,7 @@ double benchmark_generic_math(const char* str_filename,
   uint32_t loop = 1000;
 
   /* Input set will be generated */
-  float* src = (float*)calloc(sizeof(float), global_size);
+  auto* src = (float*)calloc(sizeof(float), global_size);
   OCL_ASSERT(src != NULL);
   for(uint32_t i = 0; i < global_size; i++)
     src[i] = base + i * (base - 1);

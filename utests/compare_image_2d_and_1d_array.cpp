@@ -17,8 +17,8 @@ static void compare_image_2d_and_1d_array(void)
   memset(&desc, 0x0, sizeof(cl_image_desc));
   memset(&format, 0x0, sizeof(cl_image_format));
 
-  uint32_t* image_data1 = (uint32_t *)malloc(w * h * sizeof(uint32_t));
-  uint32_t* image_data2 = (uint32_t *)malloc(w * h * sizeof(uint32_t));
+  auto* image_data1 = (uint32_t *)malloc(w * h * sizeof(uint32_t));
+  auto* image_data2 = (uint32_t *)malloc(w * h * sizeof(uint32_t));
   for (int j = 0; j < h; j++) {
     for (int i = 0; i < w; i++) {
       char a = 0;

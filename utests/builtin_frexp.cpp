@@ -31,7 +31,7 @@ void builtin_frexp(void)
 
   OCL_MAP_BUFFER(1);
   OCL_MAP_BUFFER(2);
-  float *dst = (float*)buf_data[1];
+  auto *dst = (float*)buf_data[1];
   int *exp = (int*)buf_data[2];
   int w;
   OCL_ASSERT(dst[0] == 0.f && exp[0] == 0);

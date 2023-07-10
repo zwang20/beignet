@@ -28,7 +28,7 @@ void compiler_getelementptr_bitcast(void)
 
     // Run on CPU
     for (int32_t i = 0; i < (int32_t) n; ++i){
-      unsigned char* c = (unsigned char*)&cpu_src[i];
+      auto* c = (unsigned char*)&cpu_src[i];
       cpu_dst[i] = c[2];
     }
 

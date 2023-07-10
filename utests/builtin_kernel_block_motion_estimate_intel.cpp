@@ -110,7 +110,7 @@ void builtin_kernel_block_motion_estimate_intel(void)
                     -64, -48,
                     0, -48,
                     -64, -48};
-  short* res = (short*)buf_data[2];
+  auto* res = (short*)buf_data[2];
   for (uint32_t j = 0; j < mv_h - 1; ++j) {
     for (uint32_t i = 0; i < mv_w - 1; ++i) {
         uint32_t index = j * mv_w * 2 + i * 2;

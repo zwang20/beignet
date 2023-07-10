@@ -64,9 +64,9 @@ void compiler_intra_prediction(void)
   OCL_MAP_BUFFER(3);
   OCL_MAP_BUFFER(4);
   OCL_MAP_BUFFER(5);
-  uint8_t *modes = (uint8_t *)buf_data[1];
-  uint16_t *residual = (uint16_t *)buf_data[2];
-  uint8_t *shape = (uint8_t *)buf_data[3];
+  auto *modes = (uint8_t *)buf_data[1];
+  auto *residual = (uint16_t *)buf_data[2];
+  auto *shape = (uint8_t *)buf_data[3];
 #define VME_DEBUG 0
 #if VME_DEBUG
   uint32_t *dwo = (uint32_t *)buf_data[4];

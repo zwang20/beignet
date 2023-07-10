@@ -24,8 +24,8 @@ namespace gbe {
 namespace ir {
   CFGStructurizer::~CFGStructurizer()
   {
-    BlockVector::iterator iter = blocks.begin();
-    BlockVector::iterator iter_end = blocks.end();
+    auto iter = blocks.begin();
+    auto iter_end = blocks.end();
     while(iter != iter_end)
     {
       delete *iter;
@@ -42,7 +42,7 @@ namespace ir {
     it--;
     if (pbb->hasExtraBra)
       it--;
-    BranchInstruction* pinsn = static_cast<BranchInstruction *>(&*it);
+    auto* pinsn = static_cast<BranchInstruction *>(&*it);
 
     if(!pinsn->isPredicated()){
       std::cout << "WARNING:" << "endless loop detected!" << std::endl;
@@ -69,7 +69,7 @@ namespace ir {
       bb->needIf = status;
       return;
     }
-    BlockList::iterator it = block->children.begin();
+    auto it = block->children.begin();
     while(it != block->children.end())
     {
       markNeedIf(*it,status);
@@ -87,7 +87,7 @@ namespace ir {
       return;
     }
 
-    BlockList::iterator it = block->children.begin();
+    auto it = block->children.begin();
     while(it != block->children.end())
     {
       markNeedEndif(*it, status);
@@ -100,11 +100,11 @@ namespace ir {
   {
     if(block->type() == SingleBlockType)
     {
-      SimpleBlock* pbb = static_cast<SimpleBlock*>(block);
+      auto* pbb = static_cast<SimpleBlock*>(block);
       pbb->getBasicBlock()->belongToStructure = true;
     }
     block->mark = status;
-    BlockList::iterator it = block->children.begin();
+    auto it = block->children.begin();
     while(it != block->children.end())
     {
       markStructuredBlocks(*it, status);
@@ -115,7 +115,7 @@ namespace ir {
   void CFGStructurizer::handleIfBlock(Block *block, LabelIndex& matchingEndifLabel, LabelIndex& matchingElseLabel)
   {
     BasicBlock *pbb = block->getExit();
-    BranchInstruction* pinsn = static_cast<BranchInstruction *>(pbb->getLastInstruction());
+    auto* pinsn = static_cast<BranchInstruction *>(pbb->getLastInstruction());
     Register reg = pinsn->getPredicateIndex();
     BasicBlock::iterator it = pbb->end();
     it--;
@@ -193,11 +193,11 @@ namespace ir {
   void CFGStructurizer::handleStructuredBlocks()
   {
     BlockVector::iterator it;
-    BlockVector::iterator end = blocks.end();
-    BlockVector::iterator begin = blocks.begin();
+    auto end = blocks.end();
+    auto begin = blocks.begin();
     it = end;
     it--;
-    BlockVector::reverse_iterator rit = blocks.rbegin();
+    auto rit = blocks.rbegin();
     /* structured bbs only need if and endif insn to handle the execution
      * in structure entry and exit BasicBlock, so we process the blocks backward, since
      * the block at the back of blocks is always a 'not smaller' structure then
@@ -273,7 +273,7 @@ namespace ir {
             entryIndex = i;
         }
 
-        std::set<int>::iterator iter = ns.begin();
+        auto iter = ns.begin();
         int index = *iter;
 
         std::vector<BasicBlock *> unstruSeqHead;
@@ -343,7 +343,7 @@ namespace ir {
         {
           case IfThenType:
             {
-              BlockList::iterator child_iter = (*it)->children.end();
+              auto child_iter = (*it)->children.end();
               LabelIndex endiflabel;
               child_iter--;
               handleThenBlock(*child_iter, endiflabel); // this call would pass out the proper endiflabel for handleIfBlock's use.
@@ -354,7 +354,7 @@ namespace ir {
 
           case IfElseType:
             {
-              BlockList::iterator child_iter = (*it)->children.end();
+              auto child_iter = (*it)->children.end();
               LabelIndex endiflabel;
               LabelIndex elselabel;
               BlockList::iterator else_block;
@@ -398,7 +398,7 @@ namespace ir {
       return;
     }
 
-    BlockList::iterator iter = block->children.begin();
+    auto iter = block->children.begin();
     while(iter != block->children.end())
     {
       getStructureSequence(*iter, seq);
@@ -421,8 +421,8 @@ namespace ir {
       }
       return result;
     }
-    BlockList::iterator iter = (block->children).begin();
-    BlockList::iterator end = (block->children).end();
+    auto iter = (block->children).begin();
+    auto end = (block->children).end();
     while(iter != end)
     {
       std::set<int> ret = getStructureBasicBlocksIndex(*iter, bbs);
@@ -440,8 +440,8 @@ namespace ir {
       result.insert(((SimpleBlock*)block)->getBasicBlock());
       return result;
     }
-    BlockList::iterator iter = (block->children).begin();
-    BlockList::iterator end = (block->children).end();
+    auto iter = (block->children).begin();
+    auto end = (block->children).end();
     while(iter != end)
     {
       std::set<BasicBlock *> ret = getStructureBasicBlocks(*iter);
@@ -509,7 +509,7 @@ namespace ir {
 
   void CFGStructurizer::calculateNecessaryLiveout()
   {
-    BlockVector::iterator iter = blocks.begin();
+    auto iter = blocks.begin();
 
     while(iter != blocks.end())
     {
@@ -518,7 +518,7 @@ namespace ir {
         case IfElseType:
         {
           std::set<BasicBlock *> bbs;
-          BlockList::iterator thenIter = (*iter)->children.begin();
+          auto thenIter = (*iter)->children.begin();
           thenIter++;
           bbs = getStructureBasicBlocks(*thenIter);
 
@@ -526,7 +526,7 @@ namespace ir {
           std::set<Register> livein;
           getLiveIn(*(elseblock->getEntry()), livein);
 
-          std::set<BasicBlock *>::iterator bbiter = bbs.begin();
+          auto bbiter = bbs.begin();
           while(bbiter != bbs.end())
           {
             (*bbiter)->liveout.insert(livein.begin(), livein.end());

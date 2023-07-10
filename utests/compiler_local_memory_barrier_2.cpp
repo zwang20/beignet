@@ -19,7 +19,7 @@ static void compiler_local_memory_barrier_2(void)
   OCL_MAP_BUFFER(0);
 
   // Check results
-  uint32_t *dst = (uint32_t*)buf_data[0];
+  auto *dst = (uint32_t*)buf_data[0];
   for (uint32_t i = 0; i < n; i+=locals[0])
     for (uint32_t j = 0; j < locals[0]; ++j)
         OCL_ASSERT(dst[i+j] == locals[0] - 1 -j);

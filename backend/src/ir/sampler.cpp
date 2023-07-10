@@ -53,7 +53,7 @@ namespace ir {
     int32_t id = ctx->getFunction().getArgID(arg);
     GBE_ASSERT(id < (1 << __CLK_SAMPLER_ARG_BITS));
 
-    map<uint32_t, uint32_t>::iterator it = samplerMap.find(SAMPLER_ID(id));
+    auto it = samplerMap.find(SAMPLER_ID(id));
     if (it != samplerMap.end()) {
       return it->second;
     }
@@ -73,7 +73,7 @@ namespace ir {
 
     sz = samplerMap.size();
     OUT_UPDATE_SZ(sz);
-    for (map<uint32_t, uint32_t>::iterator it = samplerMap.begin(); it != samplerMap.end(); ++it) {
+    for (auto it = samplerMap.begin(); it != samplerMap.end(); ++it) {
       OUT_UPDATE_SZ(it->first);
       OUT_UPDATE_SZ(it->second);
     }

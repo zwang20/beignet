@@ -151,14 +151,14 @@ static bool expandInstruction(Instruction *Inst) {
 
   bool Modified = false;
   for (unsigned OpNum = 0; OpNum < Inst->getNumOperands(); OpNum++) {
-    if (ConstantExpr *Expr =
+    if (auto *Expr =
         dyn_cast<ConstantExpr>(Inst->getOperand(OpNum))) {
       Modified = true;
       Use *U = &Inst->getOperandUse(OpNum);
       PhiSafeReplaceUses(U, expandConstantExpr(PhiSafeInsertPt(U), Expr));
     }
     else {
-      ConstantVector *CV = dyn_cast<ConstantVector>(Inst->getOperand(OpNum));
+      auto *CV = dyn_cast<ConstantVector>(Inst->getOperand(OpNum));
       if (CV && needExpand(CV)) {
         Modified = true;
         Use *U = &Inst->getOperandUse(OpNum);

@@ -16,7 +16,7 @@ void compiler_insert_to_constant(void)
   OCL_MAP_BUFFER(0);
 
   // Check results
-  uint32_t *data = (uint32_t*) buf_data[0];
+  auto *data = (uint32_t*) buf_data[0];
   for (uint32_t i = 0; i < n; ++i) {
     OCL_ASSERT(data[4*i+0] == 0);
     OCL_ASSERT(data[4*i+1] == 1);

@@ -33,7 +33,7 @@ void compiler_function_argument3(void)
   OCL_MAP_BUFFER(0);
 
   /* Check results */
-  sfloat8 *dst = (sfloat8*)buf_data[0];
+  auto *dst = (sfloat8*)buf_data[0];
 
   OCL_ASSERT(dst[0].a == 3.0f);
   OCL_ASSERT(dst[0].b == 12.0f);

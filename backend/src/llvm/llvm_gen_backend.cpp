@@ -230,7 +230,7 @@ namespace gbe
     ir::Type type;
     Type *llvmType = value->getType();
     if (llvmType->isVectorTy() == true) {
-      VectorType *vectorType = cast<VectorType>(llvmType);
+      auto *vectorType = cast<VectorType>(llvmType);
       Type *elementType = vectorType->getElementType();
       elemNum = vectorType->getNumElements();
       if (useUnsigned)
@@ -271,7 +271,7 @@ namespace gbe
   }
 
   static Constant *extractConstantElem(Constant *CPV, uint32_t index) {
-    ConstantVector *CV = dyn_cast<ConstantVector>(CPV);
+    auto *CV = dyn_cast<ConstantVector>(CPV);
     GBE_ASSERT(CV != NULL);
 #if GBE_DEBUG
     const uint32_t elemNum = CV->getNumOperands();
@@ -5438,7 +5438,7 @@ namespace gbe
                 args_ptr = dyn_cast<llvm::Constant>(args->getOperand(0));
 
               if (args_ptr) {
-                ConstantDataSequential* fmt_arg = dyn_cast<ConstantDataSequential>(args_ptr->getOperand(0));
+                auto* fmt_arg = dyn_cast<ConstantDataSequential>(args_ptr->getOperand(0));
                 if (fmt_arg && fmt_arg->isCString()) {
                   realArgNum--;
                   continue;
@@ -5479,7 +5479,7 @@ namespace gbe
           case GEN_OCL_CALC_TIMESTAMP:
           {
             GBE_ASSERT(AI != AE);
-            ConstantInt *CI = dyn_cast<ConstantInt>(*AI);
+            auto *CI = dyn_cast<ConstantInt>(*AI);
             GBE_ASSERT(CI);
             uint32_t pointNum = CI->getZExtValue();
             AI++;
@@ -5505,7 +5505,7 @@ namespace gbe
             GBE_ASSERT(btiToGen(index) == ir::MEM_GLOBAL);
             ++AI;
             GBE_ASSERT(AI != AE);
-            ConstantInt *CI = dyn_cast<ConstantInt>(*AI);
+            auto *CI = dyn_cast<ConstantInt>(*AI);
             GBE_ASSERT(CI);
             uint32_t ptype = CI->getZExtValue();
             ctx.getUnit().getProfilingInfo()->setProfilingType(ptype);
@@ -5736,7 +5736,7 @@ namespace gbe
 
     // OK, we try to see if we know compile time the size we need to allocate
     if (I.isArrayAllocation() == true) {
-      Constant *CPV = dyn_cast<Constant>(src);
+      auto *CPV = dyn_cast<Constant>(src);
       GBE_ASSERT(CPV);
       const ir::Immediate &imm = processConstantImm(CPV);
       const uint64_t elemNum = imm.getIntegerValue();
@@ -5796,13 +5796,13 @@ namespace gbe
   }
   void GenWriter::regAllocateStoreInst(StoreInst &I) {}
   void GenWriter::emitLoadInst(LoadInst &I) {
-    MemoryInstHelper *h = new MemoryInstHelper(ctx, unit, this, legacyMode);
+    auto *h = new MemoryInstHelper(ctx, unit, this, legacyMode);
     h->emitLoadOrStore<true>(I);
     delete h;
   }
 
   void GenWriter::emitStoreInst(StoreInst &I) {
-    MemoryInstHelper *h = new MemoryInstHelper(ctx, unit, this, legacyMode);
+    auto *h = new MemoryInstHelper(ctx, unit, this, legacyMode);
     h->emitLoadOrStore<false>(I);
     delete h;
   }
@@ -5878,7 +5878,7 @@ namespace gbe
     Type *elemType = llvmType;
     unsigned elemNum = 1;
     if (!isScalarType(llvmType)) {
-      VectorType *vectorType = cast<VectorType>(llvmType);
+      auto *vectorType = cast<VectorType>(llvmType);
       elemType = vectorType->getElementType();
       elemNum = vectorType->getNumElements();
     }
@@ -5920,7 +5920,7 @@ namespace gbe
     this->isLoad = IsLoad;
     Type *scalarType = llvmType;
     if (!isScalarType(llvmType)) {
-      VectorType *vectorType = cast<VectorType>(llvmType);
+      auto *vectorType = cast<VectorType>(llvmType);
       scalarType = vectorType->getElementType();
     }
 
@@ -5972,7 +5972,7 @@ namespace gbe
     }
     // A vector type requires to build a tuple
     else {
-      VectorType *vectorType = cast<VectorType>(llvmType);
+      auto *vectorType = cast<VectorType>(llvmType);
       Type *elemType = vectorType->getElementType();
 
       // We follow OCL spec and support 2,3,4,8,16 elements only

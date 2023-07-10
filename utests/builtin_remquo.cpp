@@ -44,7 +44,7 @@ void builtin_remquo(void)
 
   OCL_MAP_BUFFER(2);
   OCL_MAP_BUFFER(3);
-  float *dest = (float *)buf_data[2];
+  auto *dest = (float *)buf_data[2];
   int *quo = (int *)buf_data[3];
   OCL_ASSERT(isnanf(dest[0]));
   OCL_ASSERT(isnanf(dest[1]));

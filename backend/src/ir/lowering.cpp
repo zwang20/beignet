@@ -477,7 +477,7 @@ namespace ir {
 
       // add.ptr_type dst ptr other
       if (opcode != OP_ADD) return false;
-      BinaryInstruction *add = cast<BinaryInstruction>(insn);
+      auto *add = cast<BinaryInstruction>(insn);
       if(!add) return false;
       const Type addType = add->getType();
       const RegisterFamily family = getFamily(addType);
@@ -492,9 +492,9 @@ namespace ir {
       if (defNum == 0 || defNum > 1) continue; // undefined or more than one def
       const ValueDef *otherDef = *defSet.begin();
       if (otherDef->getType() != ValueDef::DEF_INSN_DST) return false;
-      Instruction *otherInsn = const_cast<Instruction*>(otherDef->getInstruction());
+      auto *otherInsn = const_cast<Instruction*>(otherDef->getInstruction());
       if (otherInsn->getOpcode() != OP_LOADI) return false;
-      LoadImmInstruction *loadImm = cast<LoadImmInstruction>(otherInsn);
+      auto *loadImm = cast<LoadImmInstruction>(otherInsn);
       if(!loadImm) return false;
       const Immediate imm = loadImm->getImmediate();
       const uint64_t offset = getOffsetFromImm(imm);
@@ -503,7 +503,7 @@ namespace ir {
       // memory
       const UseSet &addUseSet = dag->getUse(add, 0);
       for (auto addUse : addUseSet) {
-        Instruction *insn = const_cast<Instruction*>(addUse->getInstruction());
+        auto *insn = const_cast<Instruction*>(addUse->getInstruction());
 
         // We finally find something like load dst arg+imm
         LoadAddImm loadAddImm;

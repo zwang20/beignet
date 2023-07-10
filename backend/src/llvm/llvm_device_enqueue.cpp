@@ -26,7 +26,7 @@ using namespace llvm;
 
 namespace gbe {
   BitCastInst *isInvokeBitcast(Instruction *I) {
-    BitCastInst* bt = dyn_cast<BitCastInst>(I);
+    auto* bt = dyn_cast<BitCastInst>(I);
     if (bt == NULL)
       return NULL;
 //bt->dump();
@@ -351,16 +351,16 @@ namespace gbe {
 #else
                 User *theUser = iter->getUser();
 #endif
-                if(StoreInst *st = dyn_cast<StoreInst>(theUser)) {
+                if(auto *st = dyn_cast<StoreInst>(theUser)) {
                   v = st->getValueOperand()->stripPointerCasts();
                 }
               }
               if(blocks.find(v) == blocks.end()) {
-                if(GlobalVariable *gv = dyn_cast<GlobalVariable>(v)) {
+                if(auto *gv = dyn_cast<GlobalVariable>(v)) {
                   Constant *c = gv->getInitializer();
-                  ConstantExpr *expr = dyn_cast<ConstantExpr>(c->getOperand(3));
-                  BitCastInst *bt = dyn_cast<BitCastInst>(expr->getAsInstruction());
-                  Function* f = dyn_cast<Function>(bt->getOperand(0));
+                  auto *expr = dyn_cast<ConstantExpr>(c->getOperand(3));
+                  auto *bt = dyn_cast<BitCastInst>(expr->getAsInstruction());
+                  auto* f = dyn_cast<Function>(bt->getOperand(0));
                   blocks[v] = f->getName();
                 }
               }

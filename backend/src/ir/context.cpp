@@ -178,7 +178,7 @@ namespace ir {
     if (insn.isMemberOf<BranchInstruction>() == true) {
       // We must book keep the fact that the label is used
       if (insn.getOpcode() == OP_BRA) {
-        const BranchInstruction &branch = cast<BranchInstruction>(insn);
+        const auto &branch = cast<BranchInstruction>(insn);
         const LabelIndex index = branch.getLabelIndex();
         GBE_ASSERT(index < usedLabels->size());
         (*usedLabels)[index] |= LABEL_IS_POINTED;

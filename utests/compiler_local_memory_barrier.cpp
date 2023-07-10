@@ -36,7 +36,7 @@ static void compiler_local_memory_barrier(void)
   OCL_MAP_BUFFER(0);
 
   // Check results
-  uint32_t *dst = (uint32_t*)buf_data[0];
+  auto *dst = (uint32_t*)buf_data[0];
   for (uint32_t i = 0; i < n; i+=16)
   for (uint32_t j = 0; j < 16; ++j)
     OCL_ASSERT(dst[i+j] == 15-j);

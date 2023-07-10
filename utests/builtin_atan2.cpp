@@ -28,7 +28,7 @@ void builtin_atan2(void) {
 	OCL_NDRANGE(1);
 
 	OCL_MAP_BUFFER(2);
-	float *dst = (float*) buf_data[2];
+	auto *dst = (float*) buf_data[2];
 	for (int i = 0; i < n; ++i) {
 		float cpu = atan2f(y[i], x[i]);
 		float gpu = dst[i];

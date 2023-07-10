@@ -408,7 +408,7 @@ int main (int argc, const char **argv)
                 continue;
 
             string file_name = argv_saved[i];
-            prog_vector::iterator result = find_if(prog_insts.begin(), prog_insts.end(),
+            auto result = find_if(prog_insts.begin(), prog_insts.end(),
             [&](program_build_instance & prog_inst)-> bool {
                 bool result = false;
                 if (prog_inst.get_program_path() == file_name)

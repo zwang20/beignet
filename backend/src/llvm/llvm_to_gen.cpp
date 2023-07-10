@@ -277,7 +277,7 @@ namespace gbe
   
   void gbeDiagnosticHandler(const llvm::DiagnosticInfo &diagnostic, void *context)
   {
-    gbeDiagnosticContext *dc = reinterpret_cast<gbeDiagnosticContext*>(context);
+    auto *dc = reinterpret_cast<gbeDiagnosticContext*>(context);
     dc->process(diagnostic);
   }
 
@@ -332,7 +332,7 @@ namespace gbe
     mod.setDataLayout(DL);
 #endif
     Triple TargetTriple(mod.getTargetTriple());
-    TARGETLIBRARY *libraryInfo = new TARGETLIBRARY(TargetTriple);
+    auto *libraryInfo = new TARGETLIBRARY(TargetTriple);
     libraryInfo->disableAllFunctions();
 
     OUTPUT_BITCODE(AFTER_LINK, mod);
@@ -408,10 +408,10 @@ namespace gbe
     OUTPUT_BITCODE(AFTER_GEN, mod);
 
     const ir::Unit::FunctionSet& fs = unit.getFunctionSet();
-    ir::Unit::FunctionSet::const_iterator iter = fs.begin();
+    auto iter = fs.begin();
     while(iter != fs.end())
     {
-      ir::CFGStructurizer *structurizer = new ir::CFGStructurizer(iter->second);
+      auto *structurizer = new ir::CFGStructurizer(iter->second);
       structurizer->StructurizeBlocks();
       delete structurizer;
       if (OCL_OUTPUT_CFG_GEN_IR)

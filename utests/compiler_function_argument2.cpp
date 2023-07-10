@@ -40,7 +40,7 @@ void compiler_function_argument2(void)
   OCL_MAP_BUFFER(0);
 
   /* Check results */
-  float *dst = (float*)buf_data[0];
+  auto *dst = (float*)buf_data[0];
 
   for (uint32_t i = 0; i < 8; ++i) {
       OCL_ASSERT((float)arg0[i] == dst[0*8 + i]);

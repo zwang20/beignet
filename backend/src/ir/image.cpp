@@ -58,7 +58,7 @@ namespace ir {
 
   void ImageSet::appendInfo(ImageInfoKey key, uint32_t offset)
   {
-    map<uint32_t, struct ImageInfo *>::iterator it = indexMap.find(key.index);
+    auto it = indexMap.find(key.index);
     assert(it != indexMap.end());
     struct ImageInfo *imageInfo = it->second;
     setInfoOffset4Type(imageInfo, key.type, offset);
@@ -78,7 +78,7 @@ namespace ir {
   }
   int32_t ImageSet::getInfoOffset(ImageInfoKey key) const
   {
-    map<uint32_t, struct ImageInfo *>::const_iterator it = indexMap.find(key.index);
+    auto it = indexMap.find(key.index);
     if (it == indexMap.end())
       return -1;
     struct ImageInfo *imageInfo = it->second;
@@ -87,7 +87,7 @@ namespace ir {
 
   uint32_t ImageSet::getIdx(const Register imageReg) const
   {
-    map<Register, struct ImageInfo *>::const_iterator it = regMap.find(imageReg);
+    auto it = regMap.find(imageReg);
     GBE_ASSERT(it != regMap.end());
     return it->second->idx;
   }
@@ -129,7 +129,7 @@ namespace ir {
 
     sz = indexMap.size();
     OUT_UPDATE_SZ(sz);
-    for (map<uint32_t, struct ImageInfo *>::iterator it = indexMap.begin(); it != indexMap.end(); ++it) {
+    for (auto it = indexMap.begin(); it != indexMap.end(); ++it) {
       OUT_UPDATE_SZ(it->first);
       OUT_UPDATE_SZ(it->second->arg_idx);
       OUT_UPDATE_SZ(it->second->idx);

@@ -102,14 +102,14 @@ namespace gbe {
         LLVMContext &Context = BB.getContext();
         for (BasicBlock::iterator DI = BB.begin(); DI != BB.end(); ) {
           Instruction *Inst = &*DI++;
-          CallInst* CI = dyn_cast<CallInst>(Inst);
+          auto* CI = dyn_cast<CallInst>(Inst);
           if(CI == NULL)
             continue;
 
           IRBuilder<> Builder(&BB, BasicBlock::iterator(CI));
           // only support memcpy and memset
           if (Function *F = CI->getCalledFunction()) {
-            const Intrinsic::ID intrinsicID = (Intrinsic::ID) F->getIntrinsicID();
+            const auto intrinsicID = (Intrinsic::ID) F->getIntrinsicID();
             if (intrinsicID == 0)
               continue;
             switch (intrinsicID) {
@@ -119,7 +119,7 @@ namespace gbe {
                                                     /* isSigned */ false);
                 Value *align = Builder.CreateIntCast(CI->getArgOperand(3), IntPtr,
                                                     /* isSigned */ false);
-                ConstantInt *ci = dyn_cast<ConstantInt>(align);
+                auto *ci = dyn_cast<ConstantInt>(align);
                 Value *Ops[3];
                 Ops[0] = CI->getArgOperand(0);
                 Ops[1] = CI->getArgOperand(1);
@@ -141,7 +141,7 @@ namespace gbe {
                                                     /* isSigned */ false);
                 Value *align = Builder.CreateIntCast(CI->getArgOperand(3), IntPtr,
                                                     /* isSigned */ false);
-                ConstantInt *ci = dyn_cast<ConstantInt>(align);
+                auto *ci = dyn_cast<ConstantInt>(align);
                 Value *Ops[3];
                 Ops[0] = Op0;
                 // Extend the amount to i32.

@@ -75,7 +75,7 @@ namespace ir {
 
     for (auto &pair : liveness) {
       BlockInfo &info = *pair.second;
-      BasicBlock *bb = const_cast<BasicBlock *>(&info.bb);
+      auto *bb = const_cast<BasicBlock *>(&info.bb);
       for (auto &pair : replaceMap) {
         Register from = pair.first;
         Register to = pair.second;

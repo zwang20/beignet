@@ -482,7 +482,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State) {
             ConstantInt::get(getPromotedType(Op->getType()), SignShiftAmt),
             State.getConverted(Op)->getName() + ".getsign",
             Binop), Binop);
-        if (ConstantInt *C = dyn_cast<ConstantInt>(
+        if (auto *C = dyn_cast<ConstantInt>(
                 State.getConverted(Binop->getOperand(1)))) {
           ShiftAmount = ConstantInt::get(getPromotedType(Op->getType()),
                                          SignShiftAmt + C->getValue());
@@ -557,7 +557,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State) {
           Binop->hasNoSignedWrap());
     }
     State.recordConverted(Binop, NewInst);
-  } else if (ICmpInst *Cmp = dyn_cast<ICmpInst>(Inst)) {
+  } else if (auto *Cmp = dyn_cast<ICmpInst>(Inst)) {
     Value *Op0, *Op1;
     // For signed compares, operands are sign-extended to their
     // promoted type. For unsigned or equality compares, the upper bits are
@@ -576,14 +576,14 @@ static void convertInstruction(Instruction *Inst, ConversionState &State) {
     Instruction *NewInst = CopyDebug(new ICmpInst(
         Cmp, Cmp->getPredicate(), Op0, Op1, ""), Cmp);
     State.recordConverted(Cmp, NewInst);
-  } else if (SelectInst *Select = dyn_cast<SelectInst>(Inst)) {
+  } else if (auto *Select = dyn_cast<SelectInst>(Inst)) {
     Instruction *NewInst = CopyDebug(SelectInst::Create(
         Select->getCondition(),
         State.getConverted(Select->getTrueValue()),
         State.getConverted(Select->getFalseValue()),
         "", Select), Select);
     State.recordConverted(Select, NewInst);
-  } else if (PHINode *Phi = dyn_cast<PHINode>(Inst)) {
+  } else if (auto *Phi = dyn_cast<PHINode>(Inst)) {
     PHINode *NewPhi = PHINode::Create(
         getPromotedType(Phi->getType()),
         Phi->getNumIncomingValues(),
@@ -594,7 +594,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State) {
                           Phi->getIncomingBlock(I));
     }
     State.recordConverted(Phi, NewPhi);
-  } else if (SwitchInst *Switch = dyn_cast<SwitchInst>(Inst)) {
+  } else if (auto *Switch = dyn_cast<SwitchInst>(Inst)) {
     Value *Condition = getClearConverted(Switch->getCondition(), Switch, State);
     SwitchInst *NewInst = SwitchInst::Create(
         Condition,

@@ -158,7 +158,7 @@ void runtime_compile_link(void)
 
   OCL_MAP_BUFFER(2);
   for (int32_t i = 0; i < (int32_t) n; ++i) {
-    int64_t *dest = (int64_t *)buf_data[2];
+    auto *dest = (int64_t *)buf_data[2];
     int64_t x = (src1[i] < src2[i]) ? 3 : 4;
     OCL_ASSERT(x == dest[i]);
   }

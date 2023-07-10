@@ -141,11 +141,11 @@ namespace gbe {
           for (BasicBlock::iterator inst = bb->begin(), instE = bb->end(); inst != instE; ++inst) {
             unsigned addrSpace = -1;
             if (isa<LoadInst>(*inst)) {
-              LoadInst *ld = cast<LoadInst>(&*inst);
+              auto *ld = cast<LoadInst>(&*inst);
               addrSpace = ld->getPointerAddressSpace();
             }
             else if (isa<StoreInst>(*inst)) {
-              StoreInst *st = cast<StoreInst>(&*inst);
+              auto *st = cast<StoreInst>(&*inst);
               addrSpace = st->getPointerAddressSpace();
             }
             if (addrSpace == 0)

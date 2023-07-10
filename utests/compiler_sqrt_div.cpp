@@ -24,7 +24,7 @@ void compiler_sqrt_div(void) {
     OCL_NDRANGE(1);
 
     OCL_MAP_BUFFER(1);
-    float *dst = (float *)buf_data[1];
+    auto *dst = (float *)buf_data[1];
     for (int i = 0; i < n; ++i) {
       float cpu = 1.0f / std::sqrt(src[i]);
       float gpu = dst[4 * i];

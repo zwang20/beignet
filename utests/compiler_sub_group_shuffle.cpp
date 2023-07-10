@@ -75,7 +75,7 @@ void compiler_sub_group_shuffle_short(void)
 
   // Compare
   OCL_MAP_BUFFER(0);
-  short* dst = (short*)buf_data[0];
+  auto* dst = (short*)buf_data[0];
   int suggroupsize = dst[0];
   OCL_ASSERT(suggroupsize == 8 || suggroupsize == 16);
 

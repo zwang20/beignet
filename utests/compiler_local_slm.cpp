@@ -25,7 +25,7 @@ void compiler_local_slm1(void)
   locals[0] = 1;
   OCL_NDRANGE(1);
   OCL_MAP_BUFFER(0);
-  uint64_t * ptr = (uint64_t*)buf_data[0];
+  auto * ptr = (uint64_t*)buf_data[0];
   OCL_ASSERT((ptr[1] -ptr[0])  == 4);
   OCL_UNMAP_BUFFER(0);
 }

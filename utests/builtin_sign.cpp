@@ -28,7 +28,7 @@ void builtin_sign(void)
   OCL_NDRANGE(1);
 
   OCL_MAP_BUFFER(1);
-  float *dst = (float*)buf_data[1];
+  auto *dst = (float*)buf_data[1];
   OCL_ASSERT(dst[0] == 0);
   OCL_ASSERT(dst[1] == 1.f);
   OCL_ASSERT(dst[2] == 0.f);

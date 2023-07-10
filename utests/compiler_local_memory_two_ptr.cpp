@@ -37,7 +37,7 @@ static void compiler_local_memory_two_ptr(void)
   OCL_MAP_BUFFER(0);
 
   // Check results
-  int32_t *dst = (int32_t*)buf_data[0];
+  auto *dst = (int32_t*)buf_data[0];
   for (int32_t i = 0; i < (int) n; i+=16)
   for (int32_t j = 0; j < 16; ++j) {
     const int gid = i + j;

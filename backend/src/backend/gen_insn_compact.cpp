@@ -337,13 +337,13 @@ namespace gbe {
   };
 
   void decompactInstruction(GenCompactInstruction * p, void *insn, uint32_t insn_version) {
-    GenNativeInstruction *pNative = (union GenNativeInstruction *) insn;
-    Gen7NativeInstruction *pOut = (union Gen7NativeInstruction *) insn;
+    auto *pNative = (union GenNativeInstruction *) insn;
+    auto *pOut = (union Gen7NativeInstruction *) insn;
     /* src3 compact insn */
     if(p->bits1.opcode == GEN_OPCODE_MAD || p->bits1.opcode == GEN_OPCODE_LRP) {
 #define NO_SWIZZLE ((0<<0) | (1<<2) | (2<<4) | (3<<6))
       assert(insn_version == 8);
-      Gen8NativeInstruction *pOut = (union Gen8NativeInstruction *) insn;
+      auto *pOut = (union Gen8NativeInstruction *) insn;
       memset(pOut, 0, sizeof(Gen8NativeInstruction));
       union Src3ControlBits control_bits;
       control_bits.data = src3_control_table[(uint32_t)p->src3Insn.bits1.control_index].bit_pattern;
@@ -431,7 +431,7 @@ namespace gbe {
           pNative->high.high |= (src1_bits.data << 13);
         }
       } else if (insn_version == 8) {
-        Gen8NativeInstruction *pOut = (union Gen8NativeInstruction *) insn;
+        auto *pOut = (union Gen8NativeInstruction *) insn;
         memset(pOut, 0, sizeof(Gen8NativeInstruction));
         union ControlBits control_bits;
         control_bits.data = control_table[(uint32_t)p->bits1.control_index].bit_pattern;
@@ -527,7 +527,7 @@ namespace gbe {
     compact_table_entry key;
     key.bit_pattern = b.data;
 
-    compact_table_entry *r = (compact_table_entry *)bsearch(&key, control_table,
+    auto *r = (compact_table_entry *)bsearch(&key, control_table,
       sizeof(control_table)/sizeof(compact_table_entry), sizeof(compact_table_entry), cmp_key);
     if (r == NULL)
       return -1;

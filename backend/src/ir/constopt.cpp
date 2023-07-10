@@ -58,7 +58,7 @@ namespace ir {
     std::map<Register, LoadImmInstruction*> loadImms; //<ir reg, load reg imm>
 
     void AddRecord(Register dst, Register arg, int64_t immv) {
-      Record* rec = new Record(dst, arg, immv);
+      auto* rec = new Record(dst, arg, immv);
       records.push_back(rec);
     }
   };
@@ -78,7 +78,7 @@ namespace ir {
 
     fn->foreachInstruction([&](Instruction &insn) {
       if (insn.getOpcode() == OP_LOADI) {
-        LoadImmInstruction *loadImm = cast<LoadImmInstruction>(&insn);
+        auto *loadImm = cast<LoadImmInstruction>(&insn);
         if(!loadImm)
           return;
 
@@ -107,7 +107,7 @@ namespace ir {
       Register dst = insn.getDst();
 
       //check if src0 is derived from kernel struct arg
-      std::vector<Record*>::iterator it =
+      auto it =
             std::find_if(records.begin(), records.end(), [=](Record* rec){
                                                             return rec->_dst == src0;
                                                             } );

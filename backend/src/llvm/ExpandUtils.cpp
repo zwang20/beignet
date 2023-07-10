@@ -72,8 +72,8 @@ using namespace llvm;
 namespace llvm {
 
   Instruction *PhiSafeInsertPt(Use *U) {
-    Instruction *InsertPt = cast<Instruction>(U->getUser());
-    if (PHINode *PN = dyn_cast<PHINode>(InsertPt)) {
+    auto *InsertPt = cast<Instruction>(U->getUser());
+    if (auto *PN = dyn_cast<PHINode>(InsertPt)) {
       // We cannot insert instructions before a PHI node, so insert
       // before the incoming block's terminator.  This could be
       // suboptimal if the terminator is a conditional.
@@ -84,7 +84,7 @@ namespace llvm {
 
   void PhiSafeReplaceUses(Use *U, Value *NewVal) {
     User *UR = U->getUser();
-    if (PHINode *PN = dyn_cast<PHINode>(UR)) {
+    if (auto *PN = dyn_cast<PHINode>(UR)) {
       // A PHI node can have multiple incoming edges from the same
       // block, in which case all these edges must have the same
       // incoming value.

@@ -122,7 +122,7 @@ void compiler_skip_check(void) {
   OCL_MAP_BUFFER(3);
   OCL_MAP_BUFFER(4);
   OCL_MAP_BUFFER(5);
-  uint16_t *residual = (uint16_t *)buf_data[3];
+  auto *residual = (uint16_t *)buf_data[3];
 #define VME_DEBUG 0
 #if VME_DEBUG
   uint32_t *dwo = (uint32_t *)buf_data[4];

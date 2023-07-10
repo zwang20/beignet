@@ -952,14 +952,14 @@ namespace gbe {
   void Scalarize::dce()
   {
     //two passes delete for some phinode
-    for (std::vector<Instruction*>::reverse_iterator i = deadList.rbegin(), e = deadList.rend(); i != e; ++i) {
+    for (auto i = deadList.rbegin(), e = deadList.rend(); i != e; ++i) {
       (*i)->dropAllReferences();
       if((*i)->use_empty()) {
         (*i)->eraseFromParent();
         (*i) = NULL;
       }
     }
-    for (std::vector<Instruction*>::reverse_iterator i = deadList.rbegin(), e = deadList.rend(); i != e; ++i) {
+    for (auto i = deadList.rbegin(), e = deadList.rend(); i != e; ++i) {
       if((*i) && (*i)->getParent())
         (*i)->eraseFromParent();
     }

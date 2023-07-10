@@ -58,7 +58,7 @@ namespace gbe {
         bool needFix = true;
         Value *needFixVal;
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-        CallInst *init = dyn_cast<CallInst>(I->getOperand(0));
+        auto *init = dyn_cast<CallInst>(I->getOperand(0));
         if (init && init->getCalledValue()->getName().compare("__translate_sampler_initializer"))
         {
           const ConstantInt *ci = dyn_cast<ConstantInt>(init->getOperand(0));
@@ -112,7 +112,7 @@ namespace gbe {
         bool needFix = true;
         Value *needFixVal;
  #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-        CallInst *init = dyn_cast<CallInst>(I->getOperand(0));
+        auto *init = dyn_cast<CallInst>(I->getOperand(0));
         if (init && init->getCalledValue()->getName().compare("__translate_sampler_initializer"))
         {
           const ConstantInt *ci = dyn_cast<ConstantInt>(init->getOperand(0));

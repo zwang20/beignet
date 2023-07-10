@@ -513,7 +513,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
       State.recordConverted(Cast, ValuePair(Lo, Hi));
     }
 
-  } else if (BinaryOperator *Binop = dyn_cast<BinaryOperator>(Inst)) {
+  } else if (auto *Binop = dyn_cast<BinaryOperator>(Inst)) {
     ValuePair Lhs = State.getConverted(Binop->getOperand(0));
     ValuePair Rhs = State.getConverted(Binop->getOperand(1));
     TypePair Tys = getExpandedIntTypes(Binop->getType());
@@ -529,7 +529,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
     }
 
     case Instruction::Shl: {
-      ConstantInt *ShlAmount = dyn_cast<ConstantInt>(Rhs.Lo);
+      auto *ShlAmount = dyn_cast<ConstantInt>(Rhs.Lo);
       // TODO(dschuff): Expansion of variable-sized shifts isn't supported
       // because the behavior depends on whether the shift amount is less than
       // the size of the low part of the expanded type, and I haven't yet
@@ -583,7 +583,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
 
     case Instruction::AShr:
     case Instruction::LShr: {
-      ConstantInt *ShrAmount = dyn_cast<ConstantInt>(Rhs.Lo);
+      auto *ShrAmount = dyn_cast<ConstantInt>(Rhs.Lo);
       // TODO(dschuff): Expansion of variable-sized shifts isn't supported
       // because the behavior depends on whether the shift amount is less than
       // the size of the low part of the expanded type, and I haven't yet
@@ -684,7 +684,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
                          "ExpandLargeIntegers");
     }
 
-  } else if (LoadInst *Load = dyn_cast<LoadInst>(Inst)) {
+  } else if (auto *Load = dyn_cast<LoadInst>(Inst)) {
     Value *Op = Load->getPointerOperand();
     unsigned AddrSpace = Op->getType()->getPointerAddressSpace();
     TypePair Tys = getExpandedIntTypes(Load->getType());
@@ -701,7 +701,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
         IRB.CreateAlignedLoad(HiTy, Align.Hi, Twine(Load->getName(), ".hi"));
     State.recordConverted(Load, ValuePair(Lo, Hi));
 
-  } else if (StoreInst *Store = dyn_cast<StoreInst>(Inst)) {
+  } else if (auto *Store = dyn_cast<StoreInst>(Inst)) {
     Value *Ptr = Store->getPointerOperand();
     unsigned AddrSpace = Ptr->getType()->getPointerAddressSpace();
     TypePair Tys = getExpandedIntTypes(Store->getValueOperand()->getType());
@@ -717,7 +717,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
     Value *Hi = IRB.CreateAlignedStore(StoreVals.Hi, HiTy, Align.Hi);
     State.recordConverted(Store, ValuePair(Lo, Hi));
 
-  } else if (ICmpInst *Icmp = dyn_cast<ICmpInst>(Inst)) {
+  } else if (auto *Icmp = dyn_cast<ICmpInst>(Inst)) {
     ValuePair Lhs = State.getConverted(Icmp->getOperand(0));
     ValuePair Rhs = State.getConverted(Icmp->getOperand(1));
     switch (Icmp->getPredicate()) {
@@ -749,7 +749,7 @@ static void convertInstruction(Instruction *Inst, ConversionState &State,
       llvm_unreachable("Invalid integer comparison");
     }
 
-  } else if (SelectInst *Select = dyn_cast<SelectInst>(Inst)) {
+  } else if (auto *Select = dyn_cast<SelectInst>(Inst)) {
     Value *Cond = Select->getCondition();
     ValuePair True = State.getConverted(Select->getTrueValue());
     ValuePair False = State.getConverted(Select->getFalseValue());

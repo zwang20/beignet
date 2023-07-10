@@ -27,7 +27,7 @@ void builtin_lgamma_r(void) {
 
 		OCL_MAP_BUFFER(1);
 		OCL_MAP_BUFFER(2);
-		float *dst = (float*) buf_data[1];
+		auto *dst = (float*) buf_data[1];
 		for (int i = 0; i < n; ++i) {
 			int cpu_signp;
 			float cpu = lgamma_r(src[i], &cpu_signp);

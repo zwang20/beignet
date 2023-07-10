@@ -24,7 +24,7 @@ void compiler_remove_negative_add(void) {
     OCL_NDRANGE(1);
 
     OCL_MAP_BUFFER(1);
-    float *dst = (float *)buf_data[1];
+    auto *dst = (float *)buf_data[1];
     for (int i = 0; i < n; ++i) {
       float cpu = std::exp2(-src[i]);
       float gpu = dst[i];

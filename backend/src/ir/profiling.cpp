@@ -37,7 +37,7 @@ namespace ir
     LockOutput lock;
     uint32_t logNum = *reinterpret_cast<uint32_t*>(logBuf);
     printf("Total log number is %u\n", logNum);
-    ProfilingReportItem* log = reinterpret_cast<ProfilingReportItem*>((char*)logBuf + 4);
+    auto* log = reinterpret_cast<ProfilingReportItem*>((char*)logBuf + 4);
     for (int i = 0; i < (int)logNum; i++) {
       GBE_ASSERT(log->simdType == ProfilingSimdType8 || log->simdType == ProfilingSimdType16);
       uint32_t simd = log->simdType == ProfilingSimdType16 ? 16 : 8;

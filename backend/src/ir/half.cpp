@@ -27,7 +27,7 @@ namespace gbe {
 namespace ir {
   static llvm::APFloat convU16ToAPFloat(const uint16_t v)
   {
-    uint64_t v64 = static_cast<uint64_t>(v);
+    auto v64 = static_cast<uint64_t>(v);
     llvm::APInt apInt(16, v64, false);
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
     return llvm::APFloat(llvm::APFloat::IEEEhalf(), apInt);
@@ -87,7 +87,7 @@ namespace ir {
 #else
     llvm::APFloat res(llvm::APFloat::IEEEhalf, llvm::APInt(16, 0, false));
 #endif
-    uint64_t u64 = static_cast<uint64_t>(u16);
+    auto u64 = static_cast<uint64_t>(u16);
     llvm::APInt apInt(16, u64, false);
     res.convertFromAPInt(apInt, false, llvm::APFloat::rmNearestTiesToEven);
     return half(convAPFloatToU16(res));
@@ -99,7 +99,7 @@ namespace ir {
 #else
     llvm::APFloat res(llvm::APFloat::IEEEhalf, llvm::APInt(16, 0, true));
 #endif
-    uint64_t u64 = static_cast<uint64_t>(v16);
+    auto u64 = static_cast<uint64_t>(v16);
     llvm::APInt apInt(16, u64, true);
     res.convertFromAPInt(apInt, true, llvm::APFloat::rmNearestTiesToEven);
     return half(convAPFloatToU16(res));

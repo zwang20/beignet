@@ -37,8 +37,8 @@ void builtin_modf(void)
 
   OCL_MAP_BUFFER(1);
   OCL_MAP_BUFFER(2);
-  float *dst = (float *)buf_data[1];
-  float *it = (float *)buf_data[2];
+  auto *dst = (float *)buf_data[1];
+  auto *it = (float *)buf_data[2];
   OCL_ASSERT(dst[0] == 0 && it[0] == INFINITY);
   OCL_ASSERT(dst[1] == -0.f && it[1] == -INFINITY);
   OCL_ASSERT(isnanf(dst[2]) && isnanf(it[2]));
