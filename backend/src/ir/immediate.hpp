@@ -156,7 +156,7 @@ namespace ir {
       else                                                      \
         this->data.p = &defaultData;                            \
       defaultData = 0ull;                                       \
-      memcpy(this->data.FIELD, FIELD, ELEMNUM * getTypeSize()); \
+      memcpy((void*) this->data.FIELD, (void *) FIELD, ELEMNUM * getTypeSize()); \
     }
 
     DECL_CONSTRUCTOR(bool, b, TYPE_BOOL, elemNum)
@@ -175,7 +175,7 @@ namespace ir {
 
     Immediate(const vector<const Immediate*> immVec, Type dstType);
 
-    INLINE int64_t getIntegerValue(void) const {
+    INLINE int64_t getIntegerValue() const {
       switch (type) {
         default:
           GBE_ASSERT(0 && "Invalid immediate type.\n");
@@ -191,7 +191,7 @@ namespace ir {
       }
     }
 
-    INLINE uint64_t getUnsignedIntegerValue(void) const {
+    INLINE uint64_t getUnsignedIntegerValue() const {
       switch (type) {
         default:
           GBE_ASSERT(0 && "Invalid immediate type.\n");
