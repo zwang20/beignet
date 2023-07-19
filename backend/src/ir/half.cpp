@@ -43,7 +43,7 @@ namespace ir {
     return static_cast<uint16_t>(v64);
   }
 
-  half::operator float(void) const {
+  half::operator float() const {
     bool loseInfo;
     llvm::APFloat apf_self = convU16ToAPFloat(this->val);
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
@@ -54,7 +54,7 @@ namespace ir {
     return apf_self.convertToFloat();
   }
 
-  half::operator double(void) const {
+  half::operator double() const {
     bool loseInfo;
     llvm::APFloat apf_self = convU16ToAPFloat(this->val);
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
@@ -65,7 +65,7 @@ namespace ir {
     return apf_self.convertToDouble();
   }
 
-  half::operator uint16_t(void) const {
+  half::operator uint16_t() const {
     llvm::APSInt apsInt(16, false);
     bool isExact;
     llvm::APFloat apf_self = convU16ToAPFloat(this->val);
@@ -73,7 +73,7 @@ namespace ir {
     return static_cast<uint16_t>(apsInt.getZExtValue());
   }
 
-  half::operator int16_t(void) const {
+  half::operator int16_t() const {
     llvm::APSInt apsInt(16, true);
     bool isExact;
     llvm::APFloat apf_self = convU16ToAPFloat(this->val);
