@@ -72,10 +72,10 @@ namespace gbe {
         int profilingType;
 
         ProfilingInserter(int profiling) : FunctionPass(ID), profilingType(profiling) {
-            module = NULL;
-            builder = NULL;
-            intTy = NULL;
-            ptrTy = NULL;
+            module = nullptr;
+            builder = nullptr;
+            intTy = nullptr;
+            ptrTy = nullptr;
         }
 
         ~ProfilingInserter(void) {
@@ -83,7 +83,7 @@ namespace gbe {
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
 
-        StringRef getPassName() const
+        StringRef getPassName() const override
 #else
         virtual const char *getPassName() const
 #endif //override

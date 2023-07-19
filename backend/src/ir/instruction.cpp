@@ -1338,7 +1338,7 @@ namespace gbe {
             static INLINE bool checkSpecialRegForWrite(const Register &reg,
                                                        const Function &fn,
                                                        std::string &whyNot) {
-                if (fn.isSpecialReg(reg) == true && reg != ir::ocl::stackptr) {
+                if (fn.isSpecialReg(reg) && reg != ir::ocl::stackptr) {
                     whyNot = "Non stack pointer special registers are not writeable";
                     return false;
                 }
