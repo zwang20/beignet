@@ -4588,7 +4588,7 @@ namespace gbe {
         }
 
         CallSite::arg_iterator AI = CS.arg_begin();
-        CallSite::arg_iterator AE = CS.arg_end();
+        __attribute__((unused)) CallSite::arg_iterator AE = CS.arg_end();
         GBE_ASSERT(AI != AE);
 
         if (opcode == ir::WORKGROUP_OP_ALL || opcode == ir::WORKGROUP_OP_ANY) {
@@ -4635,7 +4635,7 @@ namespace gbe {
 
     void GenWriter::emitSubGroupInst(CallInst &I, CallSite &CS, ir::WorkGroupOps opcode) {
         CallSite::arg_iterator AI = CS.arg_begin();
-        CallSite::arg_iterator AE = CS.arg_end();
+        __attribute__((unused)) CallSite::arg_iterator AE = CS.arg_end();
         GBE_ASSERT(AI != AE);
 
         if (opcode == ir::WORKGROUP_OP_ALL || opcode == ir::WORKGROUP_OP_ANY) {
@@ -4679,7 +4679,7 @@ namespace gbe {
     void
     GenWriter::emitBlockReadWriteMemInst(CallInst &I, CallSite &CS, bool isWrite, uint8_t vec_size, ir::Type type) {
         CallSite::arg_iterator AI = CS.arg_begin();
-        CallSite::arg_iterator AE = CS.arg_end();
+        __attribute__((unused)) CallSite::arg_iterator AE = CS.arg_end();
         GBE_ASSERT(AI != AE);
 
         Value *llvmPtr = *(AI++);
@@ -4795,7 +4795,7 @@ namespace gbe {
     void
     GenWriter::emitBlockReadWriteImageInst(CallInst &I, CallSite &CS, bool isWrite, uint8_t vec_size, ir::Type type) {
         CallSite::arg_iterator AI = CS.arg_begin();
-        CallSite::arg_iterator AE = CS.arg_end();
+        __attribute__((unused)) CallSite::arg_iterator AE = CS.arg_end();
         GBE_ASSERT(AI != AE);
 
         const uint8_t imageID = getImageID(I);
