@@ -1,1 +1,1 @@
-#define BEIGNET_GIT_SHA1 "git-7c7c3008"
+#define BEIGNET_GIT_SHA1 "git-c63f51dd"
