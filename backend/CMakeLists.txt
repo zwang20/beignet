@@ -1,7 +1,7 @@
 project (GBE)
 set (LIBGBE_VERSION_MAJOR 0)
 set (LIBGBE_VERSION_MINOR 2)
-#cmake_minimum_required (VERSION 2.6.0)
+cmake_minimum_required (VERSION 2.9.0)
 
 set (GBE_CMAKE_DIR "${GBE_SOURCE_DIR}/cmake")
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GBE_CMAKE_DIR}")
@@ -10,8 +10,8 @@ set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GBE_CMAKE_DIR}")
 # Compilation directives
 ##############################################################
 
-set (GBE_DEBUG_MEMORY false CACHE STRING "Activate the memory debugger")
-set (GBE_USE_BLOB false CACHE STRING "Compile everything from one big file")
+set (GBE_DEBUG_MEMORY false CACHE bool "Activate the memory debugger")
+set (GBE_USE_BLOB false CACHE bool "Compile everything from one big file")
 
 
 # Force Release with debug info

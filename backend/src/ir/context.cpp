@@ -30,21 +30,21 @@ namespace gbe {
 namespace ir {
 
   Context::Context(Unit &unit) :
-    unit(unit), fn(nullptr), bb(nullptr), usedLabels(nullptr) {}
+    unit(unit), fn(NULL), bb(NULL), usedLabels(NULL) {}
 
-  Context::~Context() {
+  Context::~Context(void) {
     for (const auto &elem : fnStack) GBE_SAFE_DELETE(elem.usedLabels);
     GBE_SAFE_DELETE(usedLabels);
   }
 
-  Function &Context::getFunction() {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+  Function &Context::getFunction(void) {
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     return *fn;
   }
 
   void Context::appendPushedConstant(Register reg, const PushLocation &pushed)
   {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     GBE_ASSERTM(fn->pushMap.contains(reg) == false, "Register already pushed");
     fn->pushMap.insert(std::make_pair(reg, pushed));
     fn->locationMap.insert(std::make_pair(pushed, reg));
@@ -54,13 +54,13 @@ namespace ir {
     fnStack.push_back(StackElem(fn,bb,usedLabels));
     fn = unit.newFunction(name);
     usedLabels = GBE_NEW_NO_ARG(vector<uint8_t>);
-    bb = nullptr;
+    bb = NULL;
   }
 
-  void Context::endFunction() {
-    GBE_ASSERTM(fn != nullptr, "No function to end");
+  void Context::endFunction(void) {
+    GBE_ASSERTM(fn != NULL, "No function to end");
     GBE_ASSERT(fnStack.size() != 0);
-    GBE_ASSERT(usedLabels != nullptr);
+    GBE_ASSERT(usedLabels != NULL);
 
     // Empty function -> append a return
     if (fn->blockNum() == 0) this->RET();
@@ -77,7 +77,7 @@ namespace ir {
     // function
     lowerReturn(unit, fn->getName());
     // check if there is empty labels at first
-    // FIXME: I don't find a way to eliminate all empty blocks. temporary disable this check
+    // FIXME: I don't find a way to elimimate all empty blocks. temporary disable this check
     //fn->checkEmptyLabels();
     // Properly order labels and compute the CFG, it's needed by FunctionArgumentLower
     fn->sortLabels();
@@ -101,12 +101,12 @@ namespace ir {
   Register Context::reg(RegisterFamily family, bool uniform,
                         gbe_curbe_type curbeType,
                         int subType) {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     return fn->newRegister(family, uniform, curbeType, subType);
   }
 
-  LabelIndex Context::label() {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+  LabelIndex Context::label(void) {
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     const LabelIndex index = fn->newLabel();
     if (index >= usedLabels->size()) {
       usedLabels->resize(index + 1);
@@ -117,7 +117,7 @@ namespace ir {
 
   void Context::input(const std::string &name, FunctionArgument::Type type, Register reg,
                       FunctionArgument::InfoFromLLVM& info, uint32_t elementSize, uint32_t align, unsigned char bti) {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     GBE_ASSERTM(reg < fn->file.regNum(), "Out-of-bound register");
     FunctionArgument *arg = GBE_NEW(FunctionArgument, type, reg, elementSize, name, align, info, bti);
     fn->setRegPayloadType(arg->reg, GBE_CURBE_KERNEL_ARGUMENT, fn->args.size());
@@ -125,26 +125,26 @@ namespace ir {
   }
 
   void Context::output(Register reg) {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     GBE_ASSERTM(reg < fn->file.regNum(), "Out-of-bound register");
     fn->outputs.push_back(reg);
   }
 
-  void Context::startBlock() {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+  void Context::startBlock(void) {
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
     this->bb = GBE_NEW(BasicBlock, *fn);
     fn->blocks.push_back(bb);
   }
 
-  void Context::endBlock() {
-    this->bb = nullptr;
+  void Context::endBlock(void) {
+    this->bb = NULL;
   }
 
   void Context::append(const Instruction &insn) {
-    GBE_ASSERTM(fn != nullptr, "No function currently defined");
+    GBE_ASSERTM(fn != NULL, "No function currently defined");
 
     // Start a new block if this is a label
-    if (insn.isMemberOf<LabelInstruction>()) {
+    if (insn.isMemberOf<LabelInstruction>() == true) {
       this->endBlock();
       this->startBlock();
       const LabelIndex index = cast<LabelInstruction>(insn).getLabelIndex();
@@ -157,7 +157,7 @@ namespace ir {
       (*usedLabels)[index] |= LABEL_IS_DEFINED;
     }
     // We create a new label for a new block if the user did not do it
-    else if (bb == nullptr) {
+    else if (bb == NULL) {
       // this->startBlock();
       const LabelIndex index = this->label();
       const Instruction insn = ir::LABEL(index);
@@ -175,7 +175,7 @@ namespace ir {
 #endif /* GBE_DEBUG */
 
     // Close the current block if this is a branch
-    if (insn.isMemberOf<BranchInstruction>()) {
+    if (insn.isMemberOf<BranchInstruction>() == true) {
       // We must book keep the fact that the label is used
       if (insn.getOpcode() == OP_BRA) {
         const auto &branch = cast<BranchInstruction>(insn);
