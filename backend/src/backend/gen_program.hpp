@@ -75,7 +75,7 @@ namespace gbe {
         virtual ~GenProgram() {};
 
         /*! Clean LLVM resource */
-        virtual void CleanLlvmResource();
+        virtual void CleanLlvmResource() override;
 
         /*! Implements base class */
         Kernel *compileKernel(const ir::Unit &unit, const std::string &name, bool relaxMath, int profiling) override;
