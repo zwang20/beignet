@@ -1,4 +1,4 @@
-#set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 # compiler choose,now support ICC,GCC CLANG compiler
 if (COMPILER STREQUAL "GCC")

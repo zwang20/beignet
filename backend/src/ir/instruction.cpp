@@ -1367,8 +1367,10 @@ namespace gbe {
       return false; \
   } while (0)
 
-            static const Type madType[] = {TYPE_FLOAT};
-            static const uint32_t madTypeNum = ARRAY_ELEM_NUM(madType);
+            // FIXME: variable 'madType' is not needed and will not be emitted
+            // unused variable 'madTypeNum'
+            // static const Type madType[] = {TYPE_FLOAT};
+            // static const uint32_t madTypeNum = ARRAY_ELEM_NUM(madType);
 
             // TODO add support for 64 bits values
             static const Type allButBool[] = {TYPE_S8, TYPE_U8,
