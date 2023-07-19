@@ -108,18 +108,18 @@ namespace ir {
       switch(type) {
         default:
           GBE_ASSERT(0 && "Invalid immeidate type.\n");
-        case TYPE_BOOL:
-        case TYPE_S8:
-        case TYPE_U8:   return 1;
-        case TYPE_S16:
-        case TYPE_HALF:
-        case TYPE_U16:  return 2;
-        case TYPE_FLOAT:
-        case TYPE_S32:
-        case TYPE_U32:  return 4;
-        case TYPE_DOUBLE:
-        case TYPE_S64:
-        case TYPE_U64:  return 8;
+        case IMM_TYPE_BOOL:
+        case IMM_TYPE_S8:
+        case IMM_TYPE_U8:   return 1;
+        case IMM_TYPE_S16:
+        case IMM_TYPE_HALF:
+        case IMM_TYPE_U16:  return 2;
+        case IMM_TYPE_FLOAT:
+        case IMM_TYPE_S32:
+        case IMM_TYPE_U32:  return 4;
+        case IMM_TYPE_DOUBLE:
+        case IMM_TYPE_S64:
+        case IMM_TYPE_U64:  return 8;
         case IMM_TYPE_COMP: return sizeof(Immediate*);
       }
     }
@@ -179,15 +179,15 @@ namespace ir {
       switch (type) {
         default:
           GBE_ASSERT(0 && "Invalid immediate type.\n");
-        case TYPE_BOOL: return *data.b;
-        case TYPE_S8:   return *data.s8;
-        case TYPE_U8:   return *data.u8;
-        case TYPE_S16:  return *data.s16;
-        case TYPE_U16:  return *data.u16;
-        case TYPE_S32:  return *data.s32;
-        case TYPE_U32:  return *data.u32;
-        case TYPE_S64:  return *data.s64;
-        case TYPE_U64:  return *data.u64;
+        case IMM_TYPE_BOOL: return *data.b;
+        case IMM_TYPE_S8:   return *data.s8;
+        case IMM_TYPE_U8:   return *data.u8;
+        case IMM_TYPE_S16:  return *data.s16;
+        case IMM_TYPE_U16:  return *data.u16;
+        case IMM_TYPE_S32:  return *data.s32;
+        case IMM_TYPE_U32:  return *data.u32;
+        case IMM_TYPE_S64:  return *data.s64;
+        case IMM_TYPE_U64:  return *data.u64;
       }
     }
 
@@ -195,15 +195,15 @@ namespace ir {
       switch (type) {
         default:
           GBE_ASSERT(0 && "Invalid immediate type.\n");
-        case TYPE_BOOL: return *data.b;
-        case TYPE_S8:   return *data.s8;
-        case TYPE_U8:   return *data.u8;
-        case TYPE_S16:  return *data.s16;
-        case TYPE_U16:  return *data.u16;
-        case TYPE_S32:  return *data.s32;
-        case TYPE_U32:  return *data.u32;
-        case TYPE_S64:  return *data.s64;
-        case TYPE_U64:  return *data.u64;
+        case IMM_TYPE_BOOL: return *data.b;
+        case IMM_TYPE_S8:   return *data.s8;
+        case IMM_TYPE_U8:   return *data.u8;
+        case IMM_TYPE_S16:  return *data.s16;
+        case IMM_TYPE_U16:  return *data.u16;
+        case IMM_TYPE_S32:  return *data.s32;
+        case IMM_TYPE_U32:  return *data.u32;
+        case IMM_TYPE_S64:  return *data.s64;
+        case IMM_TYPE_U64:  return *data.u64;
       }
     }
 
@@ -238,7 +238,7 @@ namespace ir {
       GBE_ASSERT(type == IMM_TYPE_DOUBLE);
       return *data.f64;
     }
-   
+
     INLINE Immediate(const Immediate & other) {
       *this = other;
     }
