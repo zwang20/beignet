@@ -132,7 +132,7 @@ namespace gbe
     return gen7_insn->bits3.ud;
   }
 
-  void Gen75Encoder::ATOMIC(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum, bool useSends) {
+  /*void Gen75Encoder::ATOMIC(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum, bool useSends) {
     GenNativeInstruction *insn = this->next(GEN_OPCODE_SEND);
 
     this->setHeader(insn);
@@ -146,7 +146,7 @@ namespace gbe
     } else {
       this->setSrc1(insn, bti);
     }
-  }
+  }*/
 
   unsigned Gen75Encoder::setUntypedReadMessageDesc(GenNativeInstruction *insn, unsigned bti, unsigned elemNum) {
     uint32_t msg_length = 0;

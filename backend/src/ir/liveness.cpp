@@ -293,18 +293,18 @@ namespace gbe {
         }
 
         /*! To pretty print the livfeness info */
-        static const uint32_t prettyInsnStrSize = 48;
-        static const uint32_t prettyRegStrSize = 5;
+        __attribute__((unused)) static const uint32_t prettyInsnStrSize = 48;
+        __attribute__((unused)) static const uint32_t prettyRegStrSize = 5;
 
         /*! Describe how the register is used */
-        static const uint32_t USE_NONE = 0;
-        static const uint32_t USE_READ = 1 << 0;
-        static const uint32_t USE_WRITTEN = 1 << 1;
+        __attribute__((unused)) static const uint32_t USE_NONE = 0;
+        __attribute__((unused)) static const uint32_t USE_READ = 1 << 0;
+        __attribute__((unused)) static const uint32_t USE_WRITTEN = 1 << 1;
 
         enum UsePosition {
-            POS_BEFORE = 0,
-            POS_HERE = 1,
-            POS_AFTER = 2
+            POS_BEFORE __attribute__((unused)) = 0,
+            POS_HERE __attribute__((unused)) = 1,
+            POS_AFTER __attribute__((unused)) = 2
         };
     } /* namespace ir */
 } /* namespace gbe */

@@ -42,7 +42,8 @@ namespace gbe
     void JMPI(GenRegister src, bool longjmp = false) override;
     /*! Patch JMPI/BRC/BRD (located at index insnID) with the given jump distance */
     void patchJMPI(uint32_t insnID, int32_t jip, int32_t uip) override;
-    virtual void ATOMIC(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum, bool useSends);
+    // FIXME: 'gbe::Gen75Encoder::ATOMIC' hides overloaded virtual function
+    // virtual void ATOMIC(GenRegister dst, uint32_t function, GenRegister src, GenRegister bti, uint32_t srcNum, bool useSends);
     void UNTYPED_READ(GenRegister dst, GenRegister src, GenRegister bti, uint32_t elemNum) override;
     void UNTYPED_WRITE(GenRegister src, GenRegister data, GenRegister bti, uint32_t elemNum, bool useSends) override;
     void setHeader(GenNativeInstruction *insn) override;

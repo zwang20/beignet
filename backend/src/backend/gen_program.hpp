@@ -31,57 +31,69 @@
 
 // Gen ISA instruction
 struct GenInstruction;
-namespace gbe
-{
-  /*! Describe a compiled kernel */
-  class GenKernel : public Kernel
-  {
-  public:
-    /*! Create an empty kernel with the given name */
-    GenKernel(const std::string &name, uint32_t deviceID);
-    /*! Destroy it */
-    virtual ~GenKernel(void);
-    /*! Implements base class */
-    virtual const char *getCode(void) const;
-    /*! Set the instruction stream (to be implemented) */
-    virtual void setCode(const char *, size_t size);
-    /*! Implements get the code size */
-    virtual uint32_t getCodeSize(void) const;
-    /*! Implements printStatus*/
-    virtual void printStatus(int indent, std::ostream& outs);
-    uint32_t deviceID;      //!< Current device ID
-    GenInstruction *insns; //!< Instruction stream
-    uint32_t insnNum;      //!< Number of instructions
-    GBE_CLASS(GenKernel);  //!< Use custom allocators
-  };
+namespace gbe {
+    /*! Describe a compiled kernel */
+    class GenKernel : public Kernel {
+    public:
+        /*! Create an empty kernel with the given name */
+        GenKernel(const std::string &name, uint32_t deviceID);
 
-  /*! Describe a compiled program */
-  class GenProgram : public Program
-  {
-  public:
-    /*! Create an empty program */
-    GenProgram(uint32_t deviceID, const void* mod = NULL, const void* ctx = NULL, const char* asm_fname = NULL, uint32_t fast_relaxed_math = 0) :
-      Program(fast_relaxed_math), deviceID(deviceID),module((void*)mod), llvm_ctx((void*)ctx), asm_file_name(asm_fname) {}
-    /*! Current device ID*/
-    uint32_t deviceID;
-    /*! Destroy the program */
-    virtual ~GenProgram(void) {};
-    /*! Clean LLVM resource */
-    virtual void CleanLlvmResource(void);
-    /*! Implements base class */
-    Kernel *compileKernel(const ir::Unit &unit, const std::string &name, bool relaxMath, int profiling) override;
-    /*! Allocate an empty kernel. */
-    Kernel *allocateKernel(const std::string &name) override {
-      return GBE_NEW(GenKernel, name, deviceID);
-    }
-    void* module;
-    void* llvm_ctx;
-    const char* asm_file_name;
-    /*! Use custom allocators */
+        /*! Destroy it */
+        virtual ~GenKernel();
+
+        /*! Implements base class */
+        virtual const char *getCode() const;
+
+        /*! Set the instruction stream (to be implemented) */
+        virtual void setCode(const char *, size_t size);
+
+        /*! Implements get the code size */
+        virtual uint32_t getCodeSize() const;
+
+        /*! Implements printStatus*/
+        virtual void printStatus(int indent, std::ostream &outs);
+
+        uint32_t deviceID;      //!< Current device ID
+        GenInstruction *insns; //!< Instruction stream
+        uint32_t insnNum;      //!< Number of instructions
+    GBE_CLASS(GenKernel);  //!< Use custom allocators
+    };
+
+    /*! Describe a compiled program */
+    class GenProgram : public Program {
+    public:
+        /*! Create an empty program */
+        GenProgram(uint32_t deviceID, const void *mod = nullptr, const void *ctx = nullptr,
+                   const char *asm_fname = nullptr, uint32_t fast_relaxed_math = 0) :
+                Program(fast_relaxed_math), deviceID(deviceID), module((void *) mod), llvm_ctx((void *) ctx),
+                asm_file_name(asm_fname) {}
+
+        /*! Current device ID*/
+        uint32_t deviceID;
+
+        /*! Destroy the program */
+        virtual ~GenProgram() {};
+
+        /*! Clean LLVM resource */
+        virtual void CleanLlvmResource();
+
+        /*! Implements base class */
+        Kernel *compileKernel(const ir::Unit &unit, const std::string &name, bool relaxMath, int profiling) override;
+
+        /*! Allocate an empty kernel. */
+        Kernel *allocateKernel(const std::string &name) override {
+            return GBE_NEW(GenKernel, name, deviceID);
+        }
+
+        void *module;
+        void *llvm_ctx;
+        const char *asm_file_name;
+        /*! Use custom allocators */
     GBE_CLASS(GenProgram);
-  };
-  /*! decompact GEN ASM if it is in compacted format */
-  extern void decompactInstruction(union GenCompactInstruction *p, void *insn, uint32_t insn_version);
+    };
+
+    /*! decompact GEN ASM if it is in compacted format */
+    extern void decompactInstruction(union GenCompactInstruction *p, void *insn, uint32_t insn_version);
 } /* namespace gbe */
 
 #endif /* __GBE_GEN_PROGRAM_HPP__ */

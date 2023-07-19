@@ -1340,7 +1340,7 @@ namespace gbe
     p->ADD(dst, dst, res);
   }
 
-  void Gen8Context::emitPrintfLongInstruction(GenRegister& addr, GenRegister& data,
+  /*void Gen8Context::emitPrintfLongInstruction(GenRegister& addr, GenRegister& data,
                                              GenRegister& src, uint32_t bti) {
     GenRegister tempSrc, tempDst;
     GenRegister nextSrc, nextDst;
@@ -1374,7 +1374,7 @@ namespace gbe
     p->pop();
     p->UNTYPED_WRITE(addr, addr, GenRegister::immud(bti), 1, false);
     p->ADD(addr, addr, GenRegister::immud(sizeof(uint32_t)));
-  }
+  }*/
 
   void ChvContext::setA0Content(uint16_t new_a0[16], uint16_t max_offset, int sz) {
     if (sz == 0)
