@@ -32,7 +32,7 @@ namespace gbe {
         // PushLocation
         ///////////////////////////////////////////////////////////////////////////
 
-        Register PushLocation::getRegister(void) const {
+        Register PushLocation::getRegister() const {
             const Function::LocationMap &locationMap = fn.getLocationMap();
             GBE_ASSERT(locationMap.contains(*this) == true);
             return locationMap.find(*this)->second;
@@ -51,17 +51,17 @@ namespace gbe {
             printfSet = GBE_NEW(PrintfSet);
         }
 
-        Function::~Function(void) {
+        Function::~Function() {
             for (auto block: blocks) GBE_DELETE(block);
             for (auto loop: loops) GBE_DELETE(loop);
             for (auto arg: args) GBE_DELETE(arg);
         }
 
-        RegisterFamily Function::getPointerFamily(void) const {
+        RegisterFamily Function::getPointerFamily() const {
             return unit.getPointerFamily();
         }
 
-        uint32_t Function::getOclVersion(void) const {
+        uint32_t Function::getOclVersion() const {
             return unit.getOclVersion();
         }
 
@@ -73,7 +73,7 @@ namespace gbe {
         }
 
         int Function::getLoopDepth(LabelIndex Block) const {
-            if (loops.size() == 0) return 0;
+            if (loops.empty()) return 0;
 
             int LoopIndex = -1;
             int LoopDepth = 0;
@@ -99,7 +99,7 @@ namespace gbe {
             return LoopDepth;
         }
 
-        void Function::checkEmptyLabels(void) {
+        void Function::checkEmptyLabels() {
             // Empty label map, we map the removed label to the next label.
             map<LabelIndex, LabelIndex> labelMap;
             map<LabelIndex, LabelIndex> revLabelMap;
@@ -111,7 +111,7 @@ namespace gbe {
             });
         }
 
-        void Function::sortLabels(void) {
+        void Function::sortLabels() {
             uint32_t last = 0;
 
             // Compute the new labels and patch the label instruction
@@ -123,7 +123,7 @@ namespace gbe {
                 const Instruction newLabel = LABEL(LabelIndex(last));
 
                 // Replace the previous label instruction
-                LabelInstruction &label = cast<LabelInstruction>(insn);
+                auto &label = cast<LabelInstruction>(insn);
                 const LabelIndex index = label.getLabelIndex();
                 labelMap.insert(std::make_pair(index, LabelIndex(last++)));
                 newLabel.replace(&insn);
@@ -134,12 +134,12 @@ namespace gbe {
                 if (insn.getOpcode() != OP_BRA) return;
 
                 // Get the current branch instruction
-                BranchInstruction &bra = cast<BranchInstruction>(insn);
+                auto &bra = cast<BranchInstruction>(insn);
                 const LabelIndex index = bra.getLabelIndex();
                 const LabelIndex newIndex = labelMap.find(index)->second;
 
                 // Insert the patched branch instruction
-                if (bra.isPredicated() == true) {
+                if (bra.isPredicated()) {
                     const Instruction newBra = BRA(newIndex, bra.getPredicateIndex());
                     newBra.replace(&insn);
                 } else {
@@ -165,17 +165,17 @@ namespace gbe {
             //this->labels.resize(last);
             foreachBlock([&](BasicBlock &bb) {
                 const Instruction *first = bb.getFirstInstruction();
-                const LabelInstruction *label = cast<LabelInstruction>(first);
+                const auto *label = cast<LabelInstruction>(first);
                 const LabelIndex index = label->getLabelIndex();
                 this->labels[index] = &bb;
             });
         }
 
-        LabelIndex Function::newLabel(void) {
+        LabelIndex Function::newLabel() {
             GBE_ASSERTM(labels.size() < 0xffffffffull,
                         "Too many labels are defined (4G only are supported)");
             const LabelIndex index(labels.size());
-            labels.push_back(NULL);
+            labels.push_back(nullptr);
             return index;
         }
 
@@ -212,7 +212,7 @@ namespace gbe {
             }
         }
 
-        uint32_t Function::getLargestBlockSize(void) const {
+        uint32_t Function::getLargestBlockSize() const {
             uint32_t insnNum = 0;
             foreachBlock([&insnNum](const ir::BasicBlock &bb) {
                 insnNum = std::max(insnNum, uint32_t(bb.size()));
@@ -220,11 +220,11 @@ namespace gbe {
             return insnNum;
         }
 
-        uint32_t Function::getFirstSpecialReg(void) const {
+        uint32_t Function::getFirstSpecialReg() const {
             return this->profile == PROFILE_OCL ? 0u : ~0u;
         }
 
-        uint32_t Function::getSpecialRegNum(void) const {
+        uint32_t Function::getSpecialRegNum() const {
             return this->profile == PROFILE_OCL ? ocl::regNum : ~0u;
         }
 
@@ -235,18 +235,18 @@ namespace gbe {
                 return &bb == this->blocks[0];
         }
 
-        BasicBlock &Function::getTopBlock(void) const {
+        BasicBlock &Function::getTopBlock() const {
             GBE_ASSERT(blockNum() > 0 && blocks[0] != NULL);
             return *blocks[0];
         }
 
-        const BasicBlock &Function::getBottomBlock(void) const {
+        const BasicBlock &Function::getBottomBlock() const {
             const uint32_t n = blockNum();
             GBE_ASSERT(n > 0 && blocks[n - 1] != NULL);
             return *blocks[n - 1];
         }
 
-        BasicBlock &Function::getBottomBlock(void) {
+        BasicBlock &Function::getBottomBlock() {
             const uint32_t n = blockNum();
             GBE_ASSERT(n > 0 && blocks[n - 1] != NULL);
             return *blocks[n - 1];
@@ -265,7 +265,7 @@ namespace gbe {
 
         /*! Indicate if the given register is a special one (like localID in OCL) */
         bool Function::isSpecialReg(const Register &reg) const {
-            const uint32_t ID = uint32_t(reg);
+            const auto ID = uint32_t(reg);
             const uint32_t firstID = this->getFirstSpecialReg();
             const uint32_t specialNum = this->getSpecialRegNum();
             return ID >= firstID && ID < firstID + specialNum;
@@ -281,14 +281,14 @@ namespace gbe {
             btiRegMap.insert(std::make_pair(bti, reg));
         }
 
-        void Function::computeCFG(void) {
+        void Function::computeCFG() {
             // Clear possible previously computed CFG and compute the direct
             // predecessors and successors
-            BasicBlock *prev = NULL;
-            this->foreachBlock([this, &prev](BasicBlock &bb) {
+            BasicBlock *prev = nullptr;
+            this->foreachBlock([&prev](BasicBlock &bb) {
                 bb.successors.clear();
                 bb.predecessors.clear();
-                if (prev != NULL) {
+                if (prev != nullptr) {
                     prev->nextBlock = &bb;
                     bb.prevBlock = prev;
                 }
@@ -296,16 +296,16 @@ namespace gbe {
             });
 
             // Update it. Do not forget that a branch can also jump to the next block
-            BasicBlock *jumpToNext = NULL;
+            BasicBlock *jumpToNext = nullptr;
             this->foreachBlock([this, &jumpToNext](BasicBlock &bb) {
                 if (jumpToNext) {
                     jumpToNext->successors.insert(&bb);
                     bb.predecessors.insert(jumpToNext);
-                    jumpToNext = NULL;
+                    jumpToNext = nullptr;
                 }
-                if (bb.size() == 0) return;
+                if (bb.empty()) return;
                 Instruction *last = bb.getLastInstruction();
-                if (last->isMemberOf<BranchInstruction>() == false || last->getOpcode() == OP_ENDIF ||
+                if (!last->isMemberOf<BranchInstruction>() || last->getOpcode() == OP_ENDIF ||
                     last->getOpcode() == OP_ELSE) {
                     jumpToNext = &bb;
                     return;
@@ -322,7 +322,7 @@ namespace gbe {
                     GBE_ASSERT(target != NULL);
                     target->predecessors.insert(&bb);
                     bb.successors.insert(target);
-                    if (insn.isPredicated() == true) jumpToNext = &bb;
+                    if (insn.isPredicated()) jumpToNext = &bb;
                     // If we are going to handle the second bra, this bra must be a predicated bra
                     GBE_ASSERT(handledInsns == 0 || insn.isPredicated() == true);
                     --it;
@@ -331,14 +331,14 @@ namespace gbe {
             });
         }
 
-        void Function::outputCFG(void) {
+        void Function::outputCFG() {
             std::string fileName = getName() + std::string(".dot");
             ::FILE *fp = fopen(fileName.c_str(), "w");
-            if (fp == NULL) return;
+            if (fp == nullptr) return;
 
             printf("writing Gen IR CFG to %s\n", fileName.c_str());
             fprintf(fp, "digraph \"%s\" {\n", getName().c_str());
-            this->foreachBlock([this, fp](BasicBlock &bb) {
+            this->foreachBlock([fp](BasicBlock &bb) {
                 uint32_t lid = bb.getLabelIndex();
                 fprintf(fp, "Node%d [shape=record, label=\"{%d}\"];\n", lid, lid);
                 set<BasicBlock *> &succ = bb.successors;
@@ -419,12 +419,12 @@ namespace gbe {
                                                thisElseLabel(0), belongToStructure(false),
                                                isStructureExit(false), isLoopExit(false),
                                                hasExtraBra(false),
-                                               matchingStructureEntry(NULL),
+                                               matchingStructureEntry(nullptr),
                                                fn(fn) {
             this->nextBlock = this->prevBlock = NULL;
         }
 
-        BasicBlock::~BasicBlock(void) {
+        BasicBlock::~BasicBlock() {
             this->foreach([this](Instruction &insn) {
                 this->fn.deleteInstruction(&insn);
             });
@@ -440,19 +440,19 @@ namespace gbe {
             this->insert(pos, &insn);
         }
 
-        Instruction *BasicBlock::getFirstInstruction(void) const {
+        Instruction *BasicBlock::getFirstInstruction() const {
             GBE_ASSERT(this->begin() != this->end());
             const Instruction &insn = *this->begin();
             return const_cast<Instruction *>(&insn);
         }
 
-        Instruction *BasicBlock::getLastInstruction(void) const {
+        Instruction *BasicBlock::getLastInstruction() const {
             GBE_ASSERT(this->begin() != this->end());
             const Instruction &insn = *(--this->end());
             return const_cast<Instruction *>(&insn);
         }
 
-        LabelIndex BasicBlock::getLabelIndex(void) const {
+        LabelIndex BasicBlock::getLabelIndex() const {
             const Instruction *first = this->getFirstInstruction();
             const auto *label = cast<LabelInstruction>(first);
             return label ? label->getLabelIndex() : LabelIndex(-1);
