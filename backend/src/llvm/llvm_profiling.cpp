@@ -85,7 +85,7 @@ namespace gbe {
 
         StringRef getPassName() const override
 #else
-        virtual const char *getPassName() const
+        virtual const char *getPassName() const override
 #endif //override
         {
             return "Timestamp Parser";

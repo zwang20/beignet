@@ -84,10 +84,10 @@ namespace gbe {
                                int *addrOffset, Instruction *&first,
                                Instruction *&last);
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-    StringRef getPassName() const
+    StringRef getPassName() const override
 #else
-    virtual const char *getPassName() const
-#endif override
+    virtual const char *getPassName() const override
+#endif // override
     {
       return "Merge compatible Load/stores for Gen";
     }
@@ -148,7 +148,7 @@ namespace gbe {
     *elementSize = sz;
 
     //a insn with small distance from the search load/store is a candidate one
-    return (abs(-offset) < sz*maxVecSize);
+    return (std::abs(-offset) < sz*maxVecSize);
   }
 
   void GenLoadStoreOptimization::mergeLoad(BasicBlock &BB,

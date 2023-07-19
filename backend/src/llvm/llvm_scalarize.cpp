@@ -106,8 +106,8 @@ namespace gbe {
     }
 
     bool runOnFunction(Function&) override;
-    void print(raw_ostream&, const Module* = 0) const;
-    virtual void getAnalysisUsage(AnalysisUsage&) const;
+    void print(raw_ostream&, const Module* = 0) const override;
+    virtual void getAnalysisUsage(AnalysisUsage&) const override;
 
   protected:
     // An instruction is valid post-scalarization iff it is fully scalar or it

@@ -17,8 +17,8 @@
  */
 #include <iostream>
 #include <dlfcn.h>
-#include <cstring>
-#include <cstdio>
+#include <string.h>
+#include <stdio.h>
 #include "cl_gbe_loader.h"
 #include "backend/src/GBEConfig.h"
 

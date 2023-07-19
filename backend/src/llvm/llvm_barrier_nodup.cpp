@@ -49,10 +49,10 @@ namespace gbe {
       }
 
 #if LLVM_VERSION_MAJOR * 10 + LLVM_VERSION_MINOR >= 40
-      StringRef getPassName() const
+      StringRef getPassName() const override
 #else
-      virtual const char *getPassName() const
-#endif override
+      virtual const char *getPassName() const override
+#endif
       {
         return "SPIR backend: set barrier no duplicate attr";
       }
