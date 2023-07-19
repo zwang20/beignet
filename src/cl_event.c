@@ -198,7 +198,7 @@ cl_event_delete_depslist(cl_event event) {
 
 LOCAL void
 cl_event_delete(cl_event event) {
-    int i;
+    __attribute__((unused)) int i;
     cl_event_user_callback cb;
 
     if (UNLIKELY(event == NULL))

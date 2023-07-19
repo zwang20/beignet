@@ -19,6 +19,7 @@
 
 #ifndef __CL_UTILS_H__
 #define __CL_UTILS_H__
+
 #include "CL/cl.h"
 
 /* INLINE is forceinline */
@@ -32,17 +33,16 @@
 #define JOIN(X, Y) _DO_JOIN(X, Y)
 #define _DO_JOIN(X, Y) _DO_JOIN2(X, Y)
 #define _DO_JOIN2(X, Y) X##Y
-enum DEBUGP_LEVEL
-{
+enum DEBUGP_LEVEL {
     DL_INFO,
     DL_WARNING,
     DL_ERROR
 };
 #ifdef NDEBUG
-  #define DEBUGP(...)
+#define DEBUGP(...)
 #else
-  //TODO: decide print or not with the value of level from environment
-  #define DEBUGP(level, fmt, ...)                       \
+//TODO: decide print or not with the value of level from environment
+#define DEBUGP(level, fmt, ...)                       \
   do {                                                  \
     fprintf(stderr, "Beignet: "#fmt, ##__VA_ARGS__);    \
     fprintf(stderr, "\n");                              \
@@ -57,13 +57,13 @@ struct JOIN(__,JOIN(__,__LINE__)) {                                 \
 
 /* Throw errors */
 #ifdef NDEBUG
-  #define ERR(ERROR, ...)                                             \
+#define ERR(ERROR, ...)                                             \
   do {                                                                \
     err = ERROR;                                                      \
     goto error;                                                       \
   } while (0)
 #else
-  #define ERR(ERROR, ...)                                             \
+#define ERR(ERROR, ...)                                             \
   do {                                                                \
     fprintf(stderr, "error in %s line %i\n", __FILE__, __LINE__);     \
     fprintf(stderr, __VA_ARGS__);                                     \
@@ -277,13 +277,13 @@ do {                                                        \
 #define MEMZERO(x) do { memset((x),0,sizeof(*(x))); } while (0)
 
 /* Run some code and catch errors */
-#define TRY(fn,...)                                     \
+#define TRY(fn, ...)                                     \
 do {                                                    \
   if (UNLIKELY((err = fn(__VA_ARGS__)) != CL_SUCCESS))  \
     goto error;                                         \
 } while (0)
 
-#define TRY_NO_ERR(fn,...)                              \
+#define TRY_NO_ERR(fn, ...)                              \
 do {                                                    \
   if (UNLIKELY(fn(__VA_ARGS__) != CL_SUCCESS))          \
     goto error;                                         \
@@ -340,72 +340,77 @@ do {                                                    \
 
 /* To help bitfield definitions */
 #define BITFIELD_BIT(X) 1
-#define BITFIELD_RANGE(X,Y) ((Y) - (X) + 1)
+#define BITFIELD_RANGE(X, Y) ((Y) - (X) + 1)
 
 /* 32 bits atomic variable */
 typedef volatile int atomic_t;
 
 static INLINE int atomic_add(atomic_t *v, const int c) {
-  register int i = c;
-  __asm__ __volatile__("lock ; xaddl %0, %1;"
-      : "+r"(i), "+m"(*v)
-      : "m"(*v), "r"(i));
-  return i;
+    int i = c;
+    __asm__ __volatile__("lock ; xaddl %0, %1;"
+            : "+r"(i), "+m"(*v)
+            : "m"(*v), "r"(i));
+    return i;
 }
+
 static INLINE int atomic_read(atomic_t *v) {
-  return *v;
+    return *v;
 }
 
 static INLINE int atomic_inc(atomic_t *v) { return atomic_add(v, 1); }
+
 static INLINE int atomic_dec(atomic_t *v) { return atomic_add(v, -1); }
 
 /* Define one list node. */
 typedef struct list_node {
-  struct list_node *n;
-  struct list_node *p;
+    struct list_node *n;
+    struct list_node *p;
 } list_node;
 typedef struct list_head {
-  list_node head_node;
+    list_node head_node;
 } list_head;
 
-static inline void list_node_init(list_node *node)
-{
-  node->n = node;
-  node->p = node;
+static inline void list_node_init(list_node *node) {
+    node->n = node;
+    node->p = node;
 }
-static inline int list_node_out_of_list(const struct list_node *node)
-{
-  return node->n == node;
+
+static inline int list_node_out_of_list(const struct list_node *node) {
+    return node->n == node;
 }
-static inline void list_init(list_head *head)
-{
-  head->head_node.n = &head->head_node;
-  head->head_node.p = &head->head_node;
+
+static inline void list_init(list_head *head) {
+    head->head_node.n = &head->head_node;
+    head->head_node.p = &head->head_node;
 }
+
 extern void list_node_insert_before(list_node *node, list_node *the_new);
+
 extern void list_node_insert_after(list_node *node, list_node *the_new);
-static inline void list_node_del(struct list_node *node)
-{
-  node->n->p = node->p;
-  node->p->n = node->n;
-  /* And all point to self for safe. */
-  node->p = node;
-  node->n = node;
+
+static inline void list_node_del(struct list_node *node) {
+    node->n->p = node->p;
+    node->p->n = node->n;
+    /* And all point to self for safe. */
+    node->p = node;
+    node->n = node;
 }
-static inline void list_add(list_head *head, list_node *the_new)
-{
-  list_node_insert_after(&head->head_node, the_new);
+
+static inline void list_add(list_head *head, list_node *the_new) {
+    list_node_insert_after(&head->head_node, the_new);
 }
-static inline void list_add_tail(list_head *head, list_node *the_new)
-{
-  list_node_insert_before(&head->head_node, the_new);
+
+static inline void list_add_tail(list_head *head, list_node *the_new) {
+    list_node_insert_before(&head->head_node, the_new);
 }
-static inline int list_empty(const struct list_head *head)
-{
-  return head->head_node.n == &head->head_node;
+
+static inline int list_empty(const struct list_head *head) {
+    return head->head_node.n == &head->head_node;
 }
+
 /* Move the content from one head to another. */
 extern void list_move(struct list_head *the_old, struct list_head *the_new);
+
 /* Merge the content of the two lists to one head. */
 extern void list_merge(struct list_head *head, struct list_head *to_merge);
 
@@ -428,4 +433,5 @@ extern void list_merge(struct list_head *head, struct list_head *to_merge);
 
 extern cl_int cl_get_info_helper(const void *src, size_t src_size, void *dst,
                                  size_t dst_size, size_t *ret_size);
+
 #endif /* __CL_UTILS_H__ */
